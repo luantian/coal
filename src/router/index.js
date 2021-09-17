@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/views/Home.vue'
-
 import test from './test'
+
+const Login = () => import('@/views/Login');
+const Home = () => import('@/views/Home');
+
 
 Vue.use(Router);
 
@@ -11,6 +13,17 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    children: [
+      {
+        path: '',
+        component: () =>  '@/views/Index'
+      }
+    ]
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
   ...test
 ]

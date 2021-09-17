@@ -1,15 +1,12 @@
 <template>
-  <div class="test">
-    <div class="main">
-      test
-    </div>
+  <div class="index">
+    index
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'Test',
+  name: 'Index',
   data() {
     return {
 
@@ -19,8 +16,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .main {
-    width: 800px;
-    height: 600px;
-  }
+
 </style>
