@@ -2,6 +2,7 @@
   <div class="test">
     <div class="main">
       test
+      <el-button type="primary">主要按钮</el-button>
     </div>
   </div>
 </template>

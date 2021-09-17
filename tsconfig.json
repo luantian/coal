@@ -10,6 +10,7 @@
     "sourceMap": true,
     "allowJs": true,
     "baseUrl": ".",
+    "outDir": "./",
     "paths": {
       "@/*": [
         "src/*"

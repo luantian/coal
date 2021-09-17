@@ -19,9 +19,8 @@ export default {
 </script>
 
 <style>
-@import 'assets/css/base.css';
-#app {
-  width: 100%;
-  height: 100%;
-}
+  #app {
+    width: 100%;
+    height: 100%;
+  }
 </style>

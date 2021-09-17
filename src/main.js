@@ -3,9 +3,12 @@ import App from './App.vue'
 import router from "./router";
 import store from "./store";
 import * as echarts from 'echarts'// 引入echarts
+
+import 'normalize.css'
+
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import 'element-ui/lib/theme-chalk/display.css';
+// import 'element-ui/lib/theme-chalk/display.css';
 
 
 Vue.config.productionTip = false
