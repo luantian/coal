@@ -2,7 +2,7 @@
   "include": [
     "./src/**/*"
   ],
-  "exclude": ["node_modules", "dist", "mycyt"],
+  "exclude": ["node_modules", "dist", "coal"],
   "compilerOptions": {
     "module": "es2015",
     "moduleResolution": "node",
@@ -10,7 +10,6 @@
     "sourceMap": true,
     "allowJs": true,
     "baseUrl": ".",
-    "outDir": "./",
     "paths": {
       "@/*": [
         "src/*"

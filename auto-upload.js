@@ -10,7 +10,7 @@ const testConfig = {
   port: 3222,
   username: 'root',
   password: 'bfd123',
-  remotePath:'/opt/mycyt'
+  remotePath:'/opt/coal'
 }
 
 const prodConfig = {
@@ -18,7 +18,7 @@ const prodConfig = {
   port: 3222,
   username: 'root',
   password: 'bfd123',
-  remotePath:'/opt/mycyt'
+  remotePath:'/opt/coal'
 }
 
 let config = (argv === '-p' ? prodConfig : testConfig)
