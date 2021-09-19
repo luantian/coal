@@ -21,15 +21,10 @@ module.exports = {
   css: {
     sourceMap: !IS_PRODUCTION,
     loaderOptions: {
-      less: {
-        lessOptions: {
-          modifyVars: {
-            hack: `true; @import '@/style/theme.less'`
-          },
-          javascriptEnabled: true,
-        },
-      },
-    },
+      sass: {
+        data: `@import "@/style/var.scss";`
+      }
+    }
   },
 
   devServer: {

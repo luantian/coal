@@ -19,9 +19,10 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
   .main {
     width: 800px;
     height: 600px;
+    color: $primary-color;
   }
 </style>

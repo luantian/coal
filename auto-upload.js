@@ -3,21 +3,21 @@ const ssh2 = require('ssh2')
 
 const argv = process.argv.splice(2)[1]
 
-const localPath = './mycyt'
+const localPath = './coal'
 
 const testConfig = {
-  host: '172.16.4.115',
+  host: '',
   port: 3222,
   username: 'root',
-  password: 'bfd123',
+  password: '',
   remotePath:'/opt/coal'
 }
 
 const prodConfig = {
-  host: '172.16.4.115',
+  host: '',
   port: 3222,
   username: 'root',
-  password: 'bfd123',
+  password: '',
   remotePath:'/opt/coal'
 }
 
