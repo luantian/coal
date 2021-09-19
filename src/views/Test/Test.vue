@@ -1,13 +1,12 @@
 <template>
   <div class="test">
-    <div class="main">
-      test
-      <el-button type="primary">主要按钮</el-button>
-    </div>
+
   </div>
 </template>
 
 <script>
+
+import * as THREE from 'three'
 
 export default {
   name: 'Test',
@@ -15,14 +14,13 @@ export default {
     return {
 
     }
+  },
+  mounted() {
+    console.log('THREE', THREE)
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .main {
-    width: 800px;
-    height: 600px;
-    color: $primary-color;
-  }
+
 </style>
