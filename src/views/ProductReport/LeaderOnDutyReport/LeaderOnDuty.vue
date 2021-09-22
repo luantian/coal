@@ -1,13 +1,13 @@
 <template>
-  <div class="production-daily">
-    生成日报
+  <div class="leader-on-duty">
+    领导值班表
   </div>
 </template>
 
 <script>
 
   export default {
-    name: 'ProductionDaily',
+    name: 'LeaderOnDuty',
     data() {
       return {
 

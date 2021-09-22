@@ -1,13 +1,18 @@
 const router = [
   {
-    path: '/reports',
-    name: 'Reports',
-    component: () => import('@/views/Reports/Index.vue'),
+    path: '/productReport',
+    name: 'productReport',
+    component: () => import('@/views/ProductReport/Index.vue'),
     children: [
       {
         path: 'productionDaily',
-        name: 'productionDaily',
-        component: () => import('@/views/Reports')
+        name: 'ProductionDaily',
+        component: () => import('@/views/ProductReport')
+      },
+      {
+        path: 'leaderOnDuty',
+        name: 'leaderOnDuty',
+        component: () => import('@/views/ProductReport/LeaderOnDutyReport/LeaderOnDuty.vue')
       }
     ]
   }

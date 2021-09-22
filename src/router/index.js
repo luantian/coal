@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import test from './test'
 import report from './report'
+import archive from './archive'
 
 const Login = () => import('@/views/Login');
 const Index = () => import('@/views/Index');
@@ -22,6 +23,7 @@ const routes = [
     component: Login,
   },
   ...report,
+  ...archive,
   ...test
 ]
 
