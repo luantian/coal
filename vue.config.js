@@ -30,10 +30,10 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': { //使用"/api"来代替"http://f.apiplus.c"
-        target: 'http://172.24.3.106:9999', //源地址
+        target: 'http://172.24.4.237:8020', //源地址
         changeOrigin: true, //改变源
         pathRewrite: {
-          '^/api/Knowledge': '/' //路径重写
+          '^/api': '/' //路径重写
         }
       },
     }

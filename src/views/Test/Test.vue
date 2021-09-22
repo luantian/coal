@@ -23,10 +23,6 @@ export default {
       scene: null,
       camera: null,
       renderer: null,
-      geometry: null,
-      material: null,
-      cube: null,
-      ambient: null,
       controls: null
     }
   },
@@ -99,7 +95,16 @@ export default {
     animate() {
       requestAnimationFrame(this.animate)
       this.renderer.render(this.scene, this.camera)
-    }
+    },
+
+    beforeDestroy() {
+      this.scene = new THREE.Scene()
+      this.container = null
+      this.scene = null
+      this.camera = null
+      this.renderer = null
+      this.controls = null
+    },
 
   }
 }

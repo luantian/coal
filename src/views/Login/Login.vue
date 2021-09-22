@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     {{ message }}
-    <a-button @click="toLogin" type="primary">asdf</a-button>
+    <el-button @click="toLogin" type="primary">login</el-button>
   </div>
 </template>
 
