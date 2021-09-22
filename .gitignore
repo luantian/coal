@@ -1,8 +1,9 @@
 .DS_Store
 node_modules
 /dist
-/mycyt
+/coal
 
+/public/static/
 
 # local env files
 .env.local
