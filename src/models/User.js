@@ -5,17 +5,16 @@ class User extends Base {
     super()
   }
 
-  static async toLogin(params) {
-    return await this.get({
+  static async toLogin(data) {
+    return await this.post({
       url: '/login',
-      data: params,
+      data,
     })
   }
 
-  static async getAll() {
+  static async getInfo() {
     return await this.get({
-      url: `/Knowledge/schema/edgelabels`,
-      data: { page_size: -1 },
+      url: '/getInfo'
     })
   }
 

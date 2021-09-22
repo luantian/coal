@@ -2,7 +2,11 @@ import axios from 'axios';
 // import qs from 'qs';
 const baseUrl = process.env.VUE_APP_BASE_URL
 
-// import { message } from 'ant-design-vue'
+import { Message } from 'element-ui'
+import LocalStorage from '@/cache/LocalStorage'
+import router from './router';
+
+
 
 const service = axios.create({
   headers: {
@@ -19,14 +23,12 @@ const METHODS2 = ['get', 'delete']
 // http request 拦截器
 service.interceptors.request.use(
   config => {
-    console.log('bbbbbbbb', config)
     // 发送请求之前
+
     if (config.method.includes(METHODS1)) {
       //如果是FormData类型，重新设置请求头
       if (config.data instanceof FormData) {
-        config.headers = {
-          'Content-Type': 'multipart/form-data'
-        }
+        config.headers['Content-Type'] = 'multipart/form-data'
       } else {
         //将参数变成  a=xx&b=xx&c=xx这样的参数列表，配合php后台
         // config.data = qs.stringify({
@@ -34,6 +36,16 @@ service.interceptors.request.use(
         // });
       }
     }
+
+    console.log('url', config.url)
+    if (config.url.indexOf('/login') === -1) {
+      const token = LocalStorage.getItem('token')
+
+      if (token) {
+        config.headers['Authorization'] = token
+      }
+    }
+
     return config;
   },
   err => {
@@ -87,6 +99,7 @@ service.interceptors.response.use(
           console.log(`连接错误${err.response.status}`)
       }
     } else {
+      console.log('dataerror', err)
       return Promise.resolve({data: '', error: err})
     }
     return Promise.resolve(err.response)
@@ -104,7 +117,6 @@ class Http {
   }
 
   static proxyPromise(method, url, data, config) {
-    console.log('config', config)
     let par = {};
     if (METHODS1.includes(method)) {
       par = data
@@ -113,7 +125,6 @@ class Http {
       par = { params: data }
     }
     return new Promise((resolve, reject) => {
-      console.log('aaaaaaaaaaaaaaaaaaaaaaaaa', service.defaults)
       Object.assign(service.defaults, config)
       service[method](url, par, config)
         .then(response => {
@@ -121,6 +132,15 @@ class Http {
           resolve(data)
           // if (data.status && data.status !== 200) message.error(data.message)
           // if (data.code && data.code !== 1) message.error(data.message)
+          console.log(data)
+          if (data.code === 401) {
+            router.push({
+              path: '/'
+            })
+          }
+          if (data.code !== 200) {
+            Message.error(data.msg)
+          }
         })
         .catch(err => {
           reject(err)
