@@ -1,45 +1,66 @@
 <template>
   <div class="report-index">
-    <div>
+    <div class="top">顶部组件</div>
+    <div class="container">
       <div class="menus">
-        <div @click="onMenu(item)" class="menu-item" v-for="(item, index) in menus" :key="index">{{ item.title }}</div>
+        <tree-menu :routes="menus" @onSelect="onMenuItem"></tree-menu>
       </div>
-    </div>
-    <div>
-      <router-view></router-view>
+      <div class="main">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 
+  import TreeMenu from '@/components/TreeMenu'
+  import report from '@/router/report'
+
   export default {
     name: 'ReportIndex',
+    components: { TreeMenu },
     data() {
       return {
-        menus: [
-          {
-            title: '生产日报表',
-            path: 'a'
-          },
-          {
-            title: '生产日报表2',
-            path: 'b'
-          }
-        ]
+        menus: report
       }
     },
+    mounted() {
+      //
+    },
     methods: {
-      onMenu(item) {
+      onMenuItem(item) {
         this.$router.push({
           path: item.path
         })
-      }
+      },
     }
   }
 
 </script>
 
 <style lang="scss" scoped>
+  .top {
+    height: $header-height;
+  }
+
+  .container {
+    display: flex;
+    height: calc(100vh - #{$header-height});
+    .menus {
+      width: $menus-width;
+      height: 100%;
+      background: red;
+      overflow: auto;
+    }
+    .main {
+      width: calc(100vw - #{$menus-width});
+      height: 100%;
+      background: green;
+      overflow: auto;
+    }
+  }
+
+
 
 </style>

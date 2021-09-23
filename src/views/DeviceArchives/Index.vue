@@ -1,6 +1,6 @@
 <template>
   <div class="report-index">
-    报表首页
+
     <div>
       <router-view></router-view>
     </div>
