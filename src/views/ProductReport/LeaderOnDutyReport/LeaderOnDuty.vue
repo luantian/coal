@@ -1,6 +1,6 @@
 <template>
   <div class="leader-on-duty">
-    领导值班表
+    {{ $route.meta.title }}
   </div>
 </template>
 

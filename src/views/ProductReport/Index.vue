@@ -50,7 +50,7 @@
     .menus {
       width: $menus-width;
       height: 100%;
-      background: red;
+      //background: red;
       overflow: auto;
     }
     .main {

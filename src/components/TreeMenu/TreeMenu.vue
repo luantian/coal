@@ -17,6 +17,9 @@
             return r(
               'el-submenu',
               {
+                class: {
+                  active: this.$route.path.indexOf(route.path) > -1
+                },
                 props: {
                   index: route.path,
                 }
@@ -35,9 +38,13 @@
               ]
             )
           } else if (route.path) {
+            console.log('route', route)
             return r(
               'el-menu-item',
               {
+                class: {
+                  active: this.$route.path.indexOf(route.path) > -1
+                },
                 props: {
                   index: route.path,
                 },
@@ -71,12 +78,12 @@
       return r(
         'el-menu',
         {
-          props: {
-            backgroundColor: "#545c64",
-            textColor: "#fff",
-            activeTextColor: "#ffd04b",
-            // router: true
-          },
+          // props: {
+          //   backgroundColor: "#545c64",
+          //   textColor: "#fff",
+          //   activeTextColor: "#ffd04b",
+          //   // router: true
+          // },
           on: {
             select: this.onSelect
           }
@@ -91,4 +98,20 @@
   .el-menu{
     border-right-width: 0;
   }
+
+  /deep/ .el-submenu.active {
+    .el-submenu__title {
+      color: green;
+      background: red;
+    }
+  }
+
+  /deep/ .el-menu-item:hover {
+    background-color: orange;
+  }
+
+  /deep/ .el-menu-item.active {
+    background: red;
+  }
+
 </style>

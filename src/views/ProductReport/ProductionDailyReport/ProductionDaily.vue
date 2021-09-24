@@ -1,6 +1,6 @@
 <template>
   <div class="production-daily">
-    asdf
+    {{ $route.meta.title }}
   </div>
 </template>
 

@@ -24,7 +24,7 @@ const router = [
         component: () => import('@/views/ProductReport/LeaderOnDutyReport/LeaderOnDuty.vue')
       }
     ]
-  },
+  }
 ]
 
 export default router
