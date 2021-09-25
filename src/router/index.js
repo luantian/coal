@@ -4,9 +4,6 @@ import test from './test'
 import report from './report'
 import archive from './archive'
 
-const Login = () => import('@/views/Login');
-const Index = () => import('@/views/Index');
-
 
 
 Vue.use(Router);
@@ -15,12 +12,17 @@ const routes = [
   {
     path: '/',
     name: 'Index',
-    component: Index,
+    component: () => import('@/views/Index'),
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: () => import('@/views/Login')
+  },
+  {
+    path: '/craftSystem',
+    name: 'CraftSystem',
+    component: () => import('@/views/CraftSystem')
   },
   ...report,
   ...archive,
