@@ -15,14 +15,40 @@
 <script>
 
   import TreeMenu from '@/components/TreeMenu'
-  import report from '@/router/report'
+
+  const menus = [
+    {
+      path: '/productReport/productionDailyReport',
+      meta: {
+        title: '生产日报表'
+      },
+    },
+    {
+      path: '/productReport/leaderOnDuty',
+      meta: {
+        title: '领导值班表'
+      },
+    },
+    {
+      path: '/productReport/deviceBreakdown',
+      meta: {
+        title: '设备故障表'
+      },
+    },
+    {
+      path: '/productReport/output',
+      meta: {
+        title: '产量统计表'
+      },
+    },
+  ]
 
   export default {
     name: 'ReportIndex',
     components: { TreeMenu },
     data() {
       return {
-        menus: report
+        menus
       }
     },
     mounted() {
@@ -50,13 +76,13 @@
     .menus {
       width: $menus-width;
       height: 100%;
-      //background: red;
+      background: aqua;
       overflow: auto;
     }
     .main {
       width: calc(100vw - #{$menus-width});
       height: 100%;
-      background: green;
+      background: ghostwhite;
       overflow: auto;
     }
   }

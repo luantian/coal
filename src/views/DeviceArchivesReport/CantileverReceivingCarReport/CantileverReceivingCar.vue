@@ -1,16 +1,13 @@
 <template>
-  <div class="report-index">
-
-    <div>
-      <router-view></router-view>
-    </div>
+  <div class="cantilever-receiving-car">
+    {{$route.meta.title}}
   </div>
 </template>
 
 <script>
 
   export default {
-    name: 'ReportIndex',
+    name: 'CantileverReceivingCar',
     data() {
       return {
 

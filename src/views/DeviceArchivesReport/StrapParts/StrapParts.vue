@@ -1,13 +1,13 @@
 <template>
-  <div class="production-daily">
-    生成日报表
+  <div class="device-parts">
+    {{$route.meta.title}}
   </div>
 </template>
 
 <script>
 
   export default {
-    name: 'ProductionDaily',
+    name: 'DevicePartsReport',
     data() {
       return {
 

@@ -38,7 +38,8 @@
               ]
             )
           } else if (route.path) {
-            console.log('route', route)
+            console.log('route+++++', route)
+
             return r(
               'el-menu-item',
               {
@@ -66,8 +67,10 @@
        * @param vm 当前组件实例
        */
       onSelect(path, paths) {
+        console.log('paths', paths)
         const current = this.$router.history.current.fullPath
         const toPath = paths.join('/')
+        console.log('toPath', toPath)
         if (current === toPath) return
         this.$router.push({
           path: toPath
