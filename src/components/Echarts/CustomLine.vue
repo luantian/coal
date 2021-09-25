@@ -24,24 +24,38 @@
     methods: {
       init() {
         this.myChart = this.$echarts.init(this.$refs.__line)
+        const color = '#fff'
+        const nameTextStyle = {
+          color
+        }
         this.option = {
           xAxis: {
             type: 'category',
+            name: '时',
+            nameTextStyle,
+            axisLabel: {
+              textStyle: {
+                color  //更改坐标轴文字颜色
+              }
+            }
           },
           yAxis: {
             type: 'category',
-            textStyle: {
-              color: '#fff',  //更改坐标轴文字颜色
-              fontSize : 14      //更改坐标轴文字大小
+            name: '万吨',
+            nameTextStyle,
+            axisLabel: {
+              textStyle: {
+                color,  //更改坐标轴文字颜色
+              }
             }
           },
           series: [
             {
               type: 'line',
+              smooth: true
             }
           ]
         }
-        this.render()
       },
       render() {
         this.option.dataset = this.dataset
@@ -49,8 +63,7 @@
       }
     },
     watch: {
-      dataset(newval) {
-        console.log('newval', newval)
+      dataset() {
         this.render()
       }
     }
@@ -59,6 +72,7 @@
 
 <style lang="scss" scoped>
   .__line {
-    height: 300px;
+    width: 100%;
+    height: 100%;
   }
 </style>

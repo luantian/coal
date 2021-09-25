@@ -12,7 +12,7 @@ import './style/element-variables.scss'
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts// 引入echarts
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, { size: 'small' });
 
 new Vue({
   render: h => h(App),

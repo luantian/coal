@@ -45,23 +45,6 @@
     }
   }
 
-  .radio-group {
-    text-align: center;
-  }
 
-  /deep/ .el-radio-button__inner {
-    background-color: #091760;
-    border: 1px solid #0B8FF5;
-    color: #fff;
-    border-right: none;
-  }
-
-  /deep/ .el-radio-button:first-child .el-radio-button__inner {
-    border-left: 1px solid #0B8FF5;
-  }
-
-  /deep/ .el-radio-button:last-child .el-radio-button__inner {
-    border-right: 1px solid #0B8FF5;
-  }
 
 </style>

@@ -10,6 +10,13 @@
           <custom-line :dataset="lineDataset"></custom-line>
         </div>
       </div>
+
+      <sub-title>轮斗利用率</sub-title>
+      <div class="pies">
+        <div class="__pies-wrap">
+          <custom-pies :dataset="piesDataset"></custom-pies>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -18,8 +25,8 @@
 
   import SubTitle from "../SubTitle";
   import OutputInfoModel from "@/models/OutputInfo";
-
   import CustomLine from '@/components/Echarts/CustomLine'
+  import CustomPies from "@/components/Echarts/CustomPies";
 
   const outputRadios = [
     { name: '当月', value: 3 },
@@ -29,12 +36,13 @@
 
   export default {
     name: 'Column1',
-    components: { SubTitle, CustomLine },
+    components: { SubTitle, CustomLine, CustomPies },
     data() {
       return {
         outputRadios,
         outputValue: 3,
-        lineDataset: { source: [] }
+        lineDataset: { source: [] },
+        piesDataset: { source: [] }
       }
     },
     mounted() {
@@ -49,8 +57,8 @@
           selectType: v
         }
         const { data } = await OutputInfoModel.queryHistogramStatistics(params)
-        console.log('data', data)
-        this.lineDataset.source = data
+        this.lineDataset = { source: data }
+        this.piesDataset = { source: [] }
       }
     }
   }
@@ -62,4 +70,28 @@
     padding-left: 40px;
     box-sizing: border-box;
   }
+
+  .radio-group {
+    text-align: center;
+  }
+
+  .__line-wrap, .__pies-wrap {
+    height: 300px;
+  }
+
+  /deep/ .el-radio-button__inner {
+    background-color: #091760;
+    border: 1px solid #0B8FF5;
+    color: #fff;
+    border-right: none;
+  }
+
+  /deep/ .el-radio-button:first-child .el-radio-button__inner {
+    border-left: 1px solid #0B8FF5;
+  }
+
+  /deep/ .el-radio-button:last-child .el-radio-button__inner {
+    border-right: 1px solid #0B8FF5;
+  }
+
 </style>
