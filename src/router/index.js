@@ -25,6 +25,7 @@ const routes = [
   ...report,
   ...archive,
   ...test
+  
 ]
 
 const router = new Router({
