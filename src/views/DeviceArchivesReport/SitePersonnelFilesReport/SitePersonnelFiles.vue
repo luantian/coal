@@ -1,22 +1,115 @@
 <template>
   <div class="personnel-files">
-    {{ $route.meta.title }}
+    <div class="header_div">
+      <div style="flex: 1;text-align:center;">
+        {{ $route.meta.title }}
+      </div>
+    </div>
+
+    <div class="table_div" style="position: relative">
+      <div style="display: flex;">
+        <div style="flex: 1">
+          <el-form :inline="true" class="demo-form-inline">
+            <el-form-item label="部门">
+              <el-input v-model="deptName" placeholder="请输入部门"></el-input>
+            </el-form-item>
+            <el-form-item label="姓名">
+              <el-input v-model="personName" placeholder="请输入姓名"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="toQuery">查询</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+        <div style="padding-right: 35px">
+          <el-button @click="addPersonFiles">新增档案</el-button>
+        </div>
+      </div>
+      <div style="position: absolute;top:65px;left:20px;right:20px;bottom:20px;overflow: auto">
+        <el-table :data="tableData" stripe style="width: 100%;" >
+          <el-table-column label="序号" type="index" align="center"></el-table-column>
+          <el-table-column prop="deptName" label="部门" align="center"></el-table-column>
+          <el-table-column prop="personName" label="姓名" align="center"></el-table-column>
+          <el-table-column prop="postName" label="职务" align="center"></el-table-column>
+          <el-table-column prop="phonenumber" label="联系电话" align="center"></el-table-column>
+          <el-table-column prop="dutyName" label="职责" align="center"></el-table-column>
+          <el-table-column prop="remark" label="备注" align="center"></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="editData(scope.$index, scope.row)">编辑
+              </el-button>
+              <el-button
+                size="mini"
+                type="danger"
+                @click="deleteData(scope.$index, scope.row)">删除
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+    </div>
+
   </div>
 </template>
 
 <script>
+import ArchiveReportModel from "@/models/ArchiveReport";
 
-  export default {
-    name: 'SitePersonnelFiles',
-    data() {
-      return {
-
-      }
+export default {
+  name: 'SitePersonnelFiles',
+  data() {
+    return {
+      tableData: [],
+      deptName: '',
+      personName: ''
     }
+  },
+  methods: {
+    async toQuery() {
+      console.log('deptName:', this.deptName)
+      console.log('personName:', this.personName)
+      const {rows} = await ArchiveReportModel.selectSitePersonnelFilesList()
+      this.tableData = rows
+      console.log(this.tableData)
+    },
+    async editData(index, row) {
+      console.log(index)
+      console.log(row)
+    },
+    async deleteData(index, row) {
+      console.log(index)
+      console.log(row)
+    },
+    async addPersonFiles() {
+      alert(223)
+    }
+  },
+  created() {
+    this.toQuery()
   }
+}
 
 </script>
 
 <style lang="scss" scoped>
+$headerHeight: 100px;
+.header_div {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  background: aquamarine
+}
+
+.table_div {
+  padding: 15px 25px;
+  border-radius: 30px;
+  background: darkgray;
+  height: calc(100vh - #{$headerHeight} - #{$header-height});
+  box-sizing: border-box;
+}
+
 
 </style>
