@@ -3,6 +3,7 @@
     <div class="header_div">
       <div style="flex: 1;text-align:center;">
         {{ $route.meta.title }}
+        sas
       </div>
     </div>
 
@@ -22,7 +23,7 @@
           </el-form>
         </div>
         <div style="padding-right: 35px">
-          <el-button @click="addPersonFiles">新增档案</el-button>
+          <el-button @click="addDialogVisible=true">新增档案</el-button>
         </div>
       </div>
       <div style="position: absolute;top:65px;left:20px;right:20px;bottom:20px;overflow: auto">
@@ -49,7 +50,11 @@
           </el-table-column>
         </el-table>
       </div>
-
+      <div>
+        <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false">
+          <add-personnel-file-form @addDialogClose="addDialogVisible = false"></add-personnel-file-form>
+        </el-dialog>
+      </div>
     </div>
 
   </div>
@@ -57,34 +62,38 @@
 
 <script>
 import ArchiveReportModel from "@/models/ArchiveReport";
-
+import addPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/addPersonnelFileForm";
 export default {
   name: 'SitePersonnelFiles',
+  components: { addPersonnelFileForm },
   data() {
     return {
       tableData: [],
       deptName: '',
-      personName: ''
+      personName: '',
+      addDialogVisible: false
     }
   },
   methods: {
     async toQuery() {
-      console.log('deptName:', this.deptName)
-      console.log('personName:', this.personName)
       const {rows} = await ArchiveReportModel.selectSitePersonnelFilesList()
       this.tableData = rows
-      console.log(this.tableData)
     },
     async editData(index, row) {
       console.log(index)
       console.log(row)
     },
     async deleteData(index, row) {
-      console.log(index)
-      console.log(row)
-    },
-    async addPersonFiles() {
-      alert(223)
+      const {code} = await ArchiveReportModel.deleteSitePersonnelFile(row.id)
+      if(code === 200){
+        this.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+        this.toQuery()
+        return
+      }
+      this.$message.error('删除失败');
     }
   },
   created() {
