@@ -38,8 +38,6 @@
               ]
             )
           } else if (route.path) {
-            console.log('route+++++', route)
-
             return r(
               'el-menu-item',
               {
