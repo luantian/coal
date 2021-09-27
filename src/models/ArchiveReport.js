@@ -6,9 +6,10 @@ class ArchiveReport extends Base {
   }
 
   // 查询现场人员基础档案列表
-  static async selectSitePersonnelFilesList() {
+  static async selectSitePersonnelFilesList(data) {
     return await this.get({
-      url: '/person/info/list'
+      url: '/person/info/list',
+      data
     })
   }
 
@@ -22,6 +23,14 @@ class ArchiveReport extends Base {
   // 新增现场人员基础档案
   static async addSitePersonnelFile(data) {
     return await this.post({
+      url: '/person/info',
+      data
+    })
+  }
+
+  // 編輯现场人员基础档案
+  static async editSitePersonnelFile(data) {
+    return await this.put({
       url: '/person/info',
       data
     })

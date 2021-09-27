@@ -26,8 +26,8 @@
           <el-button @click="addDialogVisible=true">新增档案</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:20px;bottom:20px;overflow: auto">
-        <el-table :data="tableData" stripe style="width: 100%;" >
+      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
+        <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="deptName" label="部门" align="center"></el-table-column>
           <el-table-column prop="personName" label="姓名" align="center"></el-table-column>
@@ -49,10 +49,24 @@
             </template>
           </el-table-column>
         </el-table>
+        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
+          <el-pagination
+            background
+            layout="prev, pager, next, sizes"
+            :total="totalRecords"
+            :page-sizes="pageSizes">
+          </el-pagination>
+        </div>
       </div>
       <div>
-        <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false">
-          <add-personnel-file-form @addDialogClose="addDialogVisible = false"></add-personnel-file-form>
+        <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
+                   :destroy-on-close="true">
+          <add-personnel-file-form @addDialogClose="addDialogVisible = false"
+                                   @queryList="toQuery"></add-personnel-file-form>
+        </el-dialog>
+        <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
+          <edit-personnel-file-form @editDialogClose="editDialogVisible = false"
+                                    @queryList="toQuery" :rowData="rowData"></edit-personnel-file-form>
         </el-dialog>
       </div>
     </div>
@@ -63,37 +77,72 @@
 <script>
 import ArchiveReportModel from "@/models/ArchiveReport";
 import addPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/addPersonnelFileForm";
+import editPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/editPersonnelFileForm";
+
 export default {
   name: 'SitePersonnelFiles',
-  components: { addPersonnelFileForm },
+  components: {addPersonnelFileForm, editPersonnelFileForm},
   data() {
     return {
       tableData: [],
       deptName: '',
       personName: '',
-      addDialogVisible: false
+      addDialogVisible: false,
+      editDialogVisible: false,
+      rowData: {},
+      totalRecords: 0,
+      pageSizes: [10, 20, 50, 100],
+      currentPage: 1,
+      size: 10,
+      queryParams: {}
     }
   },
   methods: {
     async toQuery() {
-      const {rows} = await ArchiveReportModel.selectSitePersonnelFilesList()
+      this.queryParams = {
+        'currentPage': this.currentPage,
+        'size': this.size,
+        'personName': this.personName,
+        'deptName': this.deptName
+      }
+      const {rows, total} = await ArchiveReportModel.selectSitePersonnelFilesList(this.queryParams);
       this.tableData = rows
+      this.totalRecords = total
     },
     async editData(index, row) {
-      console.log(index)
-      console.log(row)
+      this.rowData = row
+      this.editDialogVisible = true
     },
     async deleteData(index, row) {
-      const {code} = await ArchiveReportModel.deleteSitePersonnelFile(row.id)
-      if(code === 200){
+      this.$confirm('是否确认删除该数据?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const {code} = await ArchiveReportModel.deleteSitePersonnelFile(row.id)
+        if (code === 200) {
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          });
+          await this.toQuery()
+          return
+        }
+        this.$message.error('删除失败');
+      }).catch(() => {
         this.$message({
-          message: '删除成功',
-          type: 'success'
-        });
-        this.toQuery()
-        return
-      }
-      this.$message.error('删除失败');
+          type: 'info',
+          message: '取消删除'
+        })
+      })
+    },
+    async pageSizeChange(val) {
+      this.size = val
+      await this.toQuery()
+    },
+    async currentPageChange(val) {
+      this.size = val
+      await this.toQuery()
     }
   },
   created() {
