@@ -3,7 +3,7 @@
     <div class="output">
       <sub-title>产量统计</sub-title>
       <div class="radio-group">
-        <el-radio-group v-model="outputValue" size="medium" @change="onOutputChange">
+        <el-radio-group v-model="outputValue" @change="onOutputChange">
           <el-radio-button v-for="item in outputRadios" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>
         </el-radio-group>
         <div class="__line-wrap">
@@ -17,6 +17,21 @@
           <custom-pies :dataset="piesDataset"></custom-pies>
         </div>
       </div>
+
+      <sub-title>储量数据</sub-title>
+      <div class="__bar-wrap">
+        <custom-bar :dataset="barDataset"></custom-bar>
+      </div>
+
+      <sub-title>储量温度数据</sub-title>
+      <div class="radio-group">
+        <el-radio-group v-model="temperatureValue" @change="onTemperatureChange">
+          <el-radio-button v-for="item in temperatures" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>
+        </el-radio-group>
+        <div class="__line-wrap">
+          <custom-line :dataset="lineDataset" :x-unit="' '" :y-unit="' '"></custom-line>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -27,22 +42,31 @@
   import OutputInfoModel from "@/models/OutputInfo";
   import CustomLine from '@/components/Echarts/CustomLine'
   import CustomPies from "@/components/Echarts/CustomPies";
+  import CustomBar from "@/components/Echarts/CustomBar";
 
   const outputRadios = [
     { name: '当月', value: 3 },
     { name: '本月', value: 2 },
     { name: '年度', value: 1 }
   ]
+  const temperatures = [
+    { name: '1号装车仓', value: 3 },
+    { name: '2号装车仓', value: 2 },
+    { name: '3号装车仓', value: 1 }
+  ]
 
   export default {
     name: 'Column1',
-    components: { SubTitle, CustomLine, CustomPies },
+    components: { SubTitle, CustomLine, CustomPies, CustomBar },
     data() {
       return {
         outputRadios,
         outputValue: 3,
+        temperatures,
+        temperatureValue: 3,
         lineDataset: { source: [] },
-        piesDataset: { source: [] }
+        piesDataset: { source: [] },
+        barDataset: { source: [] }
       }
     },
     mounted() {
@@ -52,6 +76,9 @@
       onOutputChange(v) {
         this.queryTotal(v)
       },
+      onTemperatureChange() {
+
+      },
       async queryTotal(v) {
         const params = {
           selectType: v
@@ -59,6 +86,11 @@
         const { data } = await OutputInfoModel.queryHistogramStatistics(params)
         this.lineDataset = { source: data }
         this.piesDataset = { source: [] }
+        this.barDataset = { source: [
+          [ '1号装车仓', 400, 10.23 ],
+          [ '2号装车仓', 603, 8.5 ],
+          [ '3号装车仓', 821, 9.8 ]
+        ] }
       }
     }
   }
@@ -75,7 +107,7 @@
     text-align: center;
   }
 
-  .__line-wrap, .__pies-wrap {
+  .__line-wrap, .__pies-wrap, .__bar-wrap {
     height: 300px;
   }
 

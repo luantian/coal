@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Quartz-Regular';
+    src: url('./QuartzRegular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PangMenZhengDao';
+    src: url('./PangMenZhengDao.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Quartz';
+  src: url('./Quartz.ttf') format('truetype');
+}
+
+/* @font-face {
+    font-family: 'DS-DIGII';
+    src: url('./DS-DIGII.TTF') format('truetype');
+}
+ */

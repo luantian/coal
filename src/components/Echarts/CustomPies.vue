@@ -26,23 +26,26 @@
         this.myChart = this.$echarts.init(this.$refs.__pie)
 
         const data = [
-          ['装备制造', 44],
-          ['现代材料', 55],
-          ['新能源', 66]
+          ['故障率', 44],
+          ['出动率', 55],
+          ['实动率', 66]
         ]
         let titleArr= [], seriesArr = []
-        const colors = [['#389af4', '#dfeaff'],['#ff8c37', '#ffdcc3'],['#ffc257', '#ffedcc'], ['#fd6f97', '#fed4e0'],['#a181fc', '#e3d9fe']]
+        const colors = [['#1F3E8E', '#FFB14C'],['#1F3E8E', '#7CF4FF'],['#1F3E8E', '#2DB2FF']]
+
+        const margin = 30
 
         data.forEach((item, index) => {
           titleArr.push(
             {
               text: item[0],
-              left: index * 20 + 10 +'%',
+              left: index * margin + 19 +'%',
               top: '20%',
               textAlign: 'center',
               textStyle: {
                 fontWeight: 'normal',
-                color: colors[index][0],
+                color: '#fff',
+                fontSize: 12,
                 textAlign: 'center',
               },
             }
@@ -52,9 +55,10 @@
               name: item[0],
               type: 'pie',
               clockwise: false,
-              radius: [30, 40],
+              radius: [40, 46],
               label: {
-                show: false
+                show: false,
+                align: 'center'
               },
               labelLine: {
                 show: false
@@ -62,27 +66,24 @@
               textStyle:  {
                 color: colors[index][0],
               },
-              center: [index * 20 + 10 +'%', '50%'],
+              center: [index * margin + 20 +'%', '30%'],
               data: [
                 {
                   value: item[1],
                   label: {
-                    formatter: function(params){
-                      return params.value+'%';
-                    },
+                    formatter: (params) => `${params.value}%`,
                     position: 'center',
+                    top: 20,
                     show: true,
-                    axisLabel: {
-                      fontSize: '20',
-                      fontWeight: 'bold',
-                      color: colors[index][0]
-                    }
+                    color: '#fff',
+                    fontSize: 18
                   },
+                  zIndex: 3
                 },
                 {
-                  value: 100-item[1],
+                  value: 100 - item[1],
                   name: 'invisible',
-                  axisLabel: {
+                  itemStyle: {
                     color: colors[index][1]
                   },
                   emphasis: {

@@ -11,6 +11,12 @@
       dataset: {
         type: Object,
         required: true
+      },
+      xUnit: {
+        type: String,
+      },
+      yUnit: {
+        type: String,
       }
     },
     data() {
@@ -31,7 +37,7 @@
         this.option = {
           xAxis: {
             type: 'category',
-            name: '时',
+            name: this.xUnit || '时',
             nameTextStyle,
             axisLabel: {
               textStyle: {
@@ -41,7 +47,7 @@
           },
           yAxis: {
             type: 'category',
-            name: '万吨',
+            name: this.yUnit || '万吨',
             nameTextStyle,
             axisLabel: {
               textStyle: {
