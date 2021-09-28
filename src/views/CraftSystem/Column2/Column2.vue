@@ -18,15 +18,33 @@
         </div>
       </div>
     </div>
+
+    <div class="three-model">
+      <div class="three-model-header">
+        <div class="models">
+          <div class="_model" @click="changeModel(index)" :class="{ active: activeModelIndex === index }" v-for="(item, index) in models" :key="index">
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
+      <div style="width: 100%; height: 500px; padding: 10px;">
+        <three-model :model-name="models[activeModelIndex].name"></three-model>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 
   import OutputInfoModel from "@/models/OutputInfo";
+  import ThreeModel from "@/components/ThreeModel";
 
   export default {
     name: 'Column2',
+    components: {
+      ThreeModel
+    },
     data() {
       return {
         cumulative: {
@@ -41,7 +59,16 @@
           { keyIndex: 'dayYieldNumber', title: '日产量', count: 0, unit: '吨', icon: require('@/assets/img/day.png') },
           { keyIndex: 'monYieldNumber', title: '月产量', count: 0, unit: '万吨', icon: require('@/assets/img/month.png') },
           { keyIndex: 'yearYieldNumber', title: '年产量', count: 0, unit: '万吨', icon: require('@/assets/img/year.png') },
-        ]
+        ],
+        models: [
+          { name: '轮斗连续工艺', _model: null },
+          { name: '轮斗挖掘机', _model: null },
+          { name: '转载机', _model: null },
+          { name: '悬臂受料机', _model: null },
+          { name: '带式输送机', _model: null },
+          { name: '装车仓', _model: null },
+        ],
+        activeModelIndex: 0
       }
     },
     mounted() {
@@ -58,6 +85,9 @@
             item.count = data[key]
           })
         }
+      },
+      changeModel(index) {
+        this.activeModelIndex = index
       }
     }
   }
@@ -117,6 +147,33 @@
         .info-unit {
           color: #DDFCFF;
           font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .three-model {
+    height: 570px;
+    background: url("~@/assets/img/three-model-border.png") no-repeat;
+    background-size: 100% 100%;
+    .three-model-header {
+      height: 47px;
+      line-height: 47px;
+      text-align: center;
+      .models {
+        display: flex;
+        justify-content: space-around;
+        padding: 0 50px;
+        ._model {
+          box-sizing: border-box;
+          border-bottom: 5px solid transparent;
+          cursor: pointer;
+          &:hover {
+            border-bottom: 5px solid #7CF4FF;
+          }
+        }
+        ._model.active {
+          border-bottom: 5px solid #7CF4FF;
         }
       }
     }
