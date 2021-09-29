@@ -28,10 +28,42 @@ class ArchiveReport extends Base {
     })
   }
 
+
   // 編輯现场人员基础档案
   static async editSitePersonnelFile(data) {
     return await this.put({
       url: '/person/info',
+      data
+    })
+  }
+
+  // 查询轮斗挖掘机故障档案列表
+  static async selectWheelBucketBreakDown(data) {
+    return await this.get({
+      url: '/faualwheel/faualwheelInfo/list',
+      data
+    })
+  }
+
+  // 新增轮斗挖掘机故障档案列表
+  static async addWheelBucketBreakDown(data) {
+    return await this.post({
+      url: '/faualwheel/faualwheelInfo',
+      data
+    })
+  }
+
+  // 删除轮斗挖掘机故障档案列表
+  static async deleteWheelBucketBreakDown(id) {
+    return await this.delete({
+      url: '/faualwheel/faualwheelInfo/' + id
+    })
+  }
+
+  // 删除轮斗挖掘机故障档案列表
+  static async editWheelBucketBreakDown(data) {
+    return await this.put({
+      url: '/faualwheel/faualwheelInfo',
       data
     })
   }

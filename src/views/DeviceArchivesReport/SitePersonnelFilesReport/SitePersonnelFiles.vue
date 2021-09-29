@@ -3,7 +3,6 @@
     <div class="header_div">
       <div style="flex: 1;text-align:center;">
         {{ $route.meta.title }}
-        sas
       </div>
     </div>
 
@@ -54,6 +53,8 @@
             background
             layout="prev, pager, next, sizes"
             :total="totalRecords"
+            @size-change="pageSizeChange"
+            @current-change="currentPageChange"
             :page-sizes="pageSizes">
           </el-pagination>
         </div>
@@ -66,7 +67,7 @@
         </el-dialog>
         <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
           <edit-personnel-file-form @editDialogClose="editDialogVisible = false"
-                                    @queryList="toQuery" :rowData="rowData"></edit-personnel-file-form>
+                                    @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-personnel-file-form>
         </el-dialog>
       </div>
     </div>
@@ -78,7 +79,7 @@
 import ArchiveReportModel from "@/models/ArchiveReport";
 import addPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/addPersonnelFileForm";
 import editPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/editPersonnelFileForm";
-
+import { cloneDeep } from 'lodash-es'
 export default {
   name: 'SitePersonnelFiles',
   components: {addPersonnelFileForm, editPersonnelFileForm},
@@ -92,16 +93,17 @@ export default {
       rowData: {},
       totalRecords: 0,
       pageSizes: [10, 20, 50, 100],
-      currentPage: 1,
-      size: 10,
-      queryParams: {}
+      pageNum: 1,
+      pageSize: 10,
+      queryParams: {},
+      editRowData: {}
     }
   },
   methods: {
     async toQuery() {
       this.queryParams = {
-        'currentPage': this.currentPage,
-        'size': this.size,
+        'pageNum': this.pageNum,
+        'pageSize': this.pageSize,
         'personName': this.personName,
         'deptName': this.deptName
       }
@@ -110,7 +112,7 @@ export default {
       this.totalRecords = total
     },
     async editData(index, row) {
-      this.rowData = row
+      this.rowData = cloneDeep(row)
       this.editDialogVisible = true
     },
     async deleteData(index, row) {
@@ -137,11 +139,11 @@ export default {
       })
     },
     async pageSizeChange(val) {
-      this.size = val
+      this.pageSize = val
       await this.toQuery()
     },
     async currentPageChange(val) {
-      this.size = val
+      this.pageNum = val
       await this.toQuery()
     }
   },
@@ -163,7 +165,7 @@ $headerHeight: 100px;
 
 .table_div {
   padding: 15px 25px;
-  border-radius: 30px;
+  /*border-radius: 30px;*/
   background: darkgray;
   height: calc(100vh - #{$headerHeight} - #{$header-height});
   box-sizing: border-box;

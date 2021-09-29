@@ -1,6 +1,6 @@
 <template>
 <div style="width: 700px">
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
     <el-form-item label="部门" prop="deptName">
       <el-input type="text" v-model="rowData.deptName" autocomplete="off"></el-input>
     </el-form-item>
@@ -29,47 +29,13 @@
 
 <script>
   import ArchiveReportModel from "@/models/ArchiveReport";
+
     export default {
         name: "addPersonnelFileForm",
       props: {
         rowData: {}
       },
       data() {
-        const checkAge = (rule, value, callback) => {
-          if (!value) {
-            return callback(new Error('年龄不能为空'));
-          }
-          setTimeout(() => {
-            if (!Number.isInteger(value)) {
-              callback(new Error('请输入数字值'));
-            } else {
-              if (value < 18) {
-                callback(new Error('必须年满18岁'));
-              } else {
-                callback();
-              }
-            }
-          }, 1000);
-        };
-        const validatePass = (rule, value, callback) => {
-          if (value === '') {
-            callback(new Error('请输入密码'));
-          } else {
-            if (this.ruleForm.checkPass !== '') {
-              this.$refs.ruleForm.validateField('checkPass');
-            }
-            callback();
-          }
-        };
-        const validatePass2 = (rule, value, callback) => {
-          if (value === '') {
-            callback(new Error('请再次输入密码'));
-          } else if (value !== this.ruleForm.pass) {
-            callback(new Error('两次输入密码不一致!'));
-          } else {
-            callback();
-          }
-        };
         return {
           ruleForm: {
             deptName: '',
@@ -80,14 +46,23 @@
             remark: ''
           },
           rules: {
-            pass: [
-              { validator: validatePass, trigger: 'blur' }
+            deptName: [
+              { required: true, message: '部门名称不能为空', trigger: 'blur' }
             ],
-            checkPass: [
-              { validator: validatePass2, trigger: 'blur' }
+            personName: [
+              { required: true, message: '人员姓名不能为空', trigger: 'blur' }
             ],
-            age: [
-              { validator: checkAge, trigger: 'blur' }
+            postName: [
+              { required: true, message: '职务不能为空', trigger: 'blur' }
+            ],
+            phonenumber: [
+              { required: true, message: '联系电话不能为空', trigger: 'blur' }
+            ],
+            dutyName: [
+              { required: true, message: '职责不能为空', trigger: 'blur' }
+            ],
+            remark: [
+              { required: true, message: '备注不能为空', trigger: 'blur' }
             ]
           }
         };
