@@ -1,6 +1,6 @@
 <template>
   <div class="report-index">
-    <div class="top">顶部组件</div>
+    <common-header></common-header>
     <div class="container">
       <div class="menus">
         <tree-menu :routes="menus" @onSelect="onMenuItem"></tree-menu>
@@ -14,6 +14,7 @@
 
 <script>
 
+import CommonHeader from "@/components/CommonHeader";
 import TreeMenu from '@/components/TreeMenu'
 
 const menus = [
@@ -128,7 +129,7 @@ const menus = [
 ]
 export default {
   name: 'ArchiveReportIndex',
-  components: {TreeMenu},
+  components: {TreeMenu, CommonHeader},
   data() {
     return {
       menus
@@ -151,6 +152,12 @@ export default {
 <style lang="scss" scoped>
 .top {
   height: $header-height;
+}
+
+.report-index {
+  height: 100%;
+  background: url("~@/assets/img/index_bg.png") no-repeat;
+  background-size: 100% 100%;
 }
 
 .container {
