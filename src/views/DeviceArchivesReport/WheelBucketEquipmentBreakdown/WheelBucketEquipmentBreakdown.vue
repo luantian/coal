@@ -54,7 +54,6 @@
           <el-table-column prop="devicePositionSystem" label="设备部位系统" align="center"></el-table-column>
           <el-table-column prop="faultName" label="故障名称" align="center"></el-table-column>
           <el-table-column prop="faultType" label="故障类别" align="center"></el-table-column>
-          <el-table-column prop="faultDataType" label="故障数据类别" align="center"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button
@@ -101,6 +100,7 @@
   import addForm from "@/views/DeviceArchivesReport/WheelBucketEquipmentBreakdown/addWheelBucketBreakDownForm";
   import editForm from "@/views/DeviceArchivesReport/WheelBucketEquipmentBreakdown/editWheelBucketBreakDownForm";
   import {cloneDeep} from "lodash-es";
+
   export default {
     name: 'WheelBucketBreakDownFiles',
     components: {addForm, editForm},
@@ -122,16 +122,19 @@
         faultLocationOptions: [],
         selectValue: '',
         devicePositionSystem: '',
-        faultLocation: ''
+        faultLocation: '',
+        faultDataType: 1
       }
     },
+
     methods: {
       async toQuery() {
         this.queryParams = {
           'pageNum': this.pageNum,
           'pageSize': this.pageSize,
           'faultLocation': this.faultLocation,
-          'devicePositionSystem': this.devicePositionSystem
+          'devicePositionSystem': this.devicePositionSystem,
+          'faultDataType': this.faultDataType
         }
         const {rows, total} = await ArchiveReportModel.selectWheelBucketBreakDown(this.queryParams);
         this.tableData = rows
@@ -174,6 +177,7 @@
       }
     },
     created() {
+
       this.toQuery()
     }
   }

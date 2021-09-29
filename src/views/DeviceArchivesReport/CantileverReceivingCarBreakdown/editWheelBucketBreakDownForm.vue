@@ -35,7 +35,8 @@
             faultLocation: '',
             devicePositionSystem: '',
             faultName: '',
-            faultType: ''
+            faultType: '',
+            faultDataType: ''
           },
           rules: {
             faultLocation: [
@@ -49,6 +50,9 @@
             ],
             faultType: [
               { required: true, message: '故障类别不能为空', trigger: 'blur' }
+            ],
+            faultDataType: [
+              { required: true, message: '故障数据类别不能为空', trigger: 'blur' }
             ]
           }
         };

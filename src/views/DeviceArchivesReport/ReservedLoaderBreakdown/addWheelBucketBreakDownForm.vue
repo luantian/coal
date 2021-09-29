@@ -1,17 +1,17 @@
 <template>
 <div style="width: 700px">
-  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
     <el-form-item label="故障部位" prop="faultLocation">
-      <el-input type="text" v-model="rowData.faultLocation" autocomplete="off" placeholder="请输入故障部位"></el-input>
+      <el-input type="text" v-model="ruleForm.faultLocation" autocomplete="off" placeholder="请输入故障部位"></el-input>
     </el-form-item>
     <el-form-item label="设备部位系统" prop="devicePositionSystem">
-      <el-input type="text" v-model="rowData.devicePositionSystem" autocomplete="off" placeholder="请输入设备部位系统"></el-input>
+      <el-input type="text" v-model="ruleForm.devicePositionSystem" autocomplete="off" placeholder="请输入设备部位系统"></el-input>
     </el-form-item>
     <el-form-item label="故障名称" prop="faultName">
-      <el-input v-model="rowData.faultName" placeholder="请输入故障名称"></el-input>
+      <el-input v-model="ruleForm.faultName" placeholder="请输入故障名称"></el-input>
     </el-form-item>
     <el-form-item label="故障类别" prop="faultType">
-      <el-input v-model="rowData.faultType" placeholder="请输入故障类别" maxLength = "1"></el-input>
+      <el-input v-model="ruleForm.faultType" placeholder="请输入故障类别" maxLength = "1"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button @click="addCancel">取消</el-button>
@@ -23,19 +23,16 @@
 
 <script>
   import ArchiveReportModel from "@/models/ArchiveReport";
-
     export default {
         name: "addPersonnelFileForm",
-      props: {
-        rowData: {}
-      },
       data() {
         return {
           ruleForm: {
             faultLocation: '',
             devicePositionSystem: '',
             faultName: '',
-            faultType: ''
+            faultType: '',
+            faultDataType: 2
           },
           rules: {
             faultLocation: [
@@ -57,18 +54,17 @@
         async submitForm(formName) {
           this.$refs[formName].validate(async (valid) => {
             if (valid) {
-              const {code} = await ArchiveReportModel.editWheelBucketBreakDown(this.rowData)
-              console.log()
+              const {code} = await ArchiveReportModel.addWheelBucketBreakDown(this.ruleForm)
               if(code === 200){
                 this.$message({
-                  message: '編輯成功',
+                  message: '新增成功',
                   type: 'success'
                 });
-                this.$emit("editDialogClose")
+                this.$emit("addDialogClose")
                 this.$emit("queryList")
                 return
               }
-              this.$message.error('編輯失败');
+              this.$message.error('新增失败');
             } else {
               console.log('error submit!!');
               return false;
@@ -76,7 +72,7 @@
           });
         },
         addCancel() {
-          this.$emit("editDialogClose")
+          this.$emit("addDialogClose")
         }
       }
     }

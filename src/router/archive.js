@@ -107,8 +107,7 @@ const router = [
         path: 'breakDown/reversedLoaderBreakdown',
         name: 'reversedLoaderBreakdown',
         meta: {
-          title: '转载机故障' +
-            '基础档案'
+          title: '转载机故障基础档案'
         },
         component: () => import('@/views/DeviceArchivesReport/ReservedLoaderBreakdown/ReversedLoaderReport.vue')
       },

@@ -13,9 +13,6 @@
     <el-form-item label="故障类别" prop="faultType">
       <el-input v-model="ruleForm.faultType" placeholder="请输入故障类别" maxLength = "1"></el-input>
     </el-form-item>
-    <el-form-item label="故障数据类别" prop="faultType">
-      <el-input v-model="ruleForm.faultDataType" placeholder="请输入故障数据类别" maxLength = "1"></el-input>
-    </el-form-item>
     <el-form-item>
       <el-button @click="addCancel">取消</el-button>
       <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -35,7 +32,7 @@
             devicePositionSystem: '',
             faultName: '',
             faultType: '',
-            faultDataType: ''
+            faultDataType: 1
           },
           rules: {
             faultLocation: [
@@ -49,9 +46,6 @@
             ],
             faultType: [
               { required: true, message: '故障类别不能为空', trigger: 'blur' }
-            ],
-            faultDataType: [
-              { required: true, message: '故障数据类别不能为空', trigger: 'blur' }
             ]
           }
         };
@@ -61,7 +55,6 @@
           this.$refs[formName].validate(async (valid) => {
             if (valid) {
               const {code} = await ArchiveReportModel.addWheelBucketBreakDown(this.ruleForm)
-              console.log()
               if(code === 200){
                 this.$message({
                   message: '新增成功',

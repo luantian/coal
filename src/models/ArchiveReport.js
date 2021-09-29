@@ -60,10 +60,27 @@ class ArchiveReport extends Base {
     })
   }
 
+
   // 删除轮斗挖掘机故障档案列表
   static async editWheelBucketBreakDown(data) {
     return await this.put({
       url: '/faualwheel/faualwheelInfo',
+      data
+    })
+  }
+
+  // 查询设备基础档案--轮斗、转载机、悬臂受料车
+  static async selectWheelBucketBasicFilesList(data) {
+    return await this.get({
+      url: '/devicewheel/devicewheelInfo/list',
+      data
+    })
+  }
+
+  // 新增设备基础档案--轮斗、转载机、悬臂受料车
+  static async addWheelBucketBasicFile(data) {
+    return await this.post({
+      url: '/devicewheel/devicewheelInfo',
       data
     })
   }
