@@ -17,13 +17,13 @@
         </div>
       </div>
       <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
-        <card-component>
+        <card-component >
 
         </card-component>
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
-                   :destroy-on-close="true">
+                   :destroy-on-close="true" @queryList="toQuery">
           <add-form @addDialogClose="addDialogVisible = false"
                     @queryList="toQuery"></add-form>
         </el-dialog>
