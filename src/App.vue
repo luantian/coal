@@ -37,8 +37,10 @@ export default {
 
 <style>
   html, body, #app {
+    max-width: 1920px;
     width: 100%;
     height: 100%;
+    margin: 0 auto;
   }
   body {
     color: #fff;

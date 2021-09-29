@@ -1,5 +1,5 @@
 <template>
-  <div class="test">
+  <div class="__three-model" ref="_three_model">
     <div class="main" ref="main">
     </div>
   </div>
@@ -14,8 +14,16 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 // import { TransformControls } from 'three/examples/jsm/controls/TransformControls'
 // import { DragControls } from 'three/examples/jsm/controls/DragControls'
 
+let cache = {}
+
 export default {
-  name: 'Test',
+  name: 'ThreeModel',
+  props: {
+    modelName: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       container: null,
@@ -31,13 +39,17 @@ export default {
   methods: {
     init() {
 
-      const { innerWidth, innerHeight } = window
+
+      const { width, height } = this.$refs._three_model.getBoundingClientRect()
+
+      console.log('width', width)
+      console.log('height', height)
 
       this.container = this.$refs.main
 
       // 创建场景 相机 渲染器
       this.scene = new THREE.Scene();
-      this.camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 1000)
+      this.camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000)
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
 
       this.scene.background = new THREE.Color(0xcfcfcf);
@@ -46,8 +58,8 @@ export default {
 
       this.camera.lookAt(this.scene.position);
 
-      this.renderer.setPixelRatio(innerWidth);
-      this.renderer.setSize( innerWidth, innerHeight );
+      this.renderer.setPixelRatio(width);
+      this.renderer.setSize( width, height );
       this.renderer.shadowMap.enabled = true
 
       this.container.appendChild( this.renderer.domElement );
@@ -73,16 +85,27 @@ export default {
     },
 
     loadGLB() {
+
+      const gltf = cache[this.modelName]
+
+      console.log('gltf', gltf)
+
+
+      if (gltf) {
+        let model = gltf.scene
+        this.scene.add( model );
+        this.setContent(model)
+        this.render()
+        return
+      }
+
       const loader = new GLTFLoader();
 
-      loader.load('static/model/轮斗挖掘机.glb', ( gltf ) => {
-
+      loader.load(`static/model/${this.modelName}.glb`, ( gltf ) => {
+        cache[this.modelName] = gltf
         let model = gltf.scene
-
         this.scene.add( model );
-
         this.setContent(model)
-
         this.render()
       }, (p) => {
         console.log('p', p)
@@ -113,22 +136,29 @@ export default {
       object.position.z += object.position.z - center.z;
     },
 
-    beforeDestroy() {
-      this.scene = new THREE.Scene()
-      this.container = null
-      this.scene = null
-      this.camera = null
-      this.renderer = null
-      this.controls = null
-    },
+  },
 
+  beforeDestroy() {
+    this.scene = new THREE.Scene()
+    this.container = null
+    this.scene = null
+    this.camera = null
+    this.renderer = null
+    this.controls = null
+  },
+  watch: {
+    modelName() {
+      this.loadGLB()
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .main {
-    width: 600px;
-    height: 400px;
+
+
+   .__three-model, .main {
+    width: 100%;
+    height: 100%;
   }
 </style>
