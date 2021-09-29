@@ -65,7 +65,7 @@ const router = [
       },
       {
         path: 'deviceParts/wheelBucket',
-        name: 'wheelBucket',
+        name: 'wheelBucket1',
         meta: {
           title: '轮斗挖掘机零部件基础档案'
         },
@@ -97,7 +97,7 @@ const router = [
       },
       {
         path: 'breakDown/wheelBucket',
-        name: 'wheelBucket',
+        name: 'wheelBucket2',
         meta: {
           title: '轮斗挖掘机故障基础档案'
         },

@@ -20,27 +20,9 @@
     {
       path: '/productReport/productionDailyReport',
       meta: {
-        title: '生产日报表'
+        title: '近景监控'
       },
-    },
-    {
-      path: '/productReport/leaderOnDuty',
-      meta: {
-        title: '领导值班表'
-      },
-    },
-    {
-      path: '/productReport/deviceBreakdown',
-      meta: {
-        title: '设备故障表'
-      },
-    },
-    {
-      path: '/productReport/output',
-      meta: {
-        title: '产量统计表'
-      },
-    },
+    }
   ]
 
   export default {

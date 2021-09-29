@@ -32,11 +32,11 @@ export default {
   },
   methods: {
     async toLogin() {
-      const { token } = await UserModel.toLogin(this.form)
-      if (token) {
+      const { code, token } = await UserModel.toLogin(this.form)
+      if (code === 200 && token) {
         LocalStorage.setItem('token', token)
         this.$router.push({
-          path: '/index'
+          path: '/'
         })
       }
     },

@@ -40,6 +40,22 @@
   import OutputInfoModel from "@/models/OutputInfo";
   import ThreeModel from "@/components/ThreeModel";
 
+  const cumulativeList = [
+    { keyIndex: 'hourYieldNumber', title: '小时量', count: 0, unit: '吨', icon: require('@/assets/img/hour.png') },
+    { keyIndex: 'dayYieldNumber', title: '日产量', count: 0, unit: '吨', icon: require('@/assets/img/day.png') },
+    { keyIndex: 'monYieldNumber', title: '月产量', count: 0, unit: '万吨', icon: require('@/assets/img/month.png') },
+    { keyIndex: 'yearYieldNumber', title: '年产量', count: 0, unit: '万吨', icon: require('@/assets/img/year.png') },
+  ]
+
+  const models = [
+    { name: '轮斗挖掘机' },
+    { name: '传送带' },
+    { name: '悬臂受料车' },
+    { name: '整体工艺' },
+    { name: '转载机' },
+    { name: '装车仓' },
+  ]
+
   export default {
     name: 'Column2',
     components: {
@@ -54,20 +70,8 @@
           totalYieldNumber: 0,
           yearYieldNumber: 0
         },
-        cumulativeList: [
-          { keyIndex: 'hourYieldNumber', title: '小时量', count: 0, unit: '吨', icon: require('@/assets/img/hour.png') },
-          { keyIndex: 'dayYieldNumber', title: '日产量', count: 0, unit: '吨', icon: require('@/assets/img/day.png') },
-          { keyIndex: 'monYieldNumber', title: '月产量', count: 0, unit: '万吨', icon: require('@/assets/img/month.png') },
-          { keyIndex: 'yearYieldNumber', title: '年产量', count: 0, unit: '万吨', icon: require('@/assets/img/year.png') },
-        ],
-        models: [
-          { name: '轮斗连续工艺', _model: null },
-          { name: '轮斗挖掘机', _model: null },
-          { name: '转载机', _model: null },
-          { name: '悬臂受料机', _model: null },
-          { name: '带式输送机', _model: null },
-          { name: '装车仓', _model: null },
-        ],
+        cumulativeList,
+        models,
         activeModelIndex: 0
       }
     },

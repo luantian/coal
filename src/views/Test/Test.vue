@@ -18,14 +18,16 @@ export default {
   name: 'Test',
   data() {
     return {
-      container: null,
-      scene: null,
-      camera: null,
-      renderer: null,
-      controls: null
+
     }
   },
   mounted() {
+    this.rafId = null
+    this.container = null
+    this.scene = null
+    this.camera = null
+    this.renderer = null
+    this.controls = null
     this.init()
   },
   methods: {
@@ -37,14 +39,13 @@ export default {
 
       // 创建场景 相机 渲染器
       this.scene = new THREE.Scene();
-      this.camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 1000)
-      this.renderer = new THREE.WebGLRenderer({ antialias: true });
-
       this.scene.background = new THREE.Color(0xcfcfcf);
 
+      this.camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 1000)
       this.camera.position.set( 0, 0, 10 );
-
       this.camera.lookAt(this.scene.position);
+
+      this.renderer = new THREE.WebGLRenderer({ antialias: true });
 
       this.renderer.setPixelRatio(innerWidth);
       this.renderer.setSize( innerWidth, innerHeight );
@@ -62,9 +63,8 @@ export default {
       this.controls.maxDistance = 2000;
       this.controls.target = new THREE.Vector3(0, 0, 0);
       this.controls.update();
-
+      // this.controls.addEventListener('change', this.render);
       this.animate()
-
     },
 
     loadLight() {
@@ -75,7 +75,7 @@ export default {
     loadGLB() {
       const loader = new GLTFLoader();
 
-      loader.load('static/model/轮斗挖掘机.glb', ( gltf ) => {
+      loader.load('static/model/转载机模型.glb', ( gltf ) => {
 
         let model = gltf.scene
 
@@ -96,9 +96,9 @@ export default {
     },
 
     animate() {
-      this.controls.update();
-      this.renderer.render(this.scene, this.camera)
-      requestAnimationFrame(this.animate)
+      // this.controls.update();
+      this.rid = requestAnimationFrame(this.animate);
+      this.render()
     },
     setContent(object) {
       object.updateMatrixWorld();
@@ -114,7 +114,8 @@ export default {
     },
 
     beforeDestroy() {
-      this.scene = new THREE.Scene()
+      console.log('beforeDestroy')
+      cancelAnimationFrame(this.rid)
       this.container = null
       this.scene = null
       this.camera = null
