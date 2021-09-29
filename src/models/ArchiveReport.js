@@ -53,6 +53,21 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 删除轮斗挖掘机故障档案列表
+  static async deleteWheelBucketBreakDown(id) {
+    return await this.delete({
+      url: '/faualwheel/faualwheelInfo/' + id
+    })
+  }
+
+  // 删除轮斗挖掘机故障档案列表
+  static async editWheelBucketBreakDown(data) {
+    return await this.put({
+      url: '/faualwheel/faualwheelInfo',
+      data
+    })
+  }
+
 }
 
 export default ArchiveReport

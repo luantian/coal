@@ -11,10 +11,10 @@
       <el-input v-model="ruleForm.faultName" placeholder="请输入故障名称"></el-input>
     </el-form-item>
     <el-form-item label="故障类别" prop="faultType">
-      <el-input v-model="ruleForm.faultType" placeholder="请输入故障类别"></el-input>
+      <el-input v-model="ruleForm.faultType" placeholder="请输入故障类别" maxLength = "1"></el-input>
     </el-form-item>
     <el-form-item label="故障数据类别" prop="faultType">
-      <el-input v-model="ruleForm.faultDataType" placeholder="请输入故障数据类别"></el-input>
+      <el-input v-model="ruleForm.faultDataType" placeholder="请输入故障数据类别" maxLength = "1"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button @click="addCancel">取消</el-button>

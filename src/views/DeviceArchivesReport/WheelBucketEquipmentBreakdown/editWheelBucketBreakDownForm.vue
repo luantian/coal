@@ -1,23 +1,20 @@
 <template>
 <div style="width: 700px">
   <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
-    <el-form-item label="部门" prop="deptName">
-      <el-input type="text" v-model="rowData.deptName" autocomplete="off"></el-input>
+    <el-form-item label="故障部位" prop="faultLocation">
+      <el-input type="text" v-model="rowData.faultLocation" autocomplete="off" placeholder="请输入故障部位"></el-input>
     </el-form-item>
-    <el-form-item label="姓名" prop="personName">
-      <el-input type="text" v-model="rowData.personName" autocomplete="off"></el-input>
+    <el-form-item label="设备部位系统" prop="devicePositionSystem">
+      <el-input type="text" v-model="rowData.devicePositionSystem" autocomplete="off" placeholder="请输入设备部位系统"></el-input>
     </el-form-item>
-    <el-form-item label="职务" prop="postName">
-      <el-input v-model="rowData.postName"></el-input>
+    <el-form-item label="故障名称" prop="faultName">
+      <el-input v-model="rowData.faultName" placeholder="请输入故障名称"></el-input>
     </el-form-item>
-    <el-form-item label="联系电话" prop="phonenumber">
-      <el-input v-model="rowData.phonenumber"></el-input>
+    <el-form-item label="故障类别" prop="faultType">
+      <el-input v-model="rowData.faultType" placeholder="请输入故障类别" maxLength = "1"></el-input>
     </el-form-item>
-    <el-form-item label="职责" prop="dutyName">
-      <el-input v-model="rowData.dutyName"></el-input>
-    </el-form-item>
-    <el-form-item label="备注" prop="remark">
-      <el-input type="textarea" v-model="rowData.remark"></el-input>
+    <el-form-item label="故障数据类别" prop="faultType">
+      <el-input v-model="rowData.faultDataType" placeholder="请输入故障数据类别" maxLength = "1"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button @click="addCancel">取消</el-button>
@@ -38,31 +35,27 @@
       data() {
         return {
           ruleForm: {
-            deptName: '',
-            personName: '',
-            postName: '',
-            phonenumber: '',
-            dutyName: '',
-            remark: ''
+            faultLocation: '',
+            devicePositionSystem: '',
+            faultName: '',
+            faultType: '',
+            faultDataType: ''
           },
           rules: {
-            deptName: [
-              { required: true, message: '部门名称不能为空', trigger: 'blur' }
+            faultLocation: [
+              { required: true, message: '故障部位不能为空', trigger: 'blur' }
             ],
-            personName: [
-              { required: true, message: '人员姓名不能为空', trigger: 'blur' }
+            devicePositionSystem: [
+              { required: true, message: '设备部位系统不能为空', trigger: 'blur' }
             ],
-            postName: [
-              { required: true, message: '职务不能为空', trigger: 'blur' }
+            faultName: [
+              { required: true, message: '故障名称不能为空', trigger: 'blur' }
             ],
-            phonenumber: [
-              { required: true, message: '联系电话不能为空', trigger: 'blur' }
+            faultType: [
+              { required: true, message: '故障类别不能为空', trigger: 'blur' }
             ],
-            dutyName: [
-              { required: true, message: '职责不能为空', trigger: 'blur' }
-            ],
-            remark: [
-              { required: true, message: '备注不能为空', trigger: 'blur' }
+            faultDataType: [
+              { required: true, message: '故障数据类别不能为空', trigger: 'blur' }
             ]
           }
         };
@@ -71,7 +64,7 @@
         async submitForm(formName) {
           this.$refs[formName].validate(async (valid) => {
             if (valid) {
-              const {code} = await ArchiveReportModel.editSitePersonnelFile(this.rowData)
+              const {code} = await ArchiveReportModel.editWheelBucketBreakDown(this.rowData)
               console.log()
               if(code === 200){
                 this.$message({

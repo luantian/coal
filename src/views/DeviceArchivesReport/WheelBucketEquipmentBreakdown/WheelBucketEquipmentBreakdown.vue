@@ -8,28 +8,41 @@
 
     <div class="table_div" style="position: relative">
       <div style="display: flex;">
-        <div style="flex: 1">
-          <label>设备部位系统</label>
-          <el-select :inline="true" v-model="selectValue" clearable placeholder="请选择部件名称" :popper-append-to-body="false" style="margin-left: 10px">
-            <el-option
-              v-for="item in devicePositionSystemOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <label style="margin-left: 35px">故障部位</label>
-          <el-select :inline="true" v-model="selectValue" clearable placeholder="请选择部件名称" :popper-append-to-body="false" style="margin-left: 10px">
-            <el-option
-              v-for="item in faultLocationOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <el-button type="primary" @click="toQuery" style="margin-left: 10px">查询</el-button>
-        </div>
+<!--        <div style="flex: 1">-->
+<!--          <label>设备部位系统</label>-->
+<!--          <el-select :inline="true" v-model="selectValue" clearable placeholder="请选择部件名称" :popper-append-to-body="false" style="margin-left: 10px">-->
+<!--            <el-option-->
+<!--              v-for="item in devicePositionSystemOptions"-->
+<!--              :key="item.value"-->
+<!--              :label="item.label"-->
+<!--              :value="item.value">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+<!--          <label style="margin-left: 35px">故障部位</label>-->
+<!--          <el-select :inline="true" v-model="selectValue" clearable placeholder="请选择部件名称" :popper-append-to-body="false" style="margin-left: 10px">-->
+<!--            <el-option-->
+<!--              v-for="item in faultLocationOptions"-->
+<!--              :key="item.value"-->
+<!--              :label="item.label"-->
+<!--              :value="item.value">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+<!--          <el-button type="primary" @click="toQuery" style="margin-left: 10px">查询</el-button>-->
+<!--        </div>-->
 
+        <div style="flex: 1">
+          <el-form :inline="true" class="demo-form-inline">
+            <el-form-item label="设备部位系统">
+              <el-input v-model="faultLocation" placeholder="请输入设备部位系统"></el-input>
+            </el-form-item>
+            <el-form-item label="故障部位">
+              <el-input v-model="devicePositionSystem" placeholder="请输入故障部位"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="toQuery">查询</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
         <div style="padding-right: 35px">
           <el-button @click="addDialogVisible=true">新增档案</el-button>
         </div>
@@ -87,6 +100,7 @@
   import ArchiveReportModel from "@/models/ArchiveReport";
   import addForm from "@/views/DeviceArchivesReport/WheelBucketEquipmentBreakdown/addWheelBucketBreakDownForm";
   import editForm from "@/views/DeviceArchivesReport/WheelBucketEquipmentBreakdown/editWheelBucketBreakDownForm";
+  import {cloneDeep} from "lodash-es";
   export default {
     name: 'WheelBucketBreakDownFiles',
     components: {addForm, editForm},
@@ -106,7 +120,9 @@
         editRowData: {},
         devicePositionSystemOptions: [],
         faultLocationOptions: [],
-        selectValue: ''
+        selectValue: '',
+        devicePositionSystem: '',
+        faultLocation: ''
       }
     },
     methods: {
@@ -114,15 +130,15 @@
         this.queryParams = {
           'pageNum': this.pageNum,
           'pageSize': this.pageSize,
-          'personName': this.personName,
-          'deptName': this.deptName
+          'faultLocation': this.faultLocation,
+          'devicePositionSystem': this.devicePositionSystem
         }
         const {rows, total} = await ArchiveReportModel.selectWheelBucketBreakDown(this.queryParams);
         this.tableData = rows
         this.totalRecords = total
       },
       async editData(index, row) {
-        this.rowData = row
+        this.rowData = cloneDeep(row)
         this.editDialogVisible = true
       },
       async deleteData(index, row) {
@@ -131,7 +147,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async () => {
-          const {code} = await ArchiveReportModel.deleteSitePersonnelFile(row.id)
+          const {code} = await ArchiveReportModel.deleteWheelBucketBreakDown(row.id)
           if (code === 200) {
             this.$message({
               message: '删除成功',

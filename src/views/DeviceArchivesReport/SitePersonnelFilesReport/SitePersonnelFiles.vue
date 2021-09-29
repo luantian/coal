@@ -79,6 +79,7 @@
 import ArchiveReportModel from "@/models/ArchiveReport";
 import addPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/addPersonnelFileForm";
 import editPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/editPersonnelFileForm";
+import { cloneDeep } from 'lodash-es'
 export default {
   name: 'SitePersonnelFiles',
   components: {addPersonnelFileForm, editPersonnelFileForm},
@@ -111,7 +112,7 @@ export default {
       this.totalRecords = total
     },
     async editData(index, row) {
-      this.rowData = row
+      this.rowData = cloneDeep(row)
       this.editDialogVisible = true
     },
     async deleteData(index, row) {
