@@ -22,10 +22,19 @@ const routes = [
     name: 'CraftSystem',
     component: () => import('@/views/CraftSystem')
   },
+  {
+    path: '/videoMonitor',
+    name: 'Video',
+    component: () => import('@/views/VideoMonitor')
+  },
+  {
+    path: '/safetyWarning',
+    name: 'SafetyWarning',
+    component: () => import('@/views/SafetyWarning')
+  },
   ...report,
   ...archive,
   ...test
-
 ]
 
 const router = new Router({

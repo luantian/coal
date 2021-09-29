@@ -19,8 +19,7 @@
             <span class="user-name">admin</span><i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>黄金糕</el-dropdown-item>
-<!--            <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>-->
+            <el-dropdown-item>后台管理</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -82,6 +81,9 @@
       .el-dropdown-link {
         font-size: 14px;
         cursor: pointer;
+        .user-name {
+          color: #fff;
+        }
       }
     }
   }
