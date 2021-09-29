@@ -14,7 +14,7 @@
         </div>
         <div class="info-content">
           <div class="info-title">{{ item.title }}</div>
-          <div class="info-count" style="font-family: Quartz">{{ item.count }} <span class="info-unit">{{ item.unit }}</span></div>
+          <div class="info-count">{{ item.count }} <span class="info-unit">{{ item.unit }}</span></div>
         </div>
       </div>
     </div>

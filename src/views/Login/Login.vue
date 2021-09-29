@@ -35,6 +35,9 @@ export default {
       const { token } = await UserModel.toLogin(this.form)
       if (token) {
         LocalStorage.setItem('token', token)
+        this.$router.push({
+          path: '/index'
+        })
       }
     },
     async getUserInfo() {

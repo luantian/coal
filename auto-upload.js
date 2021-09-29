@@ -6,18 +6,18 @@ const argv = process.argv.splice(2)[1]
 const localPath = './coal'
 
 const testConfig = {
-  host: '',
+  host: '49.233.1.136',
   port: 3222,
   username: 'root',
-  password: '',
+  password: '}g^;@UAd_T6!3nN',
   remotePath:'/opt/coal'
 }
 
 const prodConfig = {
-  host: '',
+  host: '49.233.1.136',
   port: 3222,
   username: 'root',
-  password: '',
+  password: '}g^;@UAd_T6!3nN',
   remotePath:'/opt/coal'
 }
 

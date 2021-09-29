@@ -1,6 +1,9 @@
 <template>
   <div class="index">
     <common-header></common-header>
+    <div class="main">
+
+    </div>
   </div>
 </template>
 
@@ -24,4 +27,9 @@ export default {
     height: 100%;
     background: url("~@/assets/img/index_bg.png") no-repeat center center;
   }
+
+  .main {
+    
+  }
+
 </style>
