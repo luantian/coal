@@ -1,6 +1,6 @@
 <template>
   <div class="report-index">
-    <div class="top">顶部组件</div>
+    <common-header></common-header>
     <div class="container">
       <div class="menus">
         <tree-menu :routes="menus" @onSelect="onMenuItem"></tree-menu>
@@ -14,6 +14,7 @@
 
 <script>
 
+  import CommonHeader from "@/components/CommonHeader";
   import TreeMenu from '@/components/TreeMenu'
 
   const menus = [
@@ -45,7 +46,7 @@
 
   export default {
     name: 'ReportIndex',
-    components: { TreeMenu },
+    components: { TreeMenu, CommonHeader },
     data() {
       return {
         menus

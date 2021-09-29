@@ -30,7 +30,8 @@ export default {
 
   .index {
     height: 100%;
-    background: url("~@/assets/img/index_bg.png") no-repeat center center;
+    background: url("~@/assets/img/index_bg.png") no-repeat;
+    background-size: 100% 100%;
   }
 
   .main {

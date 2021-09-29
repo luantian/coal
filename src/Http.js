@@ -135,7 +135,7 @@ class Http {
           console.log(data)
           if (data.code === 401) {
             router.push({
-              path: '/'
+              path: '/login'
             })
           }
           if (data.code !== 200) {
