@@ -3,22 +3,22 @@ const ssh2 = require('ssh2')
 
 const argv = process.argv.splice(2)[1]
 
-const localPath = './coal'
+const localPath = './dist'
 
 const testConfig = {
   host: '49.233.1.136',
-  port: 3222,
+  port: 22,
   username: 'root',
   password: '}g^;@UAd_T6!3nN',
-  remotePath:'/opt/coal'
+  remotePath:'/opt/meitan/screen-web/dist'
 }
 
 const prodConfig = {
   host: '49.233.1.136',
-  port: 3222,
+  port: 22,
   username: 'root',
   password: '}g^;@UAd_T6!3nN',
-  remotePath:'/opt/coal'
+  remotePath:'/opt/meitan/screen-web/dist'
 }
 
 let config = (argv === '-p' ? prodConfig : testConfig)

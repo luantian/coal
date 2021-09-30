@@ -6,7 +6,7 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 module.exports = {
   productionSourceMap: false,
-  outputDir: 'coal',
+  outputDir: 'dist',
   // 打包app时放开该配置
   publicPath: '/',
 

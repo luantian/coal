@@ -28,8 +28,7 @@
         </div>
       </div>
       <div style="width: 100%; height: 510px; padding: 10px; box-sizing: border-box;">
-<!--        <three-model :model-name="models[activeModelIndex].name"></three-model>-->
-        <iframe style="width: 100%; height: 100%;" src="/three.js-dev/examples/#webgl_animation_keyframes" frameborder="0"></iframe>
+        <iframe style="width: 100%; height: 100%;" :src="`/threeModel/index.html?timer=${new Date().getTime()}#model=./model/${models[activeModelIndex].name}.glb&kiosk=0`" frameborder="0"></iframe>
       </div>
     </div>
 
