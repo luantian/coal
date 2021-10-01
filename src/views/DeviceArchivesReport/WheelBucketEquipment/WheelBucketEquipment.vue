@@ -16,10 +16,26 @@
           <el-button @click="addDialogVisible=true">新增档案</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
-        <card-component >
-
-        </card-component>
+      <div style="position: absolute;top:65px;left:45px;right:48px;bottom:20px;overflow: auto;padding-right: 0px">
+        <el-row>
+          <el-col :span="5" v-for="(item,index) in tableData" :key="item.id" :offset="index%4 === 0 ?0:1" >
+            <div style="margin-top:15px">
+              <el-card :body-style="{ padding: '20px'}" shadow="hover" >
+                <div style="display: flex">
+                  <div style="flex: 1">
+                    <span>{{item.deviceParam}} </span><br>
+                    <div style="padding-top: 5px">
+                      <span >{{item.deviceNumberInfo}} ({{item.deviceUnit}})</span>
+                    </div>
+                  </div>
+                  <div style="vertical-align: middle" @click="editData(index, item)">
+                    <i class="el-icon-edit" style="vertical-align: middle"/>
+                  </div>
+                </div>
+              </el-card>
+            </div>
+          </el-col>
+        </el-row>
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
@@ -27,10 +43,10 @@
           <add-form @addDialogClose="addDialogVisible = false"
                     @queryList="toQuery"></add-form>
         </el-dialog>
-        <!--        <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">-->
-        <!--          <edit-form @editDialogClose="editDialogVisible = false"-->
-        <!--                     @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-form>-->
-        <!--        </el-dialog>-->
+                <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
+                  <edit-form @editDialogClose="editDialogVisible = false"
+                             @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-form>
+                </el-dialog>
       </div>
     </div>
 
@@ -40,13 +56,12 @@
 <script>
 import ArchiveReportModel from "@/models/ArchiveReport";
 import addForm from "@/views/DeviceArchivesReport/WheelBucketEquipment/addWheelBucketEquipmentForm";
-import cardComponent from "@/views/DeviceArchivesReport/WheelBucketEquipment/CardListComponents";
-// import editForm from "@/views/DeviceArchivesReport/WheelBucketEquipment/editWheelBucketBreakDownForm";
+import editForm from "@/views/DeviceArchivesReport/WheelBucketEquipment/editWheelBucketEquipmentForm.vue";
 import {cloneDeep} from "lodash-es";
 
 export default {
   name: 'WheelBucketEquipmentFiles',
-  components: {addForm, cardComponent},
+  components: {addForm,editForm},
   data() {
     return {
       tableData: [],

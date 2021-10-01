@@ -85,6 +85,14 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 编辑设备基础档案--轮斗、转载机、悬臂受料车
+  static async editWheelBucketBasicFile(data) {
+    return await this.put({
+      url: '/devicewheel/devicewheelInfo',
+      data
+    })
+  }
+
 }
 
 export default ArchiveReport
