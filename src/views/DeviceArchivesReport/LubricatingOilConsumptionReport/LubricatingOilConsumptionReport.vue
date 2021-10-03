@@ -11,10 +11,10 @@
         <div style="flex: 1">
           <el-form :inline="true" class="demo-form-inline">
             <el-form-item label="所属系统">
-              <el-input v-model="deptName" placeholder="请输入部件名称"></el-input>
+              <el-input v-model="belongSystem" placeholder="请输入所属系统"></el-input>
             </el-form-item>
             <el-form-item label="设备名称">
-              <el-input v-model="personName" placeholder="请输入部件名称"></el-input>
+              <el-input v-model="deviceName" placeholder="请输入设备名称"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="toQuery">查询</el-button>
@@ -22,17 +22,23 @@
           </el-form>
         </div>
         <div style="padding-right: 35px">
-          <el-button @click="addDialogVisible=true">新增档案</el-button>
+          <el-button @click="addDialogVisible=true">新增</el-button>
         </div>
       </div>
       <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
         <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
-          <el-table-column prop="deptName" label="部门" align="center"></el-table-column>
-          <el-table-column prop="personName" label="姓名" align="center"></el-table-column>
-          <el-table-column prop="postName" label="职务" align="center"></el-table-column>
-          <el-table-column prop="phonenumber" label="联系电话" align="center"></el-table-column>
-          <el-table-column prop="dutyName" label="职责" align="center"></el-table-column>
+          <el-table-column prop="belongSystem" label="所属系统" align="center"></el-table-column>
+          <el-table-column prop="deviceName" label="设备名称" align="center"></el-table-column>
+          <el-table-column prop="deviceUnit" label="单位" align="center"></el-table-column>
+          <el-table-column prop="deviceNumber" label="数量" align="center"></el-table-column>
+          <el-table-column prop="deviceLocation" label="设备位置" align="center"></el-table-column>
+          <el-table-column prop="remark" label="用油详情" align="center">
+            <el-table-column prop="lubricatingType" label="型号/种类" align="center"></el-table-column>
+            <el-table-column prop="lubricatingNumber" label="数量" align="center"></el-table-column>
+            <el-table-column prop="lubricatingUnit" label="单位" align="center"></el-table-column>
+            <el-table-column prop="lubricatingReplaceCycleNumber" label="更换周期" align="center"></el-table-column>
+          </el-table-column>
           <el-table-column prop="remark" label="备注" align="center"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
@@ -62,12 +68,12 @@
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
                    :destroy-on-close="true">
-          <add-personnel-file-form @addDialogClose="addDialogVisible = false"
-                                   @queryList="toQuery"></add-personnel-file-form>
+          <add-form @addDialogClose="addDialogVisible = false"
+                                   @queryList="toQuery"></add-form>
         </el-dialog>
         <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
-          <edit-personnel-file-form @editDialogClose="editDialogVisible = false"
-                                    @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-personnel-file-form>
+          <edit-form @editDialogClose="editDialogVisible = false"
+                                    @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-form>
         </el-dialog>
       </div>
     </div>
@@ -77,12 +83,12 @@
 
 <script>
 import ArchiveReportModel from "@/models/ArchiveReport";
-import addPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/addPersonnelFileForm";
-import editPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/editPersonnelFileForm";
+import addForm from "@/views/DeviceArchivesReport/LubricatingOilConsumptionReport/AddForm";
+import editForm from "@/views/DeviceArchivesReport/LubricatingOilConsumptionReport/EditForm";
 import { cloneDeep } from 'lodash-es'
 export default {
   name: 'SitePersonnelFiles',
-  components: {addPersonnelFileForm, editPersonnelFileForm},
+  components: {addForm, editForm},
   data() {
     return {
       tableData: [],
@@ -96,7 +102,9 @@ export default {
       pageNum: 1,
       pageSize: 10,
       queryParams: {},
-      editRowData: {}
+      editRowData: {},
+      deviceName: '',
+      belongSystem: ''
     }
   },
   methods: {
@@ -104,10 +112,10 @@ export default {
       this.queryParams = {
         'pageNum': this.pageNum,
         'pageSize': this.pageSize,
-        'personName': this.personName,
-        'deptName': this.deptName
+        'belongSystem': this.belongSystem,
+        'deviceName': this.deviceName
       }
-      const {rows, total} = await ArchiveReportModel.selectSitePersonnelFilesList(this.queryParams);
+      const {rows, total} = await ArchiveReportModel.selectOilConsumptionList(this.queryParams);
       this.tableData = rows
       this.totalRecords = total
     },
@@ -121,7 +129,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        const {code} = await ArchiveReportModel.deleteSitePersonnelFile(row.id)
+        const {code} = await ArchiveReportModel.deleteOilConsumptionList(row.id)
         if (code === 200) {
           this.$message({
             message: '删除成功',

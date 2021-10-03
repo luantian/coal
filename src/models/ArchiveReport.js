@@ -93,6 +93,37 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 查询润滑用油明细表
+  static async selectOilConsumptionList(data) {
+    return await this.get({
+      url: '/lubrication/info/list',
+      data
+    })
+  }
+
+  // 新增润滑用油明细表
+  static async addOilConsumptionList(data) {
+    return await this.post({
+      url: '/lubrication/info',
+      data
+    })
+  }
+
+  // 刪除润滑用油明细表
+  static async deleteOilConsumptionList(id) {
+    return await this.delete({
+      url: '/lubrication/info/' + id
+    })
+  }
+
+  // 刪除润滑用油明细表
+  static async editOilConsumptionList(data) {
+    return await this.put({
+      url: '/lubrication/info',
+      data
+    })
+  }
+
 }
 
 export default ArchiveReport
