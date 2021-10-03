@@ -131,7 +131,7 @@
   .info-list {
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
+    margin: 30px 0;
     .info-item {
       display: flex;
       .icon-wrap {

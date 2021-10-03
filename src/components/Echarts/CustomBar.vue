@@ -61,9 +61,6 @@
               type: 'value',
               name: '立方米',
               nameTextStyle,
-              interval: 200,
-              min: 0,
-              max: 600,
               axisLabel: {
                 textStyle: {
                   color  //更改坐标轴文字颜色
@@ -78,9 +75,6 @@
               type: 'value',
               name: '米',
               nameTextStyle,
-              interval: 2.5,
-              min: 0,
-              max: 10.0,
               axisLabel: {
                 textStyle: {
                   color  //更改坐标轴文字颜色
@@ -99,6 +93,7 @@
             {
               name: '高度',
               type: 'bar',
+              yAxisIndex: 1
             },
           ]
         };

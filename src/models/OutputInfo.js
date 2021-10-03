@@ -21,6 +21,32 @@ class OutputInfo extends Base {
     })
   }
 
+  // 查询轮斗利用率
+  static async queryBucketreality(data) {
+    return await this.get({
+      url: '/bucketreality/reality/faultRealityPercent',
+      data,
+    })
+  }
+
+  // 查询 装车仓 储量数据
+  static async queryReserves(data) {
+    return await this.get({
+      url: '/bigbelt/belt/loadingbinVolumeHistogram',
+      data,
+    })
+  }
+
+
+
+  // 查询 装车仓 温度
+  static async queryTemperature(data) {
+    return await this.get({
+      url: '/bigbelt/belt/loadingbinTemperatureHistogram',
+      data,
+    })
+  }
+
 
 }
 

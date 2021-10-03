@@ -1,12 +1,44 @@
 <template>
   <div class="column3">
-    <sub-title>工作时间统计</sub-title>
-    <div class="radio-group">
-      <el-radio-group v-model="workTimeValue" @change="onWorkTimeChange">
-        <el-radio-button v-for="item in workTimes" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>
-      </el-radio-group>
+    <div class="row1">
+      <sub-title>工作时间统计</sub-title>
+      <div class="radio-group">
+        <el-radio-group v-model="workTimeValue" @change="onWorkTimeChange">
+          <el-radio-button v-for="item in workTimes" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>
+        </el-radio-group>
+      </div>
       <div class="__line-wrap">
         <custom-line :dataset="workTimeDataset" y-unit="小时"></custom-line>
+      </div>
+    </div>
+
+    <div class="row2">
+      <sub-title>项目部领导值班表</sub-title>
+      <div class="__content">
+        <div class="__header">
+          <div>值班领导</div>
+          <div>当班工长</div>
+          <div>值班调度</div>
+        </div>
+        <div class="__body">
+          <div>
+            <div class="__btn __leader">栾天</div>
+          </div>
+          <div>
+            <div class="__btn">栾天</div>
+          </div>
+          <div>
+            <div class="__btn">栾一天</div>
+            <div class="__btn">栾一天</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row3">
+      <sub-title>AACM电能消耗</sub-title>
+      <div class="__bar_line-wrap">
+        <custom-bar-line :dataset="barLineDataset" x-unit="千瓦" y-unit="时"></custom-bar-line>
       </div>
     </div>
   </div>
@@ -17,6 +49,7 @@
   import SubTitle from "../SubTitle";
 
   import CustomLine from '@/components/Echarts/CustomLine'
+  import CustomBarLine from '@/components/Echarts/CustomBarLine'
 
   import OutputInfoModel from "@/models/OutputInfo";
 
@@ -28,12 +61,13 @@
 
   export default {
     name: 'Column3',
-    components: { SubTitle, CustomLine },
+    components: { SubTitle, CustomLine, CustomBarLine },
     data() {
       return {
         workTimes,
         workTimeValue: 3,
         workTimeDataset: { source: [] },
+        barLineDataset: { source: [] }
       }
     },
     mounted() {
@@ -49,12 +83,7 @@
         }
         const { data } = await OutputInfoModel.queryHistogramStatistics(params)
         this.workTimeDataset = { source: data }
-        this.piesDataset = { source: [] }
-        this.barDataset = { source: [
-          [ '1号装车仓', 400, 10.23 ],
-          [ '2号装车仓', 603, 8.5 ],
-          [ '3号装车仓', 821, 9.8 ]
-        ] }
+        this.barLineDataset = { source: data }
       }
     }
   }
@@ -70,25 +99,96 @@
 
   .radio-group {
     text-align: center;
+    position: relative;
+    top: -20px;
+    z-index: 2;
   }
 
-  .__line-wrap, .__pies-wrap, .__bar-wrap {
-    height: 300px;
+  .row1, .row2, .row3, .row4 {
+    position: relative;
   }
 
-  /deep/ .el-radio-button__inner {
-    background-color: #091760;
-    border: 1px solid #0B8FF5;
-    color: #fff;
-    border-right: none;
+  .row1 {
+    height: 240px;
   }
 
-  /deep/ .el-radio-button:first-child .el-radio-button__inner {
-    border-left: 1px solid #0B8FF5;
+  .row2 {
+    height: 180px;
   }
 
-  /deep/ .el-radio-button:last-child .el-radio-button__inner {
-    border-right: 1px solid #0B8FF5;
+  .row3 {
+    height: 230px;
   }
+
+  .row4 {
+    height: 230px;
+  }
+
+  .__line-wrap, .__bar_line-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .__line-wrap {
+    top: 30px;
+    bottom: -20px;
+  }
+
+  .__bar_line-wrap {
+    top: 40px;
+    left: 10px;
+    right: 10px;
+    bottom: -20px;
+  }
+
+  .__content {
+    font-size: 16px;
+    text-align: center;
+    .__header {
+      display: flex;
+      > div {
+        flex: 1;
+        justify-content: center;
+        display: flex;
+      }
+
+      > div:last-of-type {
+        flex: 2 !important;
+      }
+    }
+
+    .__body {
+      display: flex;
+      margin-top: 10px;
+      > div {
+        flex: 1;
+        justify-content: center;
+        display: flex;
+      }
+
+      > div:last-of-type {
+        flex: 2 !important;
+      }
+
+      .__btn {
+        width: 72px;
+        height: 38px;
+        line-height: 38px;
+        background:url("~@/assets/img/__btn.png") no-repeat;
+        font-size: 16px;
+        margin: 0 10px;
+      }
+
+      .__btn.__leader {
+        font-size: 18px;
+      }
+    }
+  }
+
+
+
+
+
 
 </style>

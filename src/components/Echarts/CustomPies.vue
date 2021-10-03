@@ -19,17 +19,25 @@
       }
     },
     mounted() {
-      this.init()
+
     },
     methods: {
       init() {
         this.myChart = this.$echarts.init(this.$refs.__pie)
 
-        const data = [
-          ['故障率', 44],
-          ['出动率', 55],
-          ['实动率', 66]
-        ]
+        // const data = [
+        //   ['故障率', 44],
+        //   ['出动率', 55],
+        //   ['实动率', 66]
+        // ]
+
+
+        const data = this.dataset.source
+
+        console.warn(data.length === 0)
+
+        if (data.length === 0) return
+
         let titleArr= [], seriesArr = []
         const colors = [['#1F3E8E', '#FFB14C'],['#1F3E8E', '#7CF4FF'],['#1F3E8E', '#2DB2FF']]
 
@@ -40,7 +48,7 @@
             {
               text: item[0],
               left: index * margin + 19 +'%',
-              top: '20%',
+              top: '60%',
               textAlign: 'center',
               textStyle: {
                 fontWeight: 'normal',
@@ -66,6 +74,9 @@
               textStyle:  {
                 color: colors[index][0],
               },
+              itemStyle: {
+                color: colors[index][1]
+              },
               center: [index * margin + 20 +'%', '30%'],
               data: [
                 {
@@ -84,7 +95,7 @@
                   value: 100 - item[1],
                   name: 'invisible',
                   itemStyle: {
-                    color: colors[index][1]
+                    color: colors[index][0]
                   },
                   emphasis: {
                     scale: true,
@@ -105,12 +116,13 @@
 
       },
       render() {
-        this.option.dataset = this.dataset
+        // this.option.dataset = this.dataset
         this.option && this.myChart.setOption(this.option);
       }
     },
     watch: {
       dataset() {
+        this.init()
         this.render()
       }
     }
