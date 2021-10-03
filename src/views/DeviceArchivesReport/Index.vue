@@ -57,7 +57,7 @@ const menus = [
       {
         path: 'ribbonConveyer',
         meta: {
-          title: '带式传输机基础档案'
+          title: '带式输送机基础档案'
         }
       },
       {

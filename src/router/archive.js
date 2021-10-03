@@ -51,7 +51,7 @@ const router = [
         path: 'deviceBasicFiles/ribbonConveyer',
         name: 'ribbonConveyer',
         meta: {
-          title: '带式传输机基础档案'
+          title: '带式输送机基础档案'
         },
         component: () => import('@/views/DeviceArchivesReport/RibbonConveyerReport/RibbonConveyerReport.vue')
       },

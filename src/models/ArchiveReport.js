@@ -124,6 +124,30 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 查询带式输送机基础档案列表
+  static async selectRibbonConveyerFilesList(data) {
+    return await this.get({
+      url: '/conveyor/info/list',
+      data
+    })
+  }
+
+  // 新增带式输送机基础档案列表
+  static async addRibbonConveyerFilesList(data) {
+    return await this.post({
+      url: '/conveyor/info',
+      data
+    })
+  }
+
+  // 编辑带式输送机基础档案列表
+  static async editRibbonConveyerFilesList(data) {
+    return await this.put({
+      url: '/conveyor/info',
+      data
+    })
+  }
+
 }
 
 export default ArchiveReport
