@@ -47,6 +47,21 @@ class OutputInfo extends Base {
     })
   }
 
+  static async queryAACM(data) {
+    return await this.get({
+      url: '/bigbelt/belt/beltAacmhigheleHistogram',
+      data
+    })
+  }
+
+  // 查询工作时间统计
+  static async queryRealityHistogramStatistics(data) {
+    return await this.get({
+      url: '/bucketreality/reality/histogramStatistics',
+      data
+    })
+  }
+
 
 }
 

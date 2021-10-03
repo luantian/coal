@@ -35,15 +35,15 @@
 
 <style lang="scss" scoped>
   .craft-system {
-    height: 100%;
+    //height: 100%;
+    height: 970px;
     background: #000 url("~@/assets/img/craftSystem_bg.png") no-repeat;
     background-size: 100% 100%;
+    overflow: hidden;
   }
 
   .container {
     display: flex;
-
-
     .column3 {
       width: 450px;
     }
