@@ -103,7 +103,7 @@ export default {
         'pageNum': this.pageNum,
         'pageSize': this.pageSize,
         'partsName': this.partsName,
-        'partsType': 1
+        'partsType': this.partsType
       }
       const {rows, total} = await ArchiveReportModel.selectPartFileList(this.queryParams);
       this.tableData = rows
