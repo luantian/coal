@@ -217,6 +217,37 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 查询零部件基础档案零----1：轮斗挖掘机，2：转载机零部件基础档案，3：悬臂受料车零部件基础档案
+  static async selectPartFileList(data) {
+    return await this.get({
+      url: '/partsconveyor/partsconveyorInfo/list',
+      data
+    })
+  }
+
+  // 新增零部件基础档案零----1：轮斗挖掘机，2：转载机零部件基础档案，3：悬臂受料车零部件基础档案
+  static async addPartFile(data) {
+    return await this.post({
+      url: '/partsconveyor/partsconveyorInfo',
+      data
+    })
+  }
+
+  // 编辑零部件基础档案零----1：轮斗挖掘机，2：转载机零部件基础档案，3：悬臂受料车零部件基础档案
+  static async editPartFile(data) {
+    return await this.put({
+      url: '/partsconveyor/partsconveyorInfo',
+      data
+    })
+  }
+
+  // 删除零部件基础档案零----1：轮斗挖掘机，2：转载机零部件基础档案，3：悬臂受料车零部件基础档案
+  static async deletePartFile(id) {
+    return await this.delete({
+      url: '/partsconveyor/partsconveyorInfo/' + id
+    })
+  }
+
 }
 
 export default ArchiveReport
