@@ -22,14 +22,14 @@
         </div>
         <div class="__body">
           <div>
-            <div class="__btn __leader">栾天</div>
+            <div class="__btn __leader">{{ duty.leaderName }}</div>
           </div>
           <div>
-            <div class="__btn">栾天</div>
+            <div class="__btn">{{ duty.foremanName }}</div>
           </div>
           <div>
-            <div class="__btn">栾一天</div>
-            <div class="__btn">栾一天</div>
+            <div class="__btn">{{ duty.dispatchName }}</div>
+<!--            <div class="__btn">栾一天</div>-->
           </div>
         </div>
       </div>
@@ -52,9 +52,10 @@
   import CustomBarLine from '@/components/Echarts/CustomBarLine'
 
   import OutputInfoModel from "@/models/OutputInfo";
+  import LeaderOnDuty from "@/models/LeaderOnDuty"
 
   const workTimes = [
-    { name: '当月', value: 3 },
+    { name: '当日', value: 3 },
     { name: '本月', value: 2 },
     { name: '年度', value: 1 }
   ]
@@ -67,24 +68,43 @@
         workTimes,
         workTimeValue: 3,
         workTimeDataset: { source: [] },
+        duty: {},
         barLineDataset: { source: [] }
       }
     },
     mounted() {
-      this.queryTotal(this.workTimeValue)
+      this.queryWorkTime(this.workTimeValue)
+      this.queryScreen()
+      this.queryAACM(3)
     },
     methods: {
       onWorkTimeChange(v) {
-        this.queryTotal(v)
+        this.queryWorkTime(v)
       },
-      async queryTotal(v) {
+      async queryWorkTime(v) {
         const params = {
           selectType: v
         }
-        const { data } = await OutputInfoModel.queryHistogramStatistics(params)
+        const { data } = await OutputInfoModel.queryRealityHistogramStatistics(params)
         this.workTimeDataset = { source: data }
+        console.log('查询工作时间 data', data)
+      },
+
+      // 值班领导查询
+      async queryScreen() {
+        const { data } = await LeaderOnDuty.queryScreen()
+        this.duty = data
+      },
+
+      async queryAACM(v) {
+        const params = {
+          selectType: v
+        }
+        const { data } = await OutputInfoModel.queryAACM(params)
+        console.log('查询AACM data', data)
         this.barLineDataset = { source: data }
-      }
+      },
+
     }
   }
 </script>

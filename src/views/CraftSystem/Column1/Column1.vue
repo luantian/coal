@@ -36,7 +36,7 @@
           </el-radio-group>
         </div>
         <div class="__row4_line-wrap">
-          <custom-line :dataset="lineDataset" :x-unit="' '" :y-unit="' '"></custom-line>
+          <custom-line :dataset="temperatureDataset" :x-unit="' '" :y-unit="' '"></custom-line>
         </div>
       </div>
 
@@ -58,9 +58,9 @@
     { name: '年度', value: 1 }
   ]
   const temperatures = [
-    { name: '1号装车仓', value: 3 },
+    { name: '1号装车仓', value: 1 },
     { name: '2号装车仓', value: 2 },
-    { name: '3号装车仓', value: 1 }
+    { name: '3号装车仓', value: 3 }
   ]
 
   export default {
@@ -71,10 +71,12 @@
         outputRadios,
         outputValue: 3,
         temperatures,
-        temperatureValue: 3,
+        temperatureValue: 1,
         lineDataset: { source: [] },
         piesDataset: { source: [] },
-        barDataset: { source: [] }
+        barDataset: { source: [] },
+        temperatureData: {},
+        temperatureDataset: { source: [] }
       }
     },
     mounted() {
@@ -88,7 +90,13 @@
         this.queryTotal(v)
       },
       onTemperatureChange(v) {
-        this.queryTemperature(v)
+        // this.queryTemperature(v)
+
+        this.temperatureDataset = {
+          source: this.temperatureData[`loadingbin#gautem_${v}`].statisticsData
+        }
+
+        console.log('v', this.temperatureDataset)
       },
       async queryTotal(v) {
         const params = {
@@ -126,6 +134,13 @@
         }
         const { data } = await OutputInfoModel.queryTemperature(params)
         console.log('装车仓温度', data)
+
+        this.temperatureData = data
+
+        this.temperatureDataset = {
+          source: data['loadingbin#gautem_1'].statisticsData
+        }
+
       }
     }
   }
