@@ -61,7 +61,7 @@ const router = [
         meta: {
           title: '装车仓基础档案'
         },
-        component: () => import('@/views/DeviceArchivesReport/RibbonConveyerReport/RibbonConveyerReport.vue')
+        component: () => import('@/views/DeviceArchivesReport/LoadingBunkerReport/LoadingBunkerReport.vue')
       },
       {
         path: 'deviceParts/wheelBucket',

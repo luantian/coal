@@ -148,6 +148,44 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 编辑带式输送机基础档案列表
+  static async deleteRibbonConveyerFilesList(id) {
+    return await this.delete({
+      url: '/conveyor/info/' + id
+    })
+  }
+
+  // 查询装车仓基础档案列表
+  static async selectLoadingBunkerFilesList(data) {
+    return await this.get({
+      url: '/warehouse/warehouseInfo/list',
+      data
+    })
+  }
+
+  // 查询装车仓基础档案列表
+  static async addLoadingBunkerFile(data) {
+    return await this.post({
+      url: '/warehouse/warehouseInfo',
+      data
+    })
+  }
+
+  // 编辑装车仓基础档案列表
+  static async editLoadingBunkerFile(data) {
+    return await this.put({
+      url: '/warehouse/warehouseInfo',
+      data
+    })
+  }
+
+  // 删除装车仓基础档案列表
+  static async deleteLoadingBunkerFile(id) {
+    return await this.delete({
+      url: '/warehouse/warehouseInfo/' + id
+    })
+  }
+
 }
 
 export default ArchiveReport
