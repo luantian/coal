@@ -186,6 +186,37 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 查询皮条零部件基础档案
+  static async selectStrapFileList(data) {
+    return await this.get({
+      url: '/pimp/pimpInfo/list',
+      data
+    })
+  }
+
+  // 新增皮条零部件基础档案
+  static async addStrapFile(data) {
+    return await this.post({
+      url: '/pimp/pimpInfo',
+      data
+    })
+  }
+
+  // 编辑皮条零部件基础档案
+  static async editStrapFile(data) {
+    return await this.put({
+      url: '/pimp/pimpInfo',
+      data
+    })
+  }
+
+  // 删除皮条零部件基础档案
+  static async deleteStrapFile(id) {
+    return await this.delete({
+      url: '/pimp/pimpInfo/' + id
+    })
+  }
+
 }
 
 export default ArchiveReport
