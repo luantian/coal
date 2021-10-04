@@ -68,6 +68,37 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 查询生产日报--完成情况
+  static async selectCompletionList(data) {
+    return await this.get({
+      url: '/reportcomplete/complete/list',
+      data
+    })
+  }
+
+  // 新增生产日报--完成情况
+  static async addCompletion(data) {
+    return await this.post({
+      url: '/reportcomplete/complete',
+      data
+    })
+  }
+
+  // 编辑生产日报--完成情况
+  static async editCompletion(data) {
+    return await this.put({
+      url: '/reportcomplete/complete',
+      data
+    })
+  }
+
+  // 删除生产日报--完成情况
+  static async deleteCompletion(id) {
+    return await this.delete({
+      url: '/reportcomplete/complete' + id
+    })
+  }
+
 }
 
 export default ArchiveReport
