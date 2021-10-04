@@ -59,25 +59,25 @@ import ProductionReportModel from "@/models/ProductionReport";
           },
           rules: {
             deviceType: [
-              { required: true, message: '设备型号不能为空', trigger: 'blur' }
+              { required: true, message: '设备类别不能为空', trigger: 'blur' }
             ],
-            warehouseLength: [
-              { required: true, message: '仓体长度(m)不能为空', trigger: 'blur' }
+            deviceName: [
+              { required: true, message: '设备名称不能为空', trigger: 'blur' }
             ],
-            warehouseWidth: [
-              { required: true, message: '仓体宽度(m)不能为空', trigger: 'blur' }
+            alarmStartTime: [
+              { required: true, message: '故障开始时间不能为空', trigger: 'blur' }
             ],
-            warehouseHeight: [
-              { required: true, message: '仓体高度(m)不能为空', trigger: 'blur' }
+            alarmEndTime: [
+              { required: true, message: '故障结束时间不能为空', trigger: 'blur' }
             ],
-            warehouseVolume: [
-              { required: true, message: '仓体容积(m³)位置不能为空', trigger: 'blur' }
+            alarmLocation: [
+              { required: true, message: '故障名称位置不能为空', trigger: 'blur' }
             ],
-            materialDensity: [
-              { required: true, message: '物料容重(t/m³)不能为空', trigger: 'blur' }
+            deviceLimenValue: [
+              { required: true, message: '耗时不能为空', trigger: 'blur' }
             ],
-            materialAngle: [
-              { required: true, message: '物料堆积角(°)不能为空', trigger: 'blur' }
+            createUser: [
+              { required: true, message: '故障记录员不能为空', trigger: 'blur' }
             ]
           }
         };

@@ -19,15 +19,15 @@
 
   const menus = [
     {
-      path: '/productReport/productionDailyReport',
+      path: '/productReport/productionPlan',
       meta: {
-        title: '生产日报表'
+        title: '生产日报-生产计划'
       },
     },
     {
-      path: '/productReport/leaderOnDuty',
+      path: '/productReport/completion',
       meta: {
-        title: '领导值班表'
+        title: '生产日报-完成情况'
       },
     },
     {
@@ -35,13 +35,7 @@
       meta: {
         title: '设备故障表'
       },
-    },
-    {
-      path: '/productReport/output',
-      meta: {
-        title: '产量统计表'
-      },
-    },
+    }
   ]
 
   export default {

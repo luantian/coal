@@ -1,22 +1,189 @@
 <template>
-  <div class="production-daily">
-    {{ $route.meta.title }}
+  <div class="personnel-files">
+    <div class="header_div">
+      <div style="flex: 1;text-align:center;">
+        {{ $route.meta.title }}
+      </div>
+    </div>
+
+    <div class="table_div" style="position: relative">
+      <div style="display: flex;">
+        <div style="flex: 1">
+
+        </div>
+        <div style="padding-right: 35px">
+          <el-button @click="addDialogVisible=true">新增参数</el-button>
+        </div>
+      </div>
+      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
+        <el-table :data="tableData" stripe style="width: 100%;">
+          <el-table-column label="序号" type="index" align="center"></el-table-column>
+          <el-table-column prop="bucketJobPeopleNumber" label="轮斗组作业人数" align="center"></el-table-column>
+          <el-table-column prop="bucketNameDay" label="轮斗组姓名-白班" align="center"></el-table-column>
+          <el-table-column prop="bucketNameNight" label="轮斗组姓名-夜班" align="center"></el-table-column>
+          <el-table-column prop="bucketTelDay" label="	轮斗组电话-白班" align="center"></el-table-column>
+          <el-table-column prop="bucketTelNight" label="轮斗组电话-夜班" align="center"></el-table-column>
+          <el-table-column prop="dispatchNameDay" label="值班调度姓名-白班" align="center"></el-table-column>
+          <el-table-column prop="dispatchNameNight" label="值班调度姓名-夜班" align="center"></el-table-column>
+          <el-table-column prop="dispatchTelDay" label="值班调度电话-白班" align="center"></el-table-column>
+          <el-table-column prop="dispatchTelNight" label="值班调度电话-夜班" align="center"></el-table-column>
+          <el-table-column prop="dutyPeopleNumber" label="当班人数" align="center"></el-table-column>
+          <el-table-column prop="entruckPeopleNumber" label="装车人数" align="center"></el-table-column>
+          <el-table-column prop="foremanNameDay" label="工长姓名-白班" align="center"></el-table-column>
+          <el-table-column prop="foremanNameNight" label="工长姓名-夜班" align="center"></el-table-column>
+          <el-table-column prop="foremanPeopleNumber" label="工长人数" align="center"></el-table-column>
+          <el-table-column prop="foremanTelDay" label="工长电话-白班" align="center"></el-table-column>
+          <el-table-column prop="foremanTelNight" label="工长电话-夜班" align="center"></el-table-column>
+          <el-table-column prop="forkliftJobPeopleNumber" label="铲车作业人数" align="center"></el-table-column>
+          <el-table-column prop="forkliftNumber" label="铲车台数" align="center"></el-table-column>
+          <el-table-column prop="inspectionPeopleNumber" label="巡检人数" align="center"></el-table-column>
+          <el-table-column prop="jobLocation" label="作业位置" align="center"></el-table-column>
+          <el-table-column prop="leaderNameDay" label="值班领导姓名-白班" align="center"></el-table-column>
+          <el-table-column prop="leaderTelDay" label="值班领导电话-白班" align="center"></el-table-column>
+          <el-table-column prop="planDate" label="计划日报日期" align="center"></el-table-column>
+          <el-table-column prop="safetyNameDay" label="安全员姓名-白班" align="center"></el-table-column>
+          <el-table-column prop="safetyNameNight" label="安全员姓名-夜班" align="center"></el-table-column>
+          <el-table-column prop="safetyTelDay" label="安全员电话-白班" align="center"></el-table-column>
+          <el-table-column prop="safetyTelNight" label="	安全员电话-夜班" align="center"></el-table-column>
+          <el-table-column prop="waterwheelJobPeopleNumber" label="水车作业人数" align="center"></el-table-column>
+          <el-table-column prop="waterwheelNumber" label="水车台数" align="center"></el-table-column>
+          <el-table-column prop="workPlan" label="工作计划" align="center"></el-table-column>
+          <el-table-column label="操作" >
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="editData(scope.$index, scope.row)">编辑
+              </el-button>
+              <el-button
+                size="mini"
+                type="danger"
+                @click="deleteData(scope.$index, scope.row)">删除
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
+          <el-pagination
+            background
+            layout="prev, pager, next, sizes"
+            :total="totalRecords"
+            @size-change="pageSizeChange"
+            @current-change="currentPageChange"
+            :page-sizes="pageSizes">
+          </el-pagination>
+        </div>
+      </div>
+      <div>
+        <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
+                   :destroy-on-close="true">
+          <add-form @addDialogClose="addDialogVisible = false"
+                    @queryList="toQuery"></add-form>
+        </el-dialog>
+        <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
+          <edit-form @editDialogClose="editDialogVisible = false"
+                     @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-form>
+        </el-dialog>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
-
+  import ProductionReportModel from "@/models/ProductionReport";
+  import addForm from "@/views/ProductReport/ProductionDailyReport/AddForm";
+  import editForm from "@/views/ProductReport/ProductionDailyReport/EditForm";
+  import { cloneDeep } from 'lodash-es'
   export default {
-    name: 'ProductionDaily',
+    name: 'SitePersonnelFiles',
+    components: {addForm, editForm},
     data() {
       return {
-
+        tableData: [],
+        deptName: '',
+        personName: '',
+        addDialogVisible: false,
+        editDialogVisible: false,
+        rowData: {},
+        totalRecords: 0,
+        pageSizes: [10, 20, 50, 100],
+        pageNum: 1,
+        pageSize: 10,
+        queryParams: {},
+        editRowData: {}
       }
+    },
+    methods: {
+      async toQuery() {
+        this.queryParams = {
+          'pageNum': this.pageNum,
+          'pageSize': this.pageSize,
+          'personName': this.personName,
+          'deptName': this.deptName
+        }
+        const {rows, total} = await ProductionReportModel.selectProductionPlanList(this.queryParams);
+        this.tableData = rows
+        this.totalRecords = total
+      },
+      async editData(index, row) {
+        this.rowData = cloneDeep(row)
+        this.editDialogVisible = true
+      },
+      async deleteData(index, row) {
+        this.$confirm('是否确认删除该数据?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async () => {
+          const {code} = await ProductionReportModel.deleteProductionPlan(row.id)
+          if (code === 200) {
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            await this.toQuery()
+            return
+          }
+          this.$message.error('删除失败');
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消删除'
+          })
+        })
+      },
+      async pageSizeChange(val) {
+        this.pageSize = val
+        await this.toQuery()
+      },
+      async currentPageChange(val) {
+        this.pageNum = val
+        await this.toQuery()
+      }
+    },
+    created() {
+      this.toQuery()
     }
   }
 
 </script>
 
 <style lang="scss" scoped>
+  $headerHeight: 100px;
+  .header_div {
+    display: flex;
+    height: 100px;
+    align-items: center;
+    background: aquamarine
+  }
+
+  .table_div {
+    padding: 15px 25px;
+    /*border-radius: 30px;*/
+    background: darkgray;
+    height: calc(100vh - #{$headerHeight} - #{$header-height});
+    box-sizing: border-box;
+  }
+
 
 </style>

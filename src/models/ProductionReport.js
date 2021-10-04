@@ -37,6 +37,37 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 查询生产日报--生产计划
+  static async selectProductionPlanList(data) {
+    return await this.get({
+      url: '/reportplan/plan/list',
+      data
+    })
+  }
+
+  // 新增生产日报--生产计划
+  static async addProductionPlan(data) {
+    return await this.post({
+      url: '/reportplan/plan',
+      data
+    })
+  }
+
+  // 编辑生产日报--生产计划
+  static async editProductionPlan(data) {
+    return await this.put({
+      url: '/reportplan/plan',
+      data
+    })
+  }
+
+  // 删除生产日报--生产计划
+  static async deleteProductionPlan(id) {
+    return await this.delete({
+      url: '/reportplan/plan/' + id
+    })
+  }
+
 }
 
 export default ArchiveReport

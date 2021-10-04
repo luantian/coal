@@ -8,20 +8,20 @@ const router = [
     component: () => import('@/views/ProductReport/Index.vue'),
     children: [
       {
-        path: 'productionDailyReport',
-        name: 'productionDailyReport',
+        path: 'productionPlan',
+        name: 'productionPlan',
         meta: {
-          title: '生产日报表'
+          title: '生产日报-生产计划'
         },
         component: () => import('@/views/ProductReport/ProductionDailyReport/ProductionDaily.vue')
       },
       {
-        path: 'leaderOnDuty',
-        name: 'LeaderOnDuty',
+        path: 'completion',
+        name: 'completion',
         meta: {
-          title: '领导值班表'
+          title: '生产日报-完成情况'
         },
-        component: () => import('@/views/ProductReport/LeaderOnDutyReport/LeaderOnDuty.vue')
+        component: () => import('@/views/ProductReport/ProductionCompletionReport/Completion.vue')
       },
       {
         path: 'deviceBreakdown',
@@ -30,14 +30,6 @@ const router = [
           title: '设备故障表'
         },
         component: () => import('@/views/ProductReport/DeviceBreakdownReport/DeviceBreakdown.vue')
-      },
-      {
-        path: 'output',
-        name: 'output',
-        meta: {
-          title: '产量统计表'
-        },
-        component: () => import('@/views/ProductReport/OutputStatisticsReport/OutputStatisticsReport.vue')
       }
     ]
   }
