@@ -1,26 +1,32 @@
 <template>
 <div style="width: 700px">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
-    <el-form-item label="设备型号" prop="deviceType">
-      <el-input type="text" v-model="ruleForm.deviceType" autocomplete="off" placeholder="请输入设备型号"></el-input>
+    <el-form-item label="设备类别" prop="deviceType">
+      <el-input type="text" v-model="ruleForm.deviceType" autocomplete="off" placeholder="请输入设备类别"></el-input>
     </el-form-item>
-    <el-form-item label="仓体长度(m)" prop="warehouseLength">
-      <el-input v-model="ruleForm.warehouseLength" placeholder="请输入仓体长度(m)"></el-input>
+    <el-form-item label="设备名称" prop="deviceName">
+      <el-input v-model="ruleForm.deviceName" placeholder="请输入设备名称"></el-input>
     </el-form-item>
-    <el-form-item label="仓体宽度(m)" prop="warehouseWidth">
-      <el-input v-model="ruleForm.warehouseWidth" placeholder="请输入仓体宽度(m)"></el-input>
+    <el-form-item label="故障开始时间" prop="alarmStartTime">
+      <el-col :span="11">
+        <el-date-picker type="date" placeholder="请选择故障开始时间" v-model="ruleForm.alarmStartTime" style="width: 100%;" value-format="yyyy-MM-dd" editable="false"></el-date-picker>
+      </el-col>
+<!--      <el-date-picker v-model="ruleForm.alarmStartTime" placeholder="请选择故障开始时间"></el-date-picker>-->
     </el-form-item>
-    <el-form-item label="仓体高度(m)" prop="warehouseHeight">
-      <el-input v-model="ruleForm.warehouseHeight" placeholder="仓体高度(m)"></el-input>
+    <el-form-item label="故障结束时间" prop="alarmEndTime">
+      <el-col :span="11">
+        <el-date-picker type="date" placeholder="请选择故障结束时间" v-model="ruleForm.alarmEndTime" style="width: 100%;" value-format="yyyy-MM-dd" editable="false"></el-date-picker>
+      </el-col>
+<!--      <el-input v-model="ruleForm.alarmEndTime" placeholder="请输入故障结束时间"></el-input>-->
     </el-form-item>
-    <el-form-item label="仓体容积(m³)" prop="warehouseVolume">
-      <el-input v-model="ruleForm.warehouseVolume" placeholder="请输入仓体容积(m³)"></el-input>
+    <el-form-item label="故障名称" prop="alarmLocation">
+      <el-input v-model="ruleForm.alarmLocation" placeholder="请输入故障名称"></el-input>
     </el-form-item>
-    <el-form-item label="物料容重(t/m³)" prop="materialDensity">
-      <el-input v-model="ruleForm.materialDensity" placeholder="请输入物料容重(t/m³)"></el-input>
+    <el-form-item label="耗时" prop="deviceLimenValue">
+      <el-input v-model="ruleForm.deviceLimenValue" placeholder="请输入耗时"></el-input>
     </el-form-item>
-    <el-form-item label="物料堆积角(°)" prop="materialAngle">
-      <el-input v-model="ruleForm.materialAngle" placeholder="请输入物料堆积角(°)"></el-input>
+    <el-form-item label="故障记录员" prop="createUser">
+      <el-input v-model="ruleForm.createUser" placeholder="请输入故障记录员"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button @click="addCancel">取消</el-button>
@@ -38,34 +44,34 @@ import ProductionReportModel from "@/models/ProductionReport";
         return {
           ruleForm: {
             deviceType: '',
-            warehouseLength: '',
-            warehouseWidth: '',
-            warehouseHeight: '',
-            warehouseVolume: '',
-            materialDensity: '',
-            materialAngle: ''
+            deviceName: '',
+            alarmStartTime: '',
+            alarmEndTime: '',
+            alarmLocation: '',
+            deviceLimenValue: '',
+            createUser: ''
           },
           rules: {
             deviceType: [
-              { required: true, message: '设备型号不能为空', trigger: 'blur' }
+              { required: true, message: '设备类别不能为空', trigger: 'blur' }
             ],
-            warehouseLength: [
-              { required: true, message: '仓体长度(m)不能为空', trigger: 'blur' }
+            deviceName: [
+              { required: true, message: '设备名称不能为空', trigger: 'blur' }
             ],
-            warehouseWidth: [
-              { required: true, message: '仓体宽度(m)不能为空', trigger: 'blur' }
+            alarmStartTime: [
+              { required: true, message: '故障开始时间不能为空', trigger: 'blur' }
             ],
-            warehouseHeight: [
-              { required: true, message: '仓体高度(m)不能为空', trigger: 'blur' }
+            alarmEndTime: [
+              { required: true, message: '故障结束时间不能为空', trigger: 'blur' }
             ],
-            warehouseVolume: [
-              { required: true, message: '仓体容积(m³)位置不能为空', trigger: 'blur' }
+            alarmLocation: [
+              { required: true, message: '故障名称位置不能为空', trigger: 'blur' }
             ],
-            materialDensity: [
-              { required: true, message: '物料容重(t/m³)不能为空', trigger: 'blur' }
+            deviceLimenValue: [
+              { required: true, message: '耗时不能为空', trigger: 'blur' }
             ],
-            materialAngle: [
-              { required: true, message: '物料堆积角(°)不能为空', trigger: 'blur' }
+            createUser: [
+              { required: true, message: '故障记录员不能为空', trigger: 'blur' }
             ]
           }
         };

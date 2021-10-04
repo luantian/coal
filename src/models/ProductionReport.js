@@ -21,7 +21,7 @@ class ArchiveReport extends Base {
     })
   }
 
-  // 删除故障统计表数据
+  // 新增故障统计表数据
   static async addDeviceBreakFile(data) {
     return await this.post({
       url: '/reportdevifault/fault',
@@ -29,7 +29,7 @@ class ArchiveReport extends Base {
     })
   }
 
-  // 删除故障统计表数据
+  // 编辑故障统计表数据
   static async editDeviceBreakFile(data) {
     return await this.put({
       url: '/reportdevifault/fault',
