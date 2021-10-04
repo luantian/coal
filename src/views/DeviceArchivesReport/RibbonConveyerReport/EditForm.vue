@@ -189,14 +189,14 @@ export default {
     async submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          const {code} = await ArchiveReportModel.editRibbonConveyerFilesList(this.ruleForm)
+          const {code} = await ArchiveReportModel.editRibbonConveyerFilesList(this.rowData)
           console.log()
           if (code === 200) {
             this.$message({
               message: '编辑成功',
               type: 'success'
             });
-            this.$emit("addDialogClose")
+            this.$emit("editDialogClose")
             this.$emit("queryList")
             return
           }

@@ -148,6 +148,106 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 编辑带式输送机基础档案列表
+  static async deleteRibbonConveyerFilesList(id) {
+    return await this.delete({
+      url: '/conveyor/info/' + id
+    })
+  }
+
+  // 查询装车仓基础档案列表
+  static async selectLoadingBunkerFilesList(data) {
+    return await this.get({
+      url: '/warehouse/warehouseInfo/list',
+      data
+    })
+  }
+
+  // 查询装车仓基础档案列表
+  static async addLoadingBunkerFile(data) {
+    return await this.post({
+      url: '/warehouse/warehouseInfo',
+      data
+    })
+  }
+
+  // 编辑装车仓基础档案列表
+  static async editLoadingBunkerFile(data) {
+    return await this.put({
+      url: '/warehouse/warehouseInfo',
+      data
+    })
+  }
+
+  // 删除装车仓基础档案列表
+  static async deleteLoadingBunkerFile(id) {
+    return await this.delete({
+      url: '/warehouse/warehouseInfo/' + id
+    })
+  }
+
+  // 查询皮条零部件基础档案
+  static async selectStrapFileList(data) {
+    return await this.get({
+      url: '/pimp/pimpInfo/list',
+      data
+    })
+  }
+
+  // 新增皮条零部件基础档案
+  static async addStrapFile(data) {
+    return await this.post({
+      url: '/pimp/pimpInfo',
+      data
+    })
+  }
+
+  // 编辑皮条零部件基础档案
+  static async editStrapFile(data) {
+    return await this.put({
+      url: '/pimp/pimpInfo',
+      data
+    })
+  }
+
+  // 删除皮条零部件基础档案
+  static async deleteStrapFile(id) {
+    return await this.delete({
+      url: '/pimp/pimpInfo/' + id
+    })
+  }
+
+  // 查询零部件基础档案零----1：轮斗挖掘机，2：转载机零部件基础档案，3：悬臂受料车零部件基础档案
+  static async selectPartFileList(data) {
+    return await this.get({
+      url: '/partsconveyor/partsconveyorInfo/list',
+      data
+    })
+  }
+
+  // 新增零部件基础档案零----1：轮斗挖掘机，2：转载机零部件基础档案，3：悬臂受料车零部件基础档案
+  static async addPartFile(data) {
+    return await this.post({
+      url: '/partsconveyor/partsconveyorInfo',
+      data
+    })
+  }
+
+  // 编辑零部件基础档案零----1：轮斗挖掘机，2：转载机零部件基础档案，3：悬臂受料车零部件基础档案
+  static async editPartFile(data) {
+    return await this.put({
+      url: '/partsconveyor/partsconveyorInfo',
+      data
+    })
+  }
+
+  // 删除零部件基础档案零----1：轮斗挖掘机，2：转载机零部件基础档案，3：悬臂受料车零部件基础档案
+  static async deletePartFile(id) {
+    return await this.delete({
+      url: '/partsconveyor/partsconveyorInfo/' + id
+    })
+  }
+
 }
 
 export default ArchiveReport
