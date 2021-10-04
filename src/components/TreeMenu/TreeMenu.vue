@@ -79,12 +79,11 @@
       return r(
         'el-menu',
         {
-          // props: {
-          //   backgroundColor: "#545c64",
-          //   textColor: "#fff",
-          //   activeTextColor: "#ffd04b",
-          //   // router: true
-          // },
+          props: {
+            backgroundColor: "transparent",
+            textColor: "#fff",
+            activeTextColor: "red",
+          },
           on: {
             select: this.onSelect
           }
@@ -96,23 +95,27 @@
 </script>
 
 <style lang="scss" scoped>
-  .el-menu{
+  .el-menu {
     border-right-width: 0;
+    background: transparent;
   }
 
-  /deep/ .el-submenu.active {
-    .el-submenu__title {
-      color: green;
-      background: red;
-    }
+  .el-menu-item {
+    color: #fff;
+    //font-size: 18px;
   }
 
-  /deep/ .el-menu-item:hover {
-    background-color: orange;
-  }
+  //.el-submenu__title {
+  //  color: #fff;
+  //  font-size: 18px;
+  //}
+  //
+  //.el-submenu .el-menu {
+  //  background: transparent;
+  //}
 
-  /deep/ .el-menu-item.active {
-    background: red;
+  .el-submenu.active {
+    background: yellow;
   }
 
 </style>
