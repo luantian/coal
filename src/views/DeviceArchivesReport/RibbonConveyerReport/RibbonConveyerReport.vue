@@ -1,10 +1,5 @@
 <template>
   <div class="personnel-files">
-    <div class="header_div">
-      <div style="flex: 1;text-align:center;">
-        {{ $route.meta.title }}
-      </div>
-    </div>
 
     <div class="table_div" style="position: relative">
       <div style="display: flex;">
@@ -12,10 +7,10 @@
 
         </div>
         <div style="padding-right: 35px">
-          <el-button @click="addDialogVisible=true">新增参数</el-button>
+          <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
+      <div class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="deviceType" label="设备型号" align="center"></el-table-column>
@@ -39,30 +34,26 @@
           <el-table-column prop="bandStrength" label="带强" align="center"></el-table-column>
           <el-table-column prop="driveArrangement" label="驱动单元布置方式" align="center"></el-table-column>
           <el-table-column prop="remark" label="备注" align="center"></el-table-column>
-          <el-table-column label="操作" >
+          <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                @click="editData(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="deleteData(scope.$index, scope.row)">删除
-              </el-button>
+              <div>
+                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>
+                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>
+              </div>
             </template>
           </el-table-column>
         </el-table>
-        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
-          <el-pagination
-            background
-            layout="prev, pager, next, sizes"
-            :total="totalRecords"
-            @size-change="pageSizeChange"
-            @current-change="currentPageChange"
-            :page-sizes="pageSizes">
-          </el-pagination>
-        </div>
+
+      </div>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next, sizes"
+          :total="totalRecords"
+          @size-change="pageSizeChange"
+          @current-change="currentPageChange"
+          :page-sizes="pageSizes">
+        </el-pagination>
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
@@ -86,7 +77,7 @@ import addForm from "@/views/DeviceArchivesReport/RibbonConveyerReport/AddForm";
 import editForm from "@/views/DeviceArchivesReport/RibbonConveyerReport/EditForm";
 import { cloneDeep } from 'lodash-es'
 export default {
-  name: 'SitePersonnelFiles',
+  name: 'RibbonConveyerReport',
   components: {addForm, editForm},
   data() {
     return {
@@ -161,20 +152,8 @@ export default {
 
 <style lang="scss" scoped>
 $headerHeight: 100px;
-.header_div {
-  display: flex;
-  height: 100px;
-  align-items: center;
-  background: aquamarine
-}
 
-.table_div {
-  padding: 15px 25px;
-  /*border-radius: 30px;*/
-  background: darkgray;
-  height: calc(100vh - #{$headerHeight} - #{$header-height});
-  box-sizing: border-box;
-}
+
 
 
 </style>

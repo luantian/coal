@@ -34,7 +34,7 @@
         <div class="pointBox"><div></div><div></div></div>
         <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleRed.png')"><img :src="require('@/assets/images/circleRed.png')"><img :src="require('@/assets/images/circleRed.png')"></div>
       </router-link>
-      <router-link to="/productReport" tag="div" class="menuProduceForm">
+      <router-link to="/productReport/productionPlan" tag="div" class="menuProduceForm">
         <div class="title">生产报表</div>
         <div class="circleBg"></div>
         <div class="circleRun"><div><div></div><div></div><div></div></div></div>

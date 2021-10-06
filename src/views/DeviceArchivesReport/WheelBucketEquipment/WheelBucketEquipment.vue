@@ -1,41 +1,17 @@
 <template>
   <div class="personnel-files">
-    <div class="header_div">
-      <div style="flex: 1;text-align:center;">
-        {{ $route.meta.title }}
-      </div>
-    </div>
-
     <div class="table_div" style="position: relative">
       <div style="display: flex;">
 
         <div style="flex: 1">
 
         </div>
-        <div style="padding-right: 0px">
-          <el-button @click="addDialogVisible=true">新增档案</el-button>
+        <div>
+          <el-button @click="addDialogVisible=true" type="primary">新增档案</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:45px;right:48px;bottom:20px;overflow: auto;padding-right: 0px">
-        <el-row>
-          <el-col :span="5" v-for="(item,index) in tableData" :key="item.id" :offset="index%4 === 0 ?0:1" >
-            <div style="margin-top:15px">
-              <el-card :body-style="{ padding: '20px'}" shadow="hover" >
-                <div style="display: flex">
-                  <div style="flex: 1">
-                    <span>{{item.deviceParam}} </span><br>
-                    <div style="padding-top: 5px">
-                      <span >{{item.deviceNumberInfo}} ({{item.deviceUnit}})</span>
-                    </div>
-                  </div>
-                  <div style="vertical-align: middle" @click="editData(index, item)">
-                    <i class="el-icon-edit" style="vertical-align: middle"/>
-                  </div>
-                </div>
-              </el-card>
-            </div>
-          </el-col>
-        </el-row>
+      <div class="main_table">
+        <common-item :table-data="tableData" @editData="editData" @deleteData="deleteData"></common-item>
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
@@ -58,10 +34,11 @@ import ArchiveReportModel from "@/models/ArchiveReport";
 import addForm from "@/views/DeviceArchivesReport/WheelBucketEquipment/addWheelBucketEquipmentForm";
 import editForm from "@/views/DeviceArchivesReport/WheelBucketEquipment/editWheelBucketEquipmentForm.vue";
 import {cloneDeep} from "lodash-es";
+import CommonItem from "@/components/CommonItem/CommonItem";
 
 export default {
   name: 'WheelBucketEquipmentFiles',
-  components: {addForm,editForm},
+  components: {addForm,editForm, CommonItem},
   data() {
     return {
       tableData: [],
@@ -125,7 +102,6 @@ export default {
     }
   },
   created() {
-
     this.toQuery()
   }
 }
@@ -134,20 +110,18 @@ export default {
 
 <style lang="scss" scoped>
 $headerHeight: 100px;
-.header_div {
+
+
+
+.item-wrap {
   display: flex;
-  height: 100px;
-  align-items: center;
-  background: aquamarine
+  flex-wrap: wrap;
 }
 
-.table_div {
-  padding: 15px 25px;
-  /*border-radius: 30px;*/
-  background: darkgray;
-  height: calc(100vh - #{$headerHeight} - #{$header-height});
-  box-sizing: border-box;
+.main_table {
+
 }
+
 
 
 </style>

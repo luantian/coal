@@ -1,10 +1,6 @@
 <template>
   <div class="personnel-files">
-    <div class="header_div">
-      <div style="flex: 1;text-align:center;">
-        {{ $route.meta.title }}
-      </div>
-    </div>
+
 
     <div class="table_div" style="position: relative">
       <div style="display: flex;">
@@ -12,16 +8,16 @@
 
         </div>
         <div style="padding-right: 35px">
-          <el-button @click="addDialogVisible=true">新增参数</el-button>
+          <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
+      <div class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="bucketJobPeopleNumber" label="轮斗组作业人数" align="center"></el-table-column>
           <el-table-column prop="bucketNameDay" label="轮斗组姓名-白班" align="center"></el-table-column>
           <el-table-column prop="bucketNameNight" label="轮斗组姓名-夜班" align="center"></el-table-column>
-          <el-table-column prop="bucketTelDay" label="	轮斗组电话-白班" align="center"></el-table-column>
+          <el-table-column prop="bucketTelDay" label="轮斗组电话-白班" align="center"></el-table-column>
           <el-table-column prop="bucketTelNight" label="轮斗组电话-夜班" align="center"></el-table-column>
           <el-table-column prop="dispatchNameDay" label="值班调度姓名-白班" align="center"></el-table-column>
           <el-table-column prop="dispatchNameNight" label="值班调度姓名-夜班" align="center"></el-table-column>
@@ -44,21 +40,16 @@
           <el-table-column prop="safetyNameDay" label="安全员姓名-白班" align="center"></el-table-column>
           <el-table-column prop="safetyNameNight" label="安全员姓名-夜班" align="center"></el-table-column>
           <el-table-column prop="safetyTelDay" label="安全员电话-白班" align="center"></el-table-column>
-          <el-table-column prop="safetyTelNight" label="	安全员电话-夜班" align="center"></el-table-column>
+          <el-table-column prop="safetyTelNight" label="安全员电话-夜班" align="center"></el-table-column>
           <el-table-column prop="waterwheelJobPeopleNumber" label="水车作业人数" align="center"></el-table-column>
           <el-table-column prop="waterwheelNumber" label="水车台数" align="center"></el-table-column>
           <el-table-column prop="workPlan" label="工作计划" align="center"></el-table-column>
-          <el-table-column label="操作" >
+          <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                @click="editData(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="deleteData(scope.$index, scope.row)">删除
-              </el-button>
+              <div>
+                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>
+                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>
+              </div>
             </template>
           </el-table-column>
         </el-table>
@@ -170,20 +161,6 @@
 
 <style lang="scss" scoped>
   $headerHeight: 100px;
-  .header_div {
-    display: flex;
-    height: 100px;
-    align-items: center;
-    background: aquamarine
-  }
-
-  .table_div {
-    padding: 15px 25px;
-    /*border-radius: 30px;*/
-    background: darkgray;
-    height: calc(100vh - #{$headerHeight} - #{$header-height});
-    box-sizing: border-box;
-  }
 
 
 </style>

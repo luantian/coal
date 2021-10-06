@@ -65,7 +65,6 @@
        * @param vm 当前组件实例
        */
       onSelect(path, paths) {
-
         this.$emit('onSelect', path, paths)
       }
     },

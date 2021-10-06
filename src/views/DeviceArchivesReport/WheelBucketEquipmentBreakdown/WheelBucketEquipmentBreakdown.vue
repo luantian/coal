@@ -1,34 +1,9 @@
 <template>
   <div class="personnel-files">
-    <div class="header_div">
-      <div style="flex: 1;text-align:center;">
-        {{ $route.meta.title }}
-      </div>
-    </div>
+
 
     <div class="table_div" style="position: relative">
       <div style="display: flex;">
-<!--        <div style="flex: 1">-->
-<!--          <label>设备部位系统</label>-->
-<!--          <el-select :inline="true" v-model="selectValue" clearable placeholder="请选择部件名称" :popper-append-to-body="false" style="margin-left: 10px">-->
-<!--            <el-option-->
-<!--              v-for="item in devicePositionSystemOptions"-->
-<!--              :key="item.value"-->
-<!--              :label="item.label"-->
-<!--              :value="item.value">-->
-<!--            </el-option>-->
-<!--          </el-select>-->
-<!--          <label style="margin-left: 35px">故障部位</label>-->
-<!--          <el-select :inline="true" v-model="selectValue" clearable placeholder="请选择部件名称" :popper-append-to-body="false" style="margin-left: 10px">-->
-<!--            <el-option-->
-<!--              v-for="item in faultLocationOptions"-->
-<!--              :key="item.value"-->
-<!--              :label="item.label"-->
-<!--              :value="item.value">-->
-<!--            </el-option>-->
-<!--          </el-select>-->
-<!--          <el-button type="primary" @click="toQuery" style="margin-left: 10px">查询</el-button>-->
-<!--        </div>-->
 
         <div style="flex: 1">
           <el-form :inline="true" class="demo-form-inline">
@@ -44,10 +19,10 @@
           </el-form>
         </div>
         <div style="padding-right: 35px">
-          <el-button @click="addDialogVisible=true">新增档案</el-button>
+          <el-button @click="addDialogVisible=true" type="primary">新增档案</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
+      <div class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="faultLocation" label="故障部位" align="center"></el-table-column>
@@ -56,28 +31,23 @@
           <el-table-column prop="faultType" label="故障类别" align="center"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                @click="editData(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="deleteData(scope.$index, scope.row)">删除
-              </el-button>
+              <div>
+                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>
+                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>
+              </div>
             </template>
           </el-table-column>
         </el-table>
-        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
-          <el-pagination
-            background
-            layout="prev, pager, next, sizes"
-            :total="totalRecords"
-            @size-change="pageSizeChange"
-            @current-change="currentPageChange"
-            :page-sizes="pageSizes">
-          </el-pagination>
-        </div>
+      </div>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next, sizes"
+          :total="totalRecords"
+          @size-change="pageSizeChange"
+          @current-change="currentPageChange"
+          :page-sizes="pageSizes">
+        </el-pagination>
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
@@ -186,20 +156,7 @@
 
 <style lang="scss" scoped>
   $headerHeight: 100px;
-  .header_div {
-    display: flex;
-    height: 100px;
-    align-items: center;
-    background: aquamarine
-  }
 
-  .table_div {
-    padding: 15px 25px;
-    /*border-radius: 30px;*/
-    background: darkgray;
-    height: calc(100vh - #{$headerHeight} - #{$header-height});
-    box-sizing: border-box;
-  }
 
 
 </style>

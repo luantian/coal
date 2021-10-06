@@ -1,10 +1,6 @@
 <template>
   <div class="personnel-files">
-    <div class="header_div">
-      <div style="flex: 1;text-align:center;">
-        {{ $route.meta.title }}
-      </div>
-    </div>
+
 
     <div class="table_div" style="position: relative">
       <div style="display: flex;">
@@ -44,7 +40,7 @@
           </el-form>
         </div>
         <div style="padding-right: 35px">
-          <el-button @click="addDialogVisible=true">新增档案</el-button>
+          <el-button @click="addDialogVisible=true" type="primary">新增档案</el-button>
         </div>
       </div>
       <div class="main_table">
@@ -56,28 +52,23 @@
           <el-table-column prop="faultType" label="故障类别" align="center"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                @click="editData(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="deleteData(scope.$index, scope.row)">删除
-              </el-button>
+              <div>
+                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>
+                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>
+              </div>
             </template>
           </el-table-column>
         </el-table>
-        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
-          <el-pagination
-            background
-            layout="prev, pager, next, sizes"
-            :total="totalRecords"
-            @size-change="pageSizeChange"
-            @current-change="currentPageChange"
-            :page-sizes="pageSizes">
-          </el-pagination>
-        </div>
+      </div>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next, sizes"
+          :total="totalRecords"
+          @size-change="pageSizeChange"
+          @current-change="currentPageChange"
+          :page-sizes="pageSizes">
+        </el-pagination>
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
@@ -186,20 +177,9 @@ export default {
 
 <style lang="scss" scoped>
 $headerHeight: 100px;
-.header_div {
-  display: flex;
-  height: 100px;
-  align-items: center;
-  background: aquamarine
-}
 
-.table_div {
-  padding: 15px 25px;
-  /*border-radius: 30px;*/
-  background: darkgray;
-  height: calc(100vh - #{$headerHeight} - #{$header-height});
-  box-sizing: border-box;
-}
+
+
 
 
 </style>

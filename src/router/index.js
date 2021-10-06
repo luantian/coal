@@ -42,7 +42,11 @@ const router = new Router({
   routes
 })
 
-
+const originalPush = Router.prototype.push
+//修改原型对象中的push方法
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 // 标识是否第一次加载，用于在路由守卫中处理首次加载时路由路径未匹配的情况
 let isFirstLoad = true;

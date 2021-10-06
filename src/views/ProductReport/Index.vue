@@ -50,11 +50,11 @@
       //
     },
     methods: {
-      onMenuItem(item) {
+      onMenuItem(path) {
         this.$router.push({
-          path: item.path
+          path
         })
-      },
+      }
     }
   }
 
@@ -65,20 +65,33 @@
     height: $header-height;
   }
 
+
+  .report-index {
+    height: 100%;
+    background: url("~@/assets/img/index_bg.png") no-repeat;
+    background-size: 100% 100%;
+  }
+
   .container {
     display: flex;
-    height: calc(100vh - #{$header-height});
+    height: calc(100vh - #{$header-height} - 17px);
+    padding: 17px 34px 0 32px;
     .menus {
       width: $menus-width;
-      height: 100%;
-      background: aqua;
+      height: calc(100vh - #{$header-height} - 42px);
+      //background: red;
       overflow: auto;
+      background: rgba(5, 13, 61, 0.6);
+      border: 1px solid #2D35B7;
     }
     .main {
       width: calc(100vw - #{$menus-width});
-      height: 100%;
-      //background: ghostwhite;
+      height: calc(100vh - #{$header-height} - 42px);
       overflow: auto;
+      background: rgba(5, 13, 61, 0.6);
+      border-right: 1px solid #2D35B7;
+      border-top: 1px solid #2D35B7;
+      border-bottom: 1px solid #2D35B7;
     }
   }
 

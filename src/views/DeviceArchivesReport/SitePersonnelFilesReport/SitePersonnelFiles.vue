@@ -30,19 +30,9 @@
           <el-table-column prop="remark" label="备注" align="center"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <div style="display: flex">
-                <div style="flex: 1;cursor: pointer">
-                  <i class="el-icon-edit"></i>
-                  <label
-                    @click="editData(scope.$index, scope.row)">编辑
-                  </label>
-                </div>
-                <div style="flex: 1;cursor: pointer">
-                  <i class="el-icon-delete"></i>
-                  <label
-                    @click="editData(scope.$index, scope.row)">删除
-                  </label>
-                </div>
+              <div>
+                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>
+                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>
               </div>
             </template>
           </el-table-column>
