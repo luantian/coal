@@ -1,10 +1,5 @@
 <template>
   <div class="personnel-files">
-    <div class="header_div">
-      <div style="flex: 1;text-align:center;">
-        {{ $route.meta.title }}
-      </div>
-    </div>
 
     <div class="table_div" style="position: relative">
       <div style="display: flex;">
@@ -25,7 +20,7 @@
           <el-button @click="addDialogVisible=true">新增</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
+      <div class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="belongSystem" label="所属系统" align="center"></el-table-column>
@@ -164,17 +159,10 @@ export default {
 
 <style lang="scss" scoped>
 $headerHeight: 100px;
-.header_div {
-  display: flex;
-  height: 100px;
-  align-items: center;
-  background: aquamarine
-}
 
 .table_div {
   padding: 15px 25px;
   /*border-radius: 30px;*/
-  background: darkgray;
   height: calc(100vh - #{$headerHeight} - #{$header-height});
   box-sizing: border-box;
 }

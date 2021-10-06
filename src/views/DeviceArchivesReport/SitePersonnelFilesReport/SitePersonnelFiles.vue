@@ -19,8 +19,7 @@
           <el-button type="primary" @click="addDialogVisible=true">新增档案</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px"
-           class="main_table">
+      <div class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="deptName" label="部门" align="center"></el-table-column>
@@ -33,13 +32,13 @@
             <template slot-scope="scope">
               <div style="display: flex">
                 <div style="flex: 1;cursor: pointer">
-                  <li class="el-icon-edit"></li>
+                  <i class="el-icon-edit"></i>
                   <label
                     @click="editData(scope.$index, scope.row)">编辑
                   </label>
                 </div>
                 <div style="flex: 1;cursor: pointer">
-                  <li class="el-icon-delete"></li>
+                  <i class="el-icon-delete"></i>
                   <label
                     @click="editData(scope.$index, scope.row)">删除
                   </label>
@@ -48,24 +47,24 @@
             </template>
           </el-table-column>
         </el-table>
-        <div class="pagination" style="margin-top: 40px;text-align: right;padding-right: 0px">
-          <el-pagination
-            background
-            layout="prev, pager, next, sizes"
-            :total="totalRecords"
-            @size-change="pageSizeChange"
-            @current-change="currentPageChange"
-            :page-sizes="pageSizes">
-          </el-pagination>
-        </div>
+      </div>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next, sizes"
+          :total="totalRecords"
+          @size-change="pageSizeChange"
+          @current-change="currentPageChange"
+          :page-sizes="pageSizes">
+        </el-pagination>
       </div>
       <div>
-        <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
+        <el-dialog width="600px" :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
                    :destroy-on-close="true">
           <add-personnel-file-form @addDialogClose="addDialogVisible = false"
                                    @queryList="toQuery"></add-personnel-file-form>
         </el-dialog>
-        <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
+        <el-dialog width="600px" :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
           <edit-personnel-file-form @editDialogClose="editDialogVisible = false"
                                     @queryList="toQuery" :rowData="rowData"
                                     :destroy-on-close="true"></edit-personnel-file-form>
@@ -162,22 +161,16 @@ $headerHeight: 100px;
   display: flex;
   height: 100px;
   align-items: center;
-  background: aquamarine
 }
 
 .table_div {
   padding: 30px 25px;
   /*border-radius: 30px;*/
   //background: transparent !important;
-  height: calc(100vh - #{$headerHeight} - 180px);
+  height: calc(100vh - #{$headerHeight} - 100px);
 }
 
-.main_table {
-  padding-top: 22px;
-}
 
-.pagination {
-  padding-right: 0px;
-}
+
 
 </style>

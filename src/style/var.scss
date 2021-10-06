@@ -80,12 +80,6 @@ $menus-width: 200px;
   height: 56px !important;
 }
 
-.main_table /deep/ .el-table th {
-  background-color: #121B7C;
-  color: #fff !important;
-  height: 62px !important;
-}
-
 .main_table /deep/ .el-table--enable-row-transition .el-table__body td, .el-table .cell{
   background-color: transparent;
 }
@@ -114,17 +108,14 @@ el-table th,
 
 //偶数行样式
 .main_table /deep/ .el-table__row--striped  {
-  //border-image: linear-gradient(0deg, #0F1597, #3347C2, #10169F) 10 10;
-  border--style: solid; border-width: 1px; border-color: #0B8FF5;
+  border: 1px solid #0B8FF5;
   background: linear-gradient(90deg, rgba(5, 13, 61, .6) 0%, rgba(22, 35, 116, .6) 48%, rgba(2, 10, 48, .6) 97%);
-  //opacity: 0.8;
 }
+
 //奇数行样式
 .main_table /deep/ .el-table__row:not(.el-table__row--striped) {
-  //border-image: linear-gradient(0deg, #0F1597, #3347C2, #10169F) 10 10;
-  border-bottom-style: solid; border-width: 1px; border-color: #0B8FF5;
+  border: 1px solid #0B8FF5;
   background: linear-gradient(90deg, rgba(5, 13, 61, .8) 0%, rgba(16, 26, 85, .8) 48%, rgba(2, 10, 48, .8) 97%);
-  //opacity: 0.6;
 }
 
 .main_table /deep/ .el-table__row{
@@ -153,4 +144,71 @@ el-table th,
   text-align: right;
 }
 
+// table 开始
 
+.customer-table th{
+  border:none;
+}
+
+.main_table /deep/ .el-table th {
+  background-color: #121B7C !important;
+  color: #fff !important;
+}
+
+
+.el-table--border th.el-table__cell {
+  border-image: linear-gradient( 0deg, #0F1597, #3347C2, #10169F) 10 10;
+}
+
+// 头部边框
+
+.el-table th.el-table__cell.is-leaf, .el-table td.el-table__cell {
+  border-bottom: 1px solid;
+  border-image: linear-gradient(0deg, #0F1597, #3347C2, #10169F) 10 10;
+}
+
+.el-table--group::after, .el-table--border::after, .el-table::before {
+  background: transparent !important;
+}
+
+
+
+.main_table {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  right: 42px;
+  bottom: 80px;
+  overflow: auto;
+}
+
+.pagination {
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 22px;
+  height: 60px;
+}
+
+
+// table 结束
+
+
+
+// dialog 开始
+
+/deep/ .el-dialog {
+  background: #0A1266;
+}
+
+/deep/ .el-dialog__header {
+  background: url("~@/assets/img/dialog-header-bg.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.el-textarea textarea {
+  background-color: transparent !important;
+}
+
+// dialog 结束

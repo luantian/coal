@@ -1,5 +1,5 @@
 <template>
-<div style="width: 700px">
+<div>
   <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
     <div style="display: flex">
       <div style="flex: 1">

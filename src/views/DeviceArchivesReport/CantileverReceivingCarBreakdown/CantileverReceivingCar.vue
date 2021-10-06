@@ -47,7 +47,7 @@
           <el-button @click="addDialogVisible=true">新增档案</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
+      <div class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="faultLocation" label="故障部位" align="center"></el-table-column>

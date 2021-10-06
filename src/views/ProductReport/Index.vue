@@ -77,7 +77,7 @@
     .main {
       width: calc(100vw - #{$menus-width});
       height: 100%;
-      background: ghostwhite;
+      //background: ghostwhite;
       overflow: auto;
     }
   }

@@ -1,5 +1,5 @@
 <template>
-<div style="width: 700px">
+<div>
   <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
     <el-form-item label="所属系统" prop="belongSystem">
       <el-input type="text" v-model="rowData.belongSystem" autocomplete="off" placeholder="请输入所属系统"></el-input>

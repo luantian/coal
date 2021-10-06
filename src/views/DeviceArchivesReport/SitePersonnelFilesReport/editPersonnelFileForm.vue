@@ -1,5 +1,5 @@
 <template>
-<div style="width: 700px">
+<div>
   <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
     <el-form-item label="部门" prop="deptName">
       <el-input type="text" v-model="rowData.deptName" autocomplete="off"></el-input>

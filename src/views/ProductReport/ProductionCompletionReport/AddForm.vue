@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 700px">
+  <div>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
       <el-form-item label="日装车数" prop="dailyEntruckNumber">
         <el-input type="text" v-model="ruleForm.dailyEntruckNumber" autocomplete="off" placeholder="请输入日装车数"></el-input>
