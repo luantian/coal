@@ -64,9 +64,93 @@ $menus-width: 200px;
 
 // select
 .el-input__inner {
-  background-color: #050D3D !important;
+  background-color: transparent !important;
   border: 1px solid #2D35B7 !important;
   color: #fff !important;
 }
 // select
+
+//报表全局样式
+.main_table /deep/ .el-table, .el-table__expanded-cell {
+  background-color: transparent;
+}
+
+.main_table /deep/ .el-table tr {
+  background-color: transparent!important;
+  height: 56px !important;
+}
+
+.main_table /deep/ .el-table th {
+  background-color: #121B7C;
+  color: #fff !important;
+  height: 62px !important;
+}
+
+.main_table /deep/ .el-table--enable-row-transition .el-table__body td, .el-table .cell{
+  background-color: transparent;
+}
+
+.main_table /deep/ .el-table {
+  background-color: transparent !important;
+  border: 1px solid #2D35B7 !important;
+  color: #fff !important;
+}
+
+//透明化整体
+.el-table,
+.el-table__expanded-cell {
+  background-color: transparent !important;
+}
+//透明化行、单元格
+el-table th,
+.el-table tr,
+.el-table td {
+  background-color: transparent !important;
+}
+//hover时样式
+.main_table /deep/ .el-table tbody tr:hover>td {
+  background-color: #367f7f78 !important
+}
+
+//偶数行样式
+.main_table /deep/ .el-table__row--striped  {
+  //border-image: linear-gradient(0deg, #0F1597, #3347C2, #10169F) 10 10;
+  border--style: solid; border-width: 1px; border-color: #0B8FF5;
+  background: linear-gradient(90deg, rgba(5, 13, 61, .6) 0%, rgba(22, 35, 116, .6) 48%, rgba(2, 10, 48, .6) 97%);
+  //opacity: 0.8;
+}
+//奇数行样式
+.main_table /deep/ .el-table__row:not(.el-table__row--striped) {
+  //border-image: linear-gradient(0deg, #0F1597, #3347C2, #10169F) 10 10;
+  border-bottom-style: solid; border-width: 1px; border-color: #0B8FF5;
+  background: linear-gradient(90deg, rgba(5, 13, 61, .8) 0%, rgba(16, 26, 85, .8) 48%, rgba(2, 10, 48, .8) 97%);
+  //opacity: 0.6;
+}
+
+.main_table /deep/ .el-table__row{
+  border-bottom: #0B8FF5 !important;
+}
+
+//分页组件选中样式
+::v-deep .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: transparent !important;
+  color: #0B8FF5;
+}
+
+::v-deep .el-pagination.is-background .el-pager li {
+  background-color: transparent !important;
+  border-style: solid; border-width: 1px; border-color: darkgray;
+  color: #fff !important;
+}
+
+::v-deep .el-pagination.is-background button {
+  background-color: transparent !important;
+  border-style: solid; border-width: 1px; border-color: darkgray;
+}
+
+::v-deep .el-pagination.is-background .el-pagination__sizes{
+  padding-right: 0;
+  text-align: right;
+}
+
 
