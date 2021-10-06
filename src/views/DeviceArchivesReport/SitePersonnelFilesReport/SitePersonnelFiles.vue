@@ -1,11 +1,5 @@
 <template>
-  <div class="personnel-files">
-    <div class="header_div">
-      <div style="flex: 1;text-align:center;">
-        {{ $route.meta.title }}
-      </div>
-    </div>
-
+  <div class="component_container">
     <div class="table_div" style="position: relative">
       <div style="display: flex;">
         <div style="flex: 1">
@@ -21,11 +15,12 @@
             </el-form-item>
           </el-form>
         </div>
-        <div style="padding-right: 35px">
-          <el-button @click="addDialogVisible=true">新增档案</el-button>
+        <div style="padding-right: 18px">
+          <el-button type="primary" @click="addDialogVisible=true">新增档案</el-button>
         </div>
       </div>
-      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px">
+      <div style="position: absolute;top:65px;left:20px;right:42px;bottom:20px;overflow: auto;padding-right: 0px"
+           class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="deptName" label="部门" align="center"></el-table-column>
@@ -36,19 +31,24 @@
           <el-table-column prop="remark" label="备注" align="center"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                @click="editData(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="deleteData(scope.$index, scope.row)">删除
-              </el-button>
+              <div style="display: flex">
+                <div style="flex: 1;cursor: pointer">
+                  <li class="el-icon-edit"></li>
+                  <label
+                    @click="editData(scope.$index, scope.row)">编辑
+                  </label>
+                </div>
+                <div style="flex: 1;cursor: pointer">
+                  <li class="el-icon-delete"></li>
+                  <label
+                    @click="editData(scope.$index, scope.row)">删除
+                  </label>
+                </div>
+              </div>
             </template>
           </el-table-column>
         </el-table>
-        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
+        <div class="pagination" style="margin-top: 40px;text-align: right;padding-right: 0px">
           <el-pagination
             background
             layout="prev, pager, next, sizes"
@@ -67,7 +67,8 @@
         </el-dialog>
         <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
           <edit-personnel-file-form @editDialogClose="editDialogVisible = false"
-                                    @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-personnel-file-form>
+                                    @queryList="toQuery" :rowData="rowData"
+                                    :destroy-on-close="true"></edit-personnel-file-form>
         </el-dialog>
       </div>
     </div>
@@ -79,7 +80,8 @@
 import ArchiveReportModel from "@/models/ArchiveReport";
 import addPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/addPersonnelFileForm";
 import editPersonnelFileForm from "@/views/DeviceArchivesReport/SitePersonnelFilesReport/editPersonnelFileForm";
-import { cloneDeep } from 'lodash-es'
+import {cloneDeep} from 'lodash-es'
+
 export default {
   name: 'SitePersonnelFiles',
   components: {addPersonnelFileForm, editPersonnelFileForm},
@@ -164,12 +166,18 @@ $headerHeight: 100px;
 }
 
 .table_div {
-  padding: 15px 25px;
+  padding: 30px 25px;
   /*border-radius: 30px;*/
-  background: darkgray;
-  height: calc(100vh - #{$headerHeight} - #{$header-height});
-  box-sizing: border-box;
+  //background: transparent !important;
+  height: calc(100vh - #{$headerHeight} - 180px);
 }
 
+.main_table {
+  padding-top: 22px;
+}
+
+.pagination {
+  padding-right: 0px;
+}
 
 </style>
