@@ -18,7 +18,7 @@
               'el-submenu',
               {
                 class: {
-                  active: this.$route.path.indexOf(route.path) > -1
+                  active: this.$route.path === route.path
                 },
                 props: {
                   index: route.path,
@@ -42,7 +42,7 @@
               'el-menu-item',
               {
                 class: {
-                  active: this.$route.path.indexOf(route.path) > -1
+                  active: this.$route.path === route.path
                 },
                 props: {
                   index: route.path,
@@ -65,14 +65,8 @@
        * @param vm 当前组件实例
        */
       onSelect(path, paths) {
-        console.log('paths', paths)
-        const current = this.$router.history.current.fullPath
-        const toPath = paths.join('/')
-        console.log('toPath', toPath)
-        if (current === toPath) return
-        this.$router.push({
-          path: toPath
-        })
+
+        this.$emit('onSelect', path, paths)
       }
     },
     render(r) {

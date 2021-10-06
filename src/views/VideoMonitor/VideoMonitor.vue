@@ -13,48 +13,49 @@
 </template>
 
 <script>
-  import CommonHeader from "@/components/CommonHeader";
+
+  import CommonHeader from "@/components/CommonHeader"
   import TreeMenu from '@/components/TreeMenu'
 
   const menus = [
     {
-      path: '/productReport/productionDailyReport',
+      path: '组件1',
       meta: {
-        title: '生产日报表'
+        title: '近景监控'
       },
       children: [
         {
-          path: 'aaa',
+          path: '组件2',
           meta: {
-            title: 'haha'
+            title: '一号监控点',
           }
         },
         {
-          path: 'bbb',
+          path: '组件3',
           meta: {
-            title: 'haha'
+            title: '二号监控点',
+          }
+        },
+        {
+          path: '组件4',
+          meta: {
+            title: '三号监控点',
+          }
+        },
+        {
+          path: '组件5',
+          meta: {
+            title: '四号监控点',
           }
         }
       ]
     },
     {
-      path: '/productReport/leaderOnDuty',
+      path: '组件7',
       meta: {
-        title: '领导值班表'
+        title: '远景监控'
       },
-    },
-    {
-      path: '/productReport/deviceBreakdown',
-      meta: {
-        title: '设备故障表'
-      },
-    },
-    {
-      path: '/productReport/output',
-      meta: {
-        title: '产量统计表'
-      },
-    },
+    }
   ]
 
   export default {
@@ -66,8 +67,9 @@
       }
     },
     methods: {
-      onMenuItem() {
-        console.log(123)
+      onMenuItem(path, paths) {
+        console.log('path', path)
+        console.log('paths', paths)
       }
     }
   }

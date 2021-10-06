@@ -139,9 +139,12 @@ export default {
     //
   },
   methods: {
-    onMenuItem(item) {
+    onMenuItem(path, paths) {
+      const current = this.$router.history.current.fullPath
+      const toPath = paths.join('/')
+      if (current === toPath) return
       this.$router.push({
-        path: item.path
+        path: toPath
       })
     },
   }
