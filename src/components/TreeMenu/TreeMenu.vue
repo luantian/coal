@@ -14,6 +14,8 @@
         return routes.map(route => {
           if (!route.paths) route.paths = []
           if (route.children && route.children.length) {
+            console.log('a', this.$route.path)
+            console.log('b', route.path)
             return r(
               'el-submenu',
               {
@@ -72,11 +74,6 @@
       return r(
         'el-menu',
         {
-          props: {
-            backgroundColor: "transparent",
-            textColor: "#fff",
-            activeTextColor: "red",
-          },
           on: {
             select: this.onSelect
           }
@@ -89,26 +86,41 @@
 
 <style lang="scss" scoped>
   .el-menu {
-    border-right-width: 0;
+    border-right: none;
+    background-color: transparent;
+  }
+
+  ::v-deep .el-menu.el-menu--inline {
+    color: red;
+    background-color: transparent;
+  }
+
+  ::v-deep .el-menu-item {
+    color: #fff;
+    background: transparent;
+
+    &:hover, &.is-active {
+      color: $--color-primary;
+      background: url("~@/assets/img/menu-item-bg.png") no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+
+  ::v-deep .el-submenu__title {
+    color: #fff;
+    &:hover, &.is-active {
+      color: $--color-primary;
+      background: url("~@/assets/img/menu-item-bg.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    i {
+      color: #fff;
+    }
+  }
+
+  .el-submenu .el-menu {
     background: transparent;
   }
 
-  .el-menu-item {
-    color: #fff;
-    //font-size: 18px;
-  }
-
-  //.el-submenu__title {
-  //  color: #fff;
-  //  font-size: 18px;
-  //}
-  //
-  //.el-submenu .el-menu {
-  //  background: transparent;
-  //}
-
-  .el-submenu.active {
-    background: yellow;
-  }
 
 </style>

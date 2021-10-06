@@ -10,13 +10,13 @@
       <div class="date">{{ date }}</div>
       <div class="user-info">
         <div class="user-avatar">
-          <img src="@/assets/img/default_avatar.png" alt="">
+          <img :src="userInfo.avatar || require('@/assets/img/default_avatar.png')" alt="">
         </div>
       </div>
       <div class="drop">
         <el-dropdown>
           <span class="el-dropdown-link">
-            <span class="user-name">admin</span><i class="el-icon-arrow-down el-icon--right"></i>
+            <span class="user-name">{{ userInfo.nickName }}</span><i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
@@ -44,7 +44,8 @@
       return {
         timer: null,
         date: '',
-        token: LocalStorage.getItem('token')
+        token: LocalStorage.getItem('token'),
+        userInfo: LocalStorage.getItem('user')
       }
     },
     mounted() {
@@ -57,7 +58,7 @@
     },
     methods: {
       toManager() {
-        window.open(`localhost:8888/index?token=${this.token}`)
+        window.open(`http://localhost:8888/system/user?token=${this.token}`)
         // location.href = `localhost:8888/index?token=${this.token}`
       }
     }

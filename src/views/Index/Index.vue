@@ -24,7 +24,7 @@
         <div class="circleRun"><div><div></div><div></div><div></div></div></div>
         <div class="icon"><div class="iconLight"></div></div>
         <div class="pointBox"><div></div><div></div></div>
-        <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleYellow.png')"><img src="require('@/assets/images/circleYellow.png')"><img :src="require('@/assets/images/circleYellow.png')"></div>
+        <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleYellow.png')"><img :src="require('@/assets/images/circleYellow.png')"><img :src="require('@/assets/images/circleYellow.png')"></div>
       </router-link>
       <router-link to="/safetyWarning" tag="div" class="menuSafeBox">
         <div class="title">安全预警</div>
