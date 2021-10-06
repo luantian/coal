@@ -42,7 +42,7 @@ service.interceptors.request.use(
       const token = LocalStorage.getItem('token')
 
       if (token) {
-        config.headers['Authorization'] = token
+        config.headers['Authorization'] = 'Bearer ' + token
       }
     }
 

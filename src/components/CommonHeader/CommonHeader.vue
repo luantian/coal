@@ -19,7 +19,11 @@
             <span class="user-name">admin</span><i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>后台管理</el-dropdown-item>
+            <el-dropdown-item>
+              <div @click="toManager">
+                后台管理
+              </div>
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -32,12 +36,15 @@
   import * as moment from 'moment';
   moment.locale('zh-cn');
 
+  import LocalStorage from "@/cache/LocalStorage";
+
   export default {
     name: 'CommonHeader',
     data() {
       return {
         timer: null,
-        date: ''
+        date: '',
+        token: LocalStorage.getItem('token')
       }
     },
     mounted() {
@@ -47,6 +54,12 @@
     },
     beforeDestroy() {
       clearInterval(this.timer)
+    },
+    methods: {
+      toManager() {
+        window.open(`localhost:8888/index?token=${this.token}`)
+        // location.href = `localhost:8888/index?token=${this.token}`
+      }
     }
   }
 
