@@ -2,6 +2,7 @@
 node_modules
 /dist
 /coal
+/public
 
 /public/static/
 
