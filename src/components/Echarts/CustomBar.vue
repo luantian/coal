@@ -11,7 +11,15 @@
       dataset: {
         type: Object,
         required: true
-      }
+      },
+      unitX: {
+        type: String,
+        required: true
+      },
+      unitY: {
+        type: String,
+        required: true
+      },
     },
     data() {
       return {

@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'CustomPie',
+    name: 'CustomPies',
     props: {
       dataset: {
         type: Object,

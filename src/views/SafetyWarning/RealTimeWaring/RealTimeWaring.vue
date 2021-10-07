@@ -61,6 +61,7 @@
 </template>
 
 <script>
+
 import SafetyWarningModel from "@/models/SafetyWarning";
 
 export default {

@@ -23,36 +23,39 @@
           </el-form>
         </div>
       </div>
-      <div class="chart1_container" style="width: 100%;height: 400px;padding: 36px;">
-        <div style="display: flex">
-          <div style="width: 6px;height: 18px;background: #399CFF;border-radius: 2px;">
-          </div>
+      <div class="chart1_container">
+        <div style="display: flex; padding: 28px 36px;">
+          <div style="width: 6px; height: 18px; background: #399CFF; border-radius: 2px;"></div>
           <div class="bar1">报警时长</div>
-
         </div>
-        <div class="echarts_warning_duration" ref="duration_chart" style="width: 100%;height: 100%;padding: 0"></div>
+        <div class="echarts_warning_duration">
+          <custom-bar2 :dataset="barDataset" unit-x=" " unit-y="min"></custom-bar2>
+        </div>
       </div>
 
-      <div class="percent_chart_div" style="display: flex;width: 100%;height: 400px">
+      <div class="percent_chart_div">
         <div class="pie1">
-          <div class="number_percent_chart" ref="number_percent_chart" style="flex: 1">
-          </div>
+          <custom-pie :dataset="pie1Dataset"></custom-pie>
         </div>
         <div class="pie2">
-          <div class="duration_percent_chart" ref="duration_percent_chart" style="flex: 1">
-          </div>
+          <custom-pie :dataset="pie2Dataset"></custom-pie>
         </div>
       </div>
+
     </div>
 
   </div>
 </template>
 
 <script>
+
 import SafetyWarningModel from "@/models/SafetyWarning";
+import CustomPie from '@/components/Echarts/CustomPie'
+import CustomBar2 from '@/components/Echarts/CustomBar2'
 
 export default {
   name: 'WarningStatistics',
+  components: { CustomPie, CustomBar2 },
   data() {
     return {
       alarmDevice: '',
@@ -61,15 +64,36 @@ export default {
       datasetDuration: [],
       datasetQuantity: [],
       searchValueDuration: 'total_minutes_number',
-      searchValueQuantity: 'total_number'
+      searchValueQuantity: 'total_number',
+      barDataset: { source: [] },
+      pie1Dataset: { source: [] },
+      pie2Dataset: { source: [] },
     }
   },
+
   mounted() {
-    this.initDurationEcharts()
-    this.initNumberPercentEcharts();
-    this.initDurationPercentEcharts()
+    this.barDataset = {
+      source: [
+        ['Search Engine', 1048],
+        ['Direct', 735],
+        ['Email', 580],
+        ['Union Ads', 358],
+        ['Video Ads', 357],
+      ]
+    }
+    this.pie1Dataset = {
+      source: [
+        ['Search Engine', 1048],
+        ['Direct', 735],
+        ['Email', 580],
+        ['Union Ads', 358],
+        ['Video Ads', 357],
+      ]
+    }
   },
+
   methods: {
+
     async toQuery() {
       if (this.searchDate) {
         this.alarmStartTime = this.searchDate[0]
@@ -81,145 +105,13 @@ export default {
         'alarmStartTime': this.alarmStartTime,
         'alarmEndTime': this.alarmEndTime
       }
-      const {data} = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
+      const { data } = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
       this.datasetDuration = data
       this.queryParams['searchValue'] = this.searchValueQuantity
-      const {dataset} = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
+      const { dataset } = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
       this.datasetQuantity = dataset
-      this.render()
     },
-    initDurationEcharts() {
-      this.myChart = this.$echarts.init(this.$refs.duration_chart)
-      const color = '#fff'
-      const nameTextStyle = {
-        color
-      }
-      this.option = {
-        xAxis: {
-          type: 'category',
-          name: this.xUnit,
-          nameTextStyle,
-          axisLabel: {
-            textStyle: {
-              color  //更改坐标轴文字颜色
-            }
-          }
-        },
-        yAxis: {
-          type: 'value',
-          name: this.yUnit || 'min',
-          nameTextStyle,
-          axisLine: {
-            show: true
-          },
-          axisLabel: {
-            textStyle: {
-              color,  //更改坐标轴文字颜色
-            }
-          }
-        },
-        series: [
-          {
-            type: 'bar',
-            smooth: true,
-            barWidth: 38
-          }
-        ],
-        dataset: {}
-      }
-    },
-    initDurationPercentEcharts() {
-      this.myChart1 = this.$echarts.init(this.$refs.duration_percent_chart)
-      const color = '#fff'
-      const nameTextStyle = {
-        color
-      }
-      this.option1 = {
-        xAxis: {
-          type: 'category',
-          name: this.xUnit,
-          nameTextStyle,
-          axisLabel: {
-            textStyle: {
-              color  //更改坐标轴文字颜色
-            }
-          }
-        },
-        yAxis: {
-          type: 'value',
-          name: this.yUnit || 'min',
-          nameTextStyle,
-          axisLine: {
-            show: true
-          },
-          axisLabel: {
-            textStyle: {
-              color,  //更改坐标轴文字颜色
-            }
-          }
-        },
-        series: [
-          {
-            type: 'pie',
-            smooth: true,
-            barWidth: 38
-          }
-        ],
-        dataset: {}
-      }
-    },
-    initNumberPercentEcharts() {
-      this.myChart2 = this.$echarts.init(this.$refs.number_percent_chart)
-      const color = '#fff'
-      const nameTextStyle = {
-        color
-      }
-      this.option2 = {
-        xAxis: {
-          type: 'category',
-          name: this.xUnit,
-          nameTextStyle,
-          axisLabel: {
-            textStyle: {
-              color  //更改坐标轴文字颜色
-            }
-          }
-        },
-        yAxis: {
-          type: 'value',
-          name: this.yUnit || 'min',
-          nameTextStyle,
-          axisLine: {
-            show: true
-          },
-          axisLabel: {
-            textStyle: {
-              color,  //更改坐标轴文字颜色
-            }
-          }
-        },
-        series: [
-          {
-            type: 'pie',
-            smooth: true,
-            barWidth: 38
-          }
-        ],
-        dataset: {}
-      }
-    },
-    render() {
-      this.option.dataset.source = this.datasetDuration
-      this.option && this.myChart.setOption(this.option)
-      this.option1.dataset.source = this.datasetDuration
-      this.option1 && this.myChart1.setOption(this.option1)
-      this.option2.dataset.source = this.datasetQuantity
-      this.option2 && this.myChart2.setOption(this.option2)
-    }
   },
-  created() {
-    this.toQuery()
-  }
 }
 
 </script>
@@ -234,28 +126,30 @@ $headerHeight: 100px;
 }
 
 .bar1 {
-  //width: 63px;
-  //height: 16px;
   font-size: 16px;
-  font-family: PingFang SC;
   font-weight: 400;
   color: #FFFFFF;
   margin-left: 16px;
 }
 
 .chart1_container {
+  height: 300px;
   background: rgba(8, 17, 77, 0.8);
-  border: 1px solid;
-  border-image: linear-gradient(0deg, #0F1597, #3347C2, #10169F) 10 10;
-  padding: 36px;
+  border: 1px solid #0F1597;
 }
 
-.pie1 .pie1 {
-  width: 800px;
-  height: 400px;
-  background: rgba(8, 17, 77, 0.8);
-  border: 1px solid;
-  border-image: linear-gradient(0deg, #0F1597, #3347C2, #10169F) 10 10;
+.percent_chart_div {
+  display: flex;
+  .pie1, .pie2 {
+    flex: 1;
+    height: 300px;
+    background: rgba(8, 17, 77, 0.8);
+    border: 1px solid #0F1597;
+  }
+}
+
+.echarts_warning_duration {
+  height: 260px;
 }
 
 .number_percent_chart .duration_percent_chart {
