@@ -107,7 +107,7 @@ const menus = [
     },
     children: [
       {
-        path: 'wheelBucket',
+        path: 'wheelBucketBreakdown',
         meta: {
           title: '轮斗挖掘机故障基础档案'
         }

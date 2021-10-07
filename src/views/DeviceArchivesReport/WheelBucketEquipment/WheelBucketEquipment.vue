@@ -75,7 +75,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        const {code} = await ArchiveReportModel.deleteWheelBucketBreakDown(row.id)
+        const {code} = await ArchiveReportModel.deleteWheelBucketBasicFile(row.id)
         if (code === 200) {
           this.$message({
             message: '删除成功',

@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="main_table">
-        <common-item :table-data="tableData" @editData="editData"></common-item>
+        <common-item :table-data="tableData" @editData="editData" @deleteData="deleteData"></common-item>
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
@@ -78,7 +78,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async () => {
-          const {code} = await ArchiveReportModel.deleteWheelBucketBreakDown(row.id)
+          const {code} = await ArchiveReportModel.deleteWheelBucketBasicFile(row.id)
           if (code === 200) {
             this.$message({
               message: '删除成功',

@@ -15,18 +15,22 @@
 <script>
   import CommonHeader from "@/components/CommonHeader";
 
-  import Tab1 from './Tab1'
-  import Tab2 from './Tab2'
-  import Tab3 from './Tab3'
+  import RealTimeWaring from './RealTimeWaring'
+  import HistoryWarning from './HistoryWarning'
+  import WarningStatistics from './WarningStatistics'
 
   export default {
     name: 'SafetyWarning',
-    components: { CommonHeader, Tab1, Tab2, Tab3 },
+    components: { CommonHeader, RealTimeWaring, HistoryWarning, WarningStatistics },
     data() {
       return {
-        tabs: [ { title: '设备实时报警', value: 1, name: 'Tab1' }, { title: '历史报警列表', value: 2, name: 'Tab2' }, { title: '历史报警统计', value: 3, name: 'Tab3' } ],
+        tabs: [
+          { title: '设备实时报警', value: 1, name: 'RealTimeWaring' },
+          { title: '历史报警列表', value: 2, name: 'HistoryWarning' },
+          { title: '历史报警统计', value: 3, name: 'WarningStatistics' }
+        ],
         activeIndex: 0,
-        currentComponent: 'Tab1',
+        currentComponent: 'RealTimeWaring',
         options: [{
           value: '选项1',
           label: '黄金糕'

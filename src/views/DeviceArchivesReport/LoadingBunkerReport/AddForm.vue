@@ -59,7 +59,7 @@
               { required: true, message: '仓体高度(m)不能为空', trigger: 'blur' }
             ],
             warehouseVolume: [
-              { required: true, message: '仓体容积(m³)位置不能为空', trigger: 'blur' }
+              { required: true, message: '仓体容积(m³)不能为空', trigger: 'blur' }
             ],
             materialDensity: [
               { required: true, message: '物料容重(t/m³)不能为空', trigger: 'blur' }

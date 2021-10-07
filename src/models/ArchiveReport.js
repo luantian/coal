@@ -93,6 +93,13 @@ class ArchiveReport extends Base {
     })
   }
 
+  // 编辑设备基础档案--轮斗、转载机、悬臂受料车
+  static async deleteWheelBucketBasicFile(id) {
+    return await this.delete({
+      url: '/devicewheel/devicewheelInfo/' + id
+    })
+  }
+
   // 查询润滑用油明细表
   static async selectOilConsumptionList(data) {
     return await this.get({

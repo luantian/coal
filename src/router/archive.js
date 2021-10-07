@@ -96,7 +96,7 @@ const router = [
         component: () => import('@/views/DeviceArchivesReport/StrapParts/StrapParts.vue')
       },
       {
-        path: 'breakDown/wheelBucket',
+        path: 'breakDown/wheelBucketBreakdown',
         name: 'wheelBucket2',
         meta: {
           title: '轮斗挖掘机故障基础档案'

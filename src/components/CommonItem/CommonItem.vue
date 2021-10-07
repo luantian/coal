@@ -13,7 +13,7 @@
         <img :src="require('@/assets/img/edit.png')" alt="">
       </div>
       <div class="close">
-        <i class="el-icon-close"></i>
+        <i class="el-icon-close" @click="deleteData(index, item)"></i>
       </div>
     </div>
   </div>
@@ -37,6 +37,9 @@
     methods: {
       editData(index, item) {
         this.$emit('editData', index, item)
+      },
+      deleteData(index, item) {
+        this.$emit('deleteData', index, item)
       }
     }
   }
