@@ -33,10 +33,14 @@
         <div class="echarts_warning_duration" ref="duration_chart" style="width: 100%;height: 100%;padding: 0"></div>
       </div>
 
-      <div class="percent_chart_div" style="display: flex;width: 100%;height: 100%">
-        <div class="number_percent_chart" ref="number_percent_chart" style="flex: 1">
+      <div class="percent_chart_div" style="display: flex;width: 100%;height: 400px">
+        <div class="pie1">
+          <div class="number_percent_chart" ref="number_percent_chart" style="flex: 1">
+          </div>
         </div>
-        <div class="duration_percent_chart" ref="duration_percent_chart" style="flex: 1">
+        <div class="pie2">
+          <div class="duration_percent_chart" ref="duration_percent_chart" style="flex: 1">
+          </div>
         </div>
       </div>
     </div>
@@ -55,8 +59,9 @@ export default {
       searchDate: [],
       warningDurationOptions: [],
       datasetDuration: [],
-      datasetDurationPercent: [],
-      datasetQuantityPercent: []
+      datasetQuantity: [],
+      searchValueDuration: 'total_minutes_number',
+      searchValueQuantity: 'total_number'
     }
   },
   mounted() {
@@ -71,15 +76,16 @@ export default {
         this.alarmEndTime = this.searchDate[1]
       }
       this.queryParams = {
-        'pageNum': this.pageNum,
-        'pageSize': this.pageSize,
+        'searchValue': this.searchValueDuration,
         'alarmDevice': this.alarmDevice,
-        'alarmStatus': this.alarmStatus,
         'alarmStartTime': this.alarmStartTime,
         'alarmEndTime': this.alarmEndTime
       }
       const {data} = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
       this.datasetDuration = data
+      this.queryParams['searchValue'] = this.searchValueQuantity
+      const {dataset} = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
+      this.datasetQuantity = dataset
       this.render()
     },
     initDurationEcharts() {
@@ -123,12 +129,12 @@ export default {
       }
     },
     initDurationPercentEcharts() {
-      this.myChart = this.$echarts.init(this.$refs.duration_percent_chart)
+      this.myChart1 = this.$echarts.init(this.$refs.duration_percent_chart)
       const color = '#fff'
       const nameTextStyle = {
         color
       }
-      this.option = {
+      this.option1 = {
         xAxis: {
           type: 'category',
           name: this.xUnit,
@@ -154,7 +160,7 @@ export default {
         },
         series: [
           {
-            type: 'bar',
+            type: 'pie',
             smooth: true,
             barWidth: 38
           }
@@ -168,7 +174,7 @@ export default {
       const nameTextStyle = {
         color
       }
-      this.option = {
+      this.option2 = {
         xAxis: {
           type: 'category',
           name: this.xUnit,
@@ -194,7 +200,7 @@ export default {
         },
         series: [
           {
-            type: 'bar',
+            type: 'pie',
             smooth: true,
             barWidth: 38
           }
@@ -204,7 +210,11 @@ export default {
     },
     render() {
       this.option.dataset.source = this.datasetDuration
-      this.option && this.myChart2.setOption(this.option)
+      this.option && this.myChart.setOption(this.option)
+      this.option1.dataset.source = this.datasetDuration
+      this.option1 && this.myChart1.setOption(this.option1)
+      this.option2.dataset.source = this.datasetQuantity
+      this.option2 && this.myChart2.setOption(this.option2)
     }
   },
   created() {
@@ -240,12 +250,17 @@ $headerHeight: 100px;
   padding: 36px;
 }
 
-.number_percent_chart .duration_percent_chart{
-  width: 100%;
-  height: 100%  ;
+.pie1 .pie1 {
+  width: 800px;
+  height: 400px;
   background: rgba(8, 17, 77, 0.8);
   border: 1px solid;
   border-image: linear-gradient(0deg, #0F1597, #3347C2, #10169F) 10 10;
+}
+
+.number_percent_chart .duration_percent_chart {
+  width: 100%;
+  height: 100%;
 }
 
 
