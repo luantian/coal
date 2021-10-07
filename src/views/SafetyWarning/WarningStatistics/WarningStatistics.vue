@@ -55,7 +55,7 @@ import CustomBar2 from '@/components/Echarts/CustomBar2'
 
 export default {
   name: 'WarningStatistics',
-  components: { CustomPie, CustomBar2 },
+  components: {CustomPie, CustomBar2},
   data() {
     return {
       alarmDevice: '',
@@ -65,31 +65,14 @@ export default {
       datasetQuantity: [],
       searchValueDuration: 'total_minutes_number',
       searchValueQuantity: 'total_number',
-      barDataset: { source: [] },
-      pie1Dataset: { source: [] },
-      pie2Dataset: { source: [] },
+      barDataset: {source: []},
+      pie1Dataset: {source: []},
+      pie2Dataset: {source: []},
     }
   },
 
   mounted() {
-    this.barDataset = {
-      source: [
-        ['Search Engine', 1048],
-        ['Direct', 735],
-        ['Email', 580],
-        ['Union Ads', 358],
-        ['Video Ads', 357],
-      ]
-    }
-    this.pie1Dataset = {
-      source: [
-        ['Search Engine', 1048],
-        ['Direct', 735],
-        ['Email', 580],
-        ['Union Ads', 358],
-        ['Video Ads', 357],
-      ]
-    }
+    this.toQuery()
   },
 
   methods: {
@@ -100,16 +83,20 @@ export default {
         this.alarmEndTime = this.searchDate[1]
       }
       this.queryParams = {
-        'searchValue': this.searchValueDuration,
+        'selectCode': this.searchValueDuration,
         'alarmDevice': this.alarmDevice,
         'alarmStartTime': this.alarmStartTime,
         'alarmEndTime': this.alarmEndTime
       }
-      const { data } = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
-      this.datasetDuration = data
-      this.queryParams['searchValue'] = this.searchValueQuantity
-      const { dataset } = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
-      this.datasetQuantity = dataset
+      const {data} = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
+      this.barDataset.source = data
+      this.pie2Dataset.source = data
+      this.queryParams['selectCode'] = this.searchValueQuantity
+      const response = await SafetyWarningModel.selectWarningDurationEchartsData(this.queryParams);
+      this.pie1Dataset.source = response['data']
+      console.log(this.barDataset.source)
+      console.log(this.pie2Dataset.source)
+      console.log(this.pie1Dataset.source)
     },
   },
 }
@@ -140,6 +127,7 @@ $headerHeight: 100px;
 
 .percent_chart_div {
   display: flex;
+
   .pie1, .pie2 {
     flex: 1;
     height: 300px;

@@ -76,8 +76,12 @@ export default {
     }
   },
   watch: {
-    dataset() {
-      this.render()
+
+    dataset: {
+      deep: true,
+      handler() {
+        this.render()
+      }
     }
   }
 }
