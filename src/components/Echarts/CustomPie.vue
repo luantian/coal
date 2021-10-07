@@ -22,6 +22,7 @@ export default {
     this.init()
   },
   methods: {
+
     init() {
       this.myChart = this.$echarts.init(this.$refs.__pie)
       this.option = {
@@ -39,26 +40,15 @@ export default {
           {
             name: 'Access From',
             type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
+            radius: ['30%', '50%'],
             label: {
-              show: false,
-              position: 'center'
-            },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: '40',
-                fontWeight: 'bold'
-              }
-            },
-            labelLine: {
-              show: false
+              show: true,
+              position: 'outside',
+              distanceToLabelLine: 5
             },
           }
         ]
       };
-
     },
     render() {
       this.option.dataset = this.dataset

@@ -29,7 +29,6 @@
           </div>
           <div>
             <div class="__btn">{{ duty.dispatchName }}</div>
-<!--            <div class="__btn">栾一天</div>-->
           </div>
         </div>
       </div>
@@ -44,8 +43,13 @@
 
     <div class="row4">
       <sub-title>皮带电机温度</sub-title>
+      <div class="radio-group">
+        <el-radio-group v-model="motorTemperatureValue" @change="onMotorTemperaturesChange">
+          <el-radio-button v-for="item in motorTemperatures" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>
+        </el-radio-group>
+      </div>
       <div class="row4_line-wrap">
-        <custom-line :dataset="barLineDataset" x-unit=" " y-unit=" "></custom-line>
+        <custom-line :dataset="lineDataset" x-unit=" " y-unit=" "></custom-line>
       </div>
     </div>
   </div>
@@ -67,6 +71,14 @@
     { name: '年度', value: 1 }
   ]
 
+  const motorTemperatures = [
+    { name: '111皮带', value: 0 },
+    { name: '112皮带', value: 1 },
+    { name: '113皮带', value: 2 },
+    { name: '121皮带', value: 3 },
+    { name: '122皮带', value: 4 }
+  ]
+
   export default {
     name: 'Column3',
     components: { SubTitle, CustomLine, CustomBarLine },
@@ -74,6 +86,8 @@
       return {
         workTimes,
         workTimeValue: 3,
+        motorTemperatures,
+        motorTemperatureValue: 0,
         workTimeDataset: { source: [] },
         duty: {},
         barLineDataset: { source: [] }
@@ -98,6 +112,9 @@
     methods: {
       onWorkTimeChange(v) {
         this.queryWorkTime(v)
+      },
+      onMotorTemperaturesChange(v) {
+        console.log('v', v)
       },
       async queryWorkTime(v) {
         const params = {
@@ -129,7 +146,7 @@
         }
         const data = await OutputInfoModel.queryMotorTemperature(params)
         console.log('_____________queryMotorTemperature_____________', data)
-      }
+      },
 
     }
   }

@@ -127,10 +127,13 @@ $headerHeight: 100px;
 
 .percent_chart_div {
   display: flex;
-
+  margin-top: 36px;
+  .pie1 {
+    margin-right: 36px;
+  }
   .pie1, .pie2 {
     flex: 1;
-    height: 300px;
+    height: 264px;
     background: rgba(8, 17, 77, 0.8);
     border: 1px solid #0F1597;
   }
@@ -138,11 +141,6 @@ $headerHeight: 100px;
 
 .echarts_warning_duration {
   height: 260px;
-}
-
-.number_percent_chart .duration_percent_chart {
-  width: 100%;
-  height: 100%;
 }
 
 

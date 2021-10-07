@@ -99,11 +99,11 @@ export default {
         ],
         series: [
           {
-            // name: '功率',
+            name: '功率',
             type: 'bar',
           },
           {
-            // name: '能耗',
+            name: '能耗',
             type: 'line',
           },
         ]
