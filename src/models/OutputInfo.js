@@ -47,13 +47,6 @@ class OutputInfo extends Base {
     })
   }
 
-  static async queryAACM(data) {
-    return await this.get({
-      url: '/bigbelt/belt/beltAacmhigheleHistogram',
-      data
-    })
-  }
-
   // 查询工作时间统计
   static async queryRealityHistogramStatistics(data) {
     return await this.get({
@@ -62,6 +55,21 @@ class OutputInfo extends Base {
     })
   }
 
+  // 查询AACM电能消耗
+  static async queryAACM(data) {
+    return await this.get({
+      url: '/bigbelt/belt/beltAacmhigheleHistogram',
+      data
+    })
+  }
+
+  // 查询设备温度
+  static async queryMotorTemperature(data) {
+    return await this.get({
+      url: '/bigbelt/belt/beltMotortemTemperatureHistogram',
+      data
+    })
+  }
 
 }
 

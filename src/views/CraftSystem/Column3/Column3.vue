@@ -41,6 +41,13 @@
         <custom-bar-line :dataset="barLineDataset" x-unit="千瓦" y-unit="时"></custom-bar-line>
       </div>
     </div>
+
+    <div class="row4">
+      <sub-title>皮带电机温度</sub-title>
+      <div class="row4_line-wrap">
+        <custom-line :dataset="lineDataset" x-unit=" " y-unit=" "></custom-line>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,6 +83,7 @@
       this.queryWorkTime(this.workTimeValue)
       this.queryScreen()
       this.queryAACM(3)
+      this.queryMotorTemperature(3)
     },
     methods: {
       onWorkTimeChange(v) {
@@ -104,6 +112,14 @@
         console.log('查询AACM data', data)
         this.barLineDataset = { source: data }
       },
+
+      async queryMotorTemperature(v) {
+        const params = {
+          selectType: v
+        }
+        const data = await OutputInfoModel.queryMotorTemperature(params)
+        console.log('_____________queryMotorTemperature_____________', data)
+      }
 
     }
   }

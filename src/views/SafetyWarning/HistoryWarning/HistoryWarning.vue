@@ -36,17 +36,19 @@
           <el-table-column prop="alarmExcludeMeasures" label="预警排除措施" align="center"></el-table-column>
           <el-table-column prop="alarmStatus" label="状态" align="center" :formatter="statusFormatter"></el-table-column>
         </el-table>
-        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
-          <el-pagination
-            background
-            layout="prev, pager, next, sizes"
-            :total="totalRecords"
-            @size-change="pageSizeChange"
-            @current-change="currentPageChange"
-            :page-sizes="pageSizes">
-          </el-pagination>
-        </div>
+
       </div>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next, sizes"
+          :total="totalRecords"
+          @size-change="pageSizeChange"
+          @current-change="currentPageChange"
+          :page-sizes="pageSizes">
+        </el-pagination>
+      </div>
+
     </div>
 
   </div>

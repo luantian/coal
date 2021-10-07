@@ -89,5 +89,6 @@
     margin: 0 40px;
     border: 1px solid #2D35B7;
     padding: 16px 50px;
+    box-sizing: border-box;
   }
 </style>
