@@ -8,7 +8,7 @@
         </el-radio-group>
       </div>
       <div class="__line-wrap">
-        <custom-line :dataset="workTimeDataset" y-unit="小时"></custom-line>
+        <custom-line :dataset="workTimeDataset" x-unit=" " y-unit="小时"></custom-line>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
     <div class="row4">
       <sub-title>皮带电机温度</sub-title>
       <div class="row4_line-wrap">
-        <custom-line :dataset="lineDataset" x-unit=" " y-unit=" "></custom-line>
+        <custom-line :dataset="barLineDataset" x-unit=" " y-unit=" "></custom-line>
       </div>
     </div>
   </div>
@@ -80,6 +80,16 @@
       }
     },
     mounted() {
+      this.barLineDataset = {
+        source: [
+          ['0', 100, 200, 300, 400, 43, 334, 763],
+          ['1', 150, 250, 350, 400, 500, 600, 876],
+          ['3', 100, 200, 300, 34, 34, 600, 654],
+          ['4', 150, 250, 300, 345, 123, 600, 234],
+          ['5', 100, 200, 300, 234, 768, 344, 700],
+          ['6', 150, 250, 300, 400, 587, 234, 564],
+        ]
+      }
       this.queryWorkTime(this.workTimeValue)
       this.queryScreen()
       this.queryAACM(3)
@@ -164,6 +174,7 @@
     position: absolute;
     left: 0;
     right: 0;
+    z-index: 20;
   }
 
   .__line-wrap {

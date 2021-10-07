@@ -99,12 +99,12 @@ export default {
         ],
         series: [
           {
-            name: '储装量',
+            // name: '功率',
             type: 'bar',
           },
           {
-            name: '高度',
-            type: 'bar',
+            // name: '能耗',
+            type: 'line',
           },
         ]
       };

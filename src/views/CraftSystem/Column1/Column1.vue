@@ -24,7 +24,7 @@
       <div class="row3">
         <sub-title>储量数据</sub-title>
         <div class="__bar-wrap">
-          <custom-bar :dataset="barDataset"></custom-bar>
+          <custom-bar :dataset="barDataset" unit-x=" " unit-y=" "></custom-bar>
         </div>
       </div>
 
