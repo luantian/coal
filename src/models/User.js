@@ -12,6 +12,12 @@ class User extends Base {
     })
   }
 
+  static async toLogout() {
+    return await this.post({
+      url: '/logout'
+    })
+  }
+
   static async getInfo() {
     return await this.get({
       url: '/getInfo'

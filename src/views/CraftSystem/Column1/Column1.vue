@@ -9,7 +9,7 @@
           </el-radio-group>
         </div>
         <div class="__line-wrap">
-          <custom-line :dataset="lineDataset"></custom-line>
+          <custom-line :dataset="lineDataset" :x-unit="outputUnit" :y-unit="'万吨'"></custom-line>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
           </el-radio-group>
         </div>
         <div class="__row4_line-wrap">
-          <custom-line :dataset="temperatureDataset" :x-unit="' '" :y-unit="' '"></custom-line>
+          <custom-line :dataset="temperatureDataset" :x-unit="outputUnit" y-unit="℃"></custom-line>
         </div>
       </div>
 
@@ -57,6 +57,13 @@
     { name: '本月', value: 2 },
     { name: '年度', value: 1 }
   ]
+
+  const unit = {
+    1: '月',
+    2: '日',
+    3: '时'
+  }
+
   const temperatures = [
     { name: '1号装车仓', value: 1 },
     { name: '2号装车仓', value: 2 },
@@ -70,6 +77,8 @@
       return {
         outputRadios,
         outputValue: 3,
+        unit,
+        outputUnit: '时',
         temperatures,
         temperatureValue: 1,
         lineDataset: { source: [] },
@@ -83,10 +92,13 @@
       this.queryTotal(this.outputValue)
       this.queryBucketreality()
       this.queryReserves()
-      this.queryTemperature(this.temperatureValue)
+      this.queryTemperature(3)
     },
     methods: {
       onOutputChange(v) {
+        this.outputUnit = this.unit[v]
+
+        console.log('this.outputUnit', this.outputUnit)
         this.queryTotal(v)
       },
       onTemperatureChange(v) {

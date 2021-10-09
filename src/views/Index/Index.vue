@@ -65,6 +65,8 @@
 <script>
 
 import CommonHeader from "@/components/CommonHeader";
+import UserModel from "@/models/User";
+import LocalStorage from "@/cache/LocalStorage";
 
 export default {
   name: 'Index',
@@ -72,6 +74,17 @@ export default {
   data() {
     return {
 
+    }
+  },
+  async mounted() {
+    await this.getUserInfo()
+  },
+  methods: {
+    async getUserInfo() {
+      const data = await UserModel.getInfo()
+      LocalStorage.setItem('user', data.user)
+      LocalStorage.setItem('permissions', data.permissions)
+      LocalStorage.setItem('roles', data.roles)
     }
   }
 }
@@ -88,7 +101,7 @@ export default {
 .index {
   //width: 100%;
   height: 100%;
-  background: url("~@/assets/img/index_bg.png") no-repeat center;
+  background: url("~@/assets/img/index_bg.jpg") no-repeat center;
   background-size: 100% 100%;
 }
 
@@ -291,6 +304,10 @@ export default {
 @keyframes rotate2{
   0%{transform: rotateZ(0deg) ;}
   100%{transform:rotateZ(-360deg);}
+}
+
+.menuCraftSysBox, .menuSafeBox, .menuProduceForm, .menuVideoBox, .menuDevicefilesBox {
+  cursor: pointer;
 }
 
 </style>

@@ -9,7 +9,7 @@ export default {
   name: 'CustomBarLine',
   props: {
     dataset: {
-      type: Object,
+      type: Array,
       required: true
     },
     xUnit: {
@@ -34,6 +34,7 @@ export default {
       const nameTextStyle = {
         color
       }
+
       this.option = {
         tooltip: {
           trigger: 'axis',
@@ -45,10 +46,7 @@ export default {
           }
         },
         legend: {
-          textStyle: {
-            color: '#97DEFF'
-          },
-          data: ['功率', '能耗']
+          show: true
         },
         xAxis: {
           type: 'category',
@@ -59,17 +57,21 @@ export default {
             }
           },
           boundaryGap: ['20%', '20%']
-        }
-        ,
+        },
+        // dataZoom: [
+        //   {
+        //     startValue: '00'
+        //   },
+        //   {
+        //     type: 'inside'
+        //   }
+        // ],
         yAxis: [
           {
             show: true,
             type: 'value',
             name: '千瓦',
             nameTextStyle,
-            interval: 200,
-            min: 0,
-            max: 600,
             axisLabel: {
               textStyle: {
                 color  //更改坐标轴文字颜色
@@ -84,9 +86,6 @@ export default {
             type: 'value',
             name: '千瓦/时',
             nameTextStyle,
-            interval: 2.5,
-            min: 0,
-            max: 10.0,
             axisLabel: {
               textStyle: {
                 color  //更改坐标轴文字颜色
@@ -99,15 +98,60 @@ export default {
         ],
         series: [
           {
-            name: '功率',
+            name: '111皮带1',
             type: 'bar',
+            yAxisIndex: 0,
+            datasetIndex: 0
           },
           {
-            name: '能耗',
-            type: 'line',
+            name: '111皮带2',
+            type: 'bar',
+            yAxisIndex: 0,
+            datasetIndex: 0
           },
+          {
+            name: '112皮带1',
+            type: 'bar',
+            yAxisIndex: 0,
+            datasetIndex: 0
+          },
+          {
+            name: '112皮带2',
+            type: 'bar',
+            yAxisIndex: 0,
+            datasetIndex: 0
+          },
+          {
+            name: '113皮带',
+            type: 'bar',
+            yAxisIndex: 1,
+            datasetIndex: 0
+          }
         ]
       };
+    },
+    createSeries() {
+      const AACM = [
+        { name: '111皮带' },
+        { name: '111皮带' },
+        { name: '112皮带' },
+        { name: '112皮带' },
+        { name: '113皮带' },
+      ]
+      const result = AACM.map((item, index) => {
+        const r = index > (AACM.length / 2)
+
+        return {
+          name: item.name,
+          type: 'line',
+          yAxisIndex: r ? 1 : 0,
+        }
+
+      })
+
+      console.log('result', result)
+
+      return result
     },
     render() {
       this.option.dataset = this.dataset

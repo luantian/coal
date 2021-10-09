@@ -1,7 +1,7 @@
 <template>
   <div class="common-header">
     <div class="logo">
-
+      <router-link to="/" tag="div" class="to-index">返回首页</router-link>
     </div>
     <div class="title">
 
@@ -20,9 +20,10 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
-              <div @click="toManager">
-                后台管理
-              </div>
+              <div @click="toManager">后台管理</div>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <div @click="toLogout">退出登录</div>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -37,6 +38,7 @@
   moment.locale('zh-cn');
 
   import LocalStorage from "@/cache/LocalStorage";
+  import UserModel from '@/models/User'
 
   export default {
     name: 'CommonHeader',
@@ -58,8 +60,20 @@
     },
     methods: {
       toManager() {
-        window.open(`http://localhost:8888/system/user?token=${this.token}`)
+        window.open(`http://49.233.1.136:8091/system/user?token=${this.token}`)
         // location.href = `localhost:8888/index?token=${this.token}`
+      },
+      async toLogout() {
+        const { code } = await UserModel.toLogout()
+        if (code === 200) {
+          LocalStorage.setItem('token', null)
+          LocalStorage.setItem('user', null)
+          LocalStorage.setItem('permissions', null)
+          LocalStorage.setItem('roles', null)
+          this.$router.push({
+            path: '/login'
+          })
+        }
       }
     }
   }
@@ -75,6 +89,21 @@
     background: url("~@/assets/img/common_header.png") no-repeat;
     .title {
       flex: 1;
+    }
+    .logo {
+      position: relative;
+    }
+    .to-index {
+      width: 85px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      font-size: 14px;
+      background: url("~@/assets/img/toindex.png") no-repeat;
+      cursor: pointer;
+      position: absolute;
+      left: 400px;
+      top: 20px;
     }
     .opera {
       display: flex;

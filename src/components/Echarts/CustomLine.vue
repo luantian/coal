@@ -29,30 +29,43 @@
     },
     methods: {
       init() {
-        this.myChart = this.$echarts.init(this.$refs.__line)
+        if (!this.myChart) {
+          this.myChart = this.$echarts.init(this.$refs.__line)
+        }
         const color = '#fff'
         const nameTextStyle = {
           color
         }
         this.option = {
+          tooltip: {
+            show: true,
+            trigger: 'axis'
+          },
+          grid: {
+            containLabel: true
+          },
           xAxis: {
             type: 'category',
-            name: this.xUnit || '时',
+            name: this.xUnit,
             nameTextStyle,
             axisLabel: {
               textStyle: {
                 color  //更改坐标轴文字颜色
               }
-            }
+            },
+            boundaryGap: ['20%', '20%']
           },
           yAxis: {
-            type: 'category',
-            name: this.yUnit || '万吨',
+            type: 'value',
+            name: this.yUnit,
             nameTextStyle,
             axisLabel: {
               textStyle: {
                 color,  //更改坐标轴文字颜色
               }
+            },
+            splitLine: {
+              show: false
             }
           },
           series: [
@@ -64,12 +77,14 @@
         }
       },
       render() {
+        this.myChart.clear()
         this.option.dataset = this.dataset
         this.option && this.myChart.setOption(this.option);
       }
     },
     watch: {
       dataset() {
+        this.init()
         this.render()
       }
     }
