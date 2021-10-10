@@ -20,7 +20,7 @@
           <el-table-column prop="alarmEndTime" label="故障结束时间" align="center"></el-table-column>
           <el-table-column prop="alarmLocation" label="故障名称" align="center"></el-table-column>
           <el-table-column prop="deviceLimenValue" label="耗时" align="center"></el-table-column>
-          <el-table-column prop="createUser" label="故障记录员" align="center"></el-table-column>
+          <el-table-column prop="nickName" label="故障记录员" align="center"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
               <div>

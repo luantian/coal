@@ -255,4 +255,7 @@ el-table th,
   border: 1px solid #2D35B7;
   color: #fff;
 }
+::v-deep .el-textarea {
+  border: 1px solid #2D35B7;
+}
 // dialog 结束

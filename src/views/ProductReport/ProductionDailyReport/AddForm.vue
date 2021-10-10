@@ -2,7 +2,7 @@
   <div>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="130px">
       <div>
-        <el-form-item label="日报日期" prop="planDate">
+        <el-form-item label="日报日期:" prop="planDate">
           <el-col :span="5">
             <el-date-picker type="date" placeholder="请选择日报日期" v-model="ruleForm.planDate" style="width: 100%;" value-format="yyyy-MM-dd" editable="false"></el-date-picker>
           </el-col>
@@ -165,7 +165,7 @@
       <div style="display: flex;padding-top: 0px">
         <div style="flex: 1;display: flex;padding-right: 50px;">
           <div style="flex: 1;">
-            <el-form-item label="1、装车人数:" prop="entruckPeopleNumber" >
+            <el-form-item label="装车人数:" prop="entruckPeopleNumber" >
               <el-input v-model="ruleForm.entruckPeopleNumber" placeholder="请输入装车人数" style="width: 180px;"></el-input>
             </el-form-item>
           </div>
