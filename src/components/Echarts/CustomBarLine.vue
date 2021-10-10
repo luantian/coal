@@ -46,7 +46,10 @@ export default {
           }
         },
         legend: {
-          show: true
+          show: true,
+          textStyle: {
+            color: '#fff'
+          },
         },
         xAxis: {
           type: 'category',
@@ -96,55 +99,34 @@ export default {
             }
           }
         ],
-        series: [
-          {
-            name: '111皮带1',
-            type: 'bar',
-            yAxisIndex: 0,
-            datasetIndex: 0
-          },
-          {
-            name: '111皮带2',
-            type: 'bar',
-            yAxisIndex: 0,
-            datasetIndex: 0
-          },
-          {
-            name: '112皮带1',
-            type: 'bar',
-            yAxisIndex: 0,
-            datasetIndex: 0
-          },
-          {
-            name: '112皮带2',
-            type: 'bar',
-            yAxisIndex: 0,
-            datasetIndex: 0
-          },
-          {
-            name: '113皮带',
-            type: 'bar',
-            yAxisIndex: 1,
-            datasetIndex: 0
-          }
-        ]
+        series: this.createSeries()
       };
     },
     createSeries() {
       const AACM = [
         { name: '111皮带' },
-        { name: '111皮带' },
-        { name: '112皮带' },
         { name: '112皮带' },
         { name: '113皮带' },
+        { name: '121皮带' },
+        { name: '122皮带' },
+
+        { name: '111皮带' },
+        { name: '112皮带' },
+        { name: '113皮带' },
+        { name: '121皮带' },
+        { name: '122皮带' },
       ]
       const result = AACM.map((item, index) => {
-        const r = index > (AACM.length / 2)
+        const r = index >= (AACM.length / 2)
+
+        // 折线图 功率
+        // 柱形图 能耗
 
         return {
           name: item.name,
-          type: 'line',
+          type: r ? 'bar' : 'line',
           yAxisIndex: r ? 1 : 0,
+          datasetIndex: r ? 1 : 0,
         }
 
       })
