@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm" >
     <el-form-item label="所属系统" prop="belongSystem">
       <el-input type="text" v-model="ruleForm.belongSystem" autocomplete="off" placeholder="请输入所属系统"></el-input>
     </el-form-item>

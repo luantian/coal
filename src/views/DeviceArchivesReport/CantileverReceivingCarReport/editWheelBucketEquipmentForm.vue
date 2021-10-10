@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm" >
     <el-form-item label="设备参数" prop="deviceParam">
       <el-input type="text" v-model="rowData.deviceParam" autocomplete="off" placeholder="请输入故障部位"></el-input>
     </el-form-item>

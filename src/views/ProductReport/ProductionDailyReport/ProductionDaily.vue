@@ -9,6 +9,7 @@
         </div>
         <div style="padding-right: 35px">
           <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
+          <el-button @click="exportProductionPlanReport" type="primary">导出</el-button>
         </div>
       </div>
       <div class="main_table">
@@ -44,14 +45,14 @@
           <el-table-column prop="waterwheelJobPeopleNumber" label="水车作业人数" align="center"></el-table-column>
           <el-table-column prop="waterwheelNumber" label="水车台数" align="center"></el-table-column>
           <el-table-column prop="workPlan" label="工作计划" align="center"></el-table-column>
-          <el-table-column label="操作">
-            <template slot-scope="scope">
-              <div>
-                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>
-                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>
-              </div>
-            </template>
-          </el-table-column>
+<!--          <el-table-column label="操作">-->
+<!--            <template slot-scope="scope">-->
+<!--              <div>-->
+<!--                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>-->
+<!--                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>-->
+<!--              </div>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
         </el-table>
         <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
           <el-pagination
@@ -85,6 +86,7 @@
   import addForm from "@/views/ProductReport/ProductionDailyReport/AddForm";
   import editForm from "@/views/ProductReport/ProductionDailyReport/EditForm";
   import { cloneDeep } from 'lodash-es'
+  // import Export from "@/models/Export";
   export default {
     name: 'SitePersonnelFiles',
     components: {addForm, editForm},
@@ -150,6 +152,9 @@
       async currentPageChange(val) {
         this.pageNum = val
         await this.toQuery()
+      },
+      async exportProductionPlanReport() {
+        await ProductionReportModel.exportFile()
       }
     },
     created() {

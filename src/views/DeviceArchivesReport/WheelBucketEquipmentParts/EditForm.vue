@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm" >
     <el-form-item label="部件名称" prop="partsName">
       <el-input type="text" v-model="rowData.partsName" autocomplete="off" placeholder="请输入部件名称"></el-input>
     </el-form-item>

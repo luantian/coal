@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="140px" class="demo-ruleForm">
 
       <div style="display: flex">
         <div style="flex: 1">

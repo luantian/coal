@@ -7,16 +7,16 @@
             <el-form-item label="报警设备">
               <el-input v-model="alarmDevice" placeholder="请输入报警设备"></el-input>
             </el-form-item>
-<!--            <span class="demonstration">起止日期</span>-->
-<!--            <el-date-picker-->
-<!--              style="margin-left: 15px"-->
-<!--              v-model="searchDate"-->
-<!--              type="daterange"-->
-<!--              value-format="yyyy-MM-dd"-->
-<!--              range-separator="⇀"-->
-<!--              start-placeholder="开始时间"-->
-<!--              end-placeholder="结束时间">-->
-<!--            </el-date-picker>-->
+            <span class="demonstration">起止日期</span>
+            <el-date-picker
+              style="margin-left: 15px"
+              v-model="searchDate"
+              type="datetimerange"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              range-separator="⇀"
+              start-placeholder="开始时间"
+              end-placeholder="结束时间">
+            </el-date-picker>
             <el-form-item style="margin-left: 15px">
               <el-button type="primary" @click="toQuery">查询</el-button>
             </el-form-item>
@@ -81,7 +81,7 @@ export default {
       queryParams: {},
       editRowData: {},
       alarmDevice: '',
-      alarmStatus: 1,
+      alarmStatus: 2,
       alarmStartTime: '',
       alarmEndTime: '',
       searchDate: ''
@@ -90,17 +90,17 @@ export default {
   methods: {
     async toQuery() {
 
-      // if (this.searchDate) {
-      //   this.alarmStartTime = this.searchDate[0]
-      //   this.alarmEndTime = this.searchDate[1]
-      // }
+      if (this.searchDate) {
+        this.alarmStartTime = this.searchDate[0]
+        this.alarmEndTime = this.searchDate[1]
+      }
       this.queryParams = {
         'pageNum': this.pageNum,
         'pageSize': this.pageSize,
         'alarmDevice': this.alarmDevice,
         'alarmStatus': this.alarmStatus,
-        // 'alarmStartTime': this.alarmStartTime,
-        // 'alarmEndTime': this.alarmEndTime
+        'alarmStartTime': this.alarmStartTime,
+        'alarmEndTime': this.alarmEndTime
       }
       const {rows, total} = await SafetyWarningModel.selectRealTimeWarningList(this.queryParams);
       this.tableData = rows
@@ -164,10 +164,10 @@ export default {
       await this.toQuery()
     },
     statusFormatter(data) {
-      if (null === data) {
-        return data
+      if (null === data.alarmStatus) {
+        return data.alarmStatus
       }
-      if (data === 1) {
+      if (data.alarmStatus === '1') {
         return '已处理'
       }
       return '未处理'
