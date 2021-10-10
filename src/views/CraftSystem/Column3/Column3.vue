@@ -36,11 +36,6 @@
 
     <div class="row3">
       <sub-title>AACM电能消耗</sub-title>
-<!--      <div class="radio-group">-->
-<!--        <el-checkbox-group v-model="checkboxList">-->
-<!--          <el-checkbox-button v-for="item in motorTemperatures" :label="item.name" :key="item.name">{{ item.name }}</el-checkbox-button>-->
-<!--        </el-checkbox-group>-->
-<!--      </div>-->
       <div class="__bar_line-wrap">
         <custom-bar-line :dataset="barLineDataset" x-unit="千瓦" y-unit="时"></custom-bar-line>
       </div>
@@ -82,9 +77,6 @@
     3: '时'
   }
 
-  // const keysss = ['belt_111', 'belt_112', 'belt_113', 'belt_121', 'belt_122']
-
-
   const motorTemperatures = [
     { name: '111皮带', value: 0, key: 'belt_111#motortem_1a' },
     { name: '112皮带', value: 1, key: 'belt_112#motortem_1a' },
@@ -112,27 +104,27 @@
       }
     },
     mounted() {
-      this.barLineDataset =
-        [
-          {
-            source: [
-              //     设备1功率，设备2功率...  设备7功率
-              ['00', 10, 100, 101, 102, 103, 104, 105, 111],
-              ['01', 20, 200, 201, 202, 203, 204, 205, 222],
-              ['02', 30, 300, 301, 302, 303, 304, 305, 333],
-              ['03', 40, 400, 401, 402, 403, 404, 405, 444]
-            ]
-          },
-          {
-            source: [
-              //     设备1能耗，设备2能耗...  设备7能耗
-              ['00', 70, 700, 701, 702, 703, 704, 705, 711],
-              ['01', 80, 800, 801, 802, 803, 804, 805, 822],
-              ['02', 90, 900, 901, 902, 999, 904, 905, 933],
-              ['03', 50, 500, 501, 502, 503, 504, 505, 544]
-            ]
-          }
-        ]
+      // this.barLineDataset =
+      //   [
+      //     {
+      //       source: [
+      //         //     设备1功率，设备2功率...  设备7功率
+      //         ['00', 10, 100, 101, 102, 103, 104, 105, 111],
+      //         ['01', 20, 200, 201, 202, 203, 204, 205, 222],
+      //         ['02', 30, 300, 301, 302, 303, 304, 305, 333],
+      //         ['03', 40, 400, 401, 402, 403, 404, 405, 444]
+      //       ]
+      //     },
+      //     {
+      //       source: [
+      //         //     设备1能耗，设备2能耗...  设备7能耗
+      //         ['00', 70, 700, 701, 702, 703, 704, 705, 711],
+      //         ['01', 80, 800, 801, 802, 803, 804, 805, 822],
+      //         ['02', 90, 900, 901, 902, 999, 904, 905, 933],
+      //         ['03', 50, 500, 501, 502, 503, 504, 505, 544]
+      //       ]
+      //     }
+      //   ]
 
       this.queryWorkTime(this.workTimeValue)
       this.queryScreen()
@@ -173,16 +165,14 @@
         const { data } = await OutputInfoModel.queryAACM(params)
         console.log('查询AACM data', data)
 
-        // //
-        // this.barLineDataset = keysss.map((key) => {
-        //
-        //   // power_sourceData.push()
-        //
-        //   // return {
-        //   //   source: data[key]
-        //   // }
-        // })
-        // // console.log('this.barLineDataset', this.barLineDataset)
+        this.barLineDataset = [
+          {
+            source: data.power
+          },
+          {
+            source: data.energy
+          }
+        ]
       },
 
       async queryMotorTemperature(v) {

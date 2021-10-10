@@ -1,7 +1,39 @@
 import Base from "@/models/Base";
 import axios from 'axios'
 import LocalStorage from '@/cache/LocalStorage'
+
+// import { saveAs } from 'file-saver';
+
+
 const token = LocalStorage.getItem('token')
+
+const mimeMap = {
+  xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  zip: 'application/zip'
+}
+
+/**
+ * 解析blob响应内容并下载
+ * @param {*} res blob响应内容
+ * @param {String} mimeType MIME类型
+ */
+function resolveBlob(res, mimeType) {
+  const aLink = document.createElement('a')
+  var blob = new Blob([res.data], { type: mimeType })
+  // //从response的headers中获取filename, 后端response.setHeader("Content-disposition", "attachment; filename=xxxx.docx") 设置的文件名;
+  var patt = new RegExp('filename=([^;]+\\.[^\\.;]+);*')
+  var contentDisposition = decodeURI(res.headers['content-disposition'])
+  var result = patt.exec(contentDisposition)
+  var fileName = result[1]
+  // fileName = fileName.replace(/\"/g, '')
+  aLink.href = URL.createObjectURL(blob)
+  aLink.setAttribute('download', fileName) // 设置下载文件名称
+  document.body.appendChild(aLink)
+  aLink.click()
+  document.body.removeChild(aLink)
+}
+
+
 class ArchiveReport extends Base {
   constructor() {
     super()
@@ -101,38 +133,55 @@ class ArchiveReport extends Base {
     })
   }
 
+  static async downFileZip() {
+    axios({
+      method: 'get',
+      url: '/api/report/export/productionPlan',
+      responseType: 'blob',
+      headers: { 'Authorization': 'Bearer ' + token }
+    }).then(res => {
+      resolveBlob(res, mimeMap.zip)
+    })
+  }
+
   static async exportFile() {
     this.btnLoading = true;
     axios({
       method: 'get',
-      url: 'http://localhost:8080/api/report/export/productionPlan',
+      url: '/api/report/export/productionPlan',
       headers: {
         Authorization: 'Bearer ' + token
       },
-      responseType: "arraybuffer"
+      responseType: "blob"
     })
       .then(res => {
         this.btnLoading = false;
-        if (res.data.type) {
+        console.log('res.data.type', res.data)
+        if (res.data) {
           // 文件下载
           const blob = new Blob([res.data], {
-            type: "application/vnd.ms-excel"
+            // type: "application/vnd.ms-excel"
+            type: "application/zip"
           });
+          // saveAs(res.data, 'a.zip')
           let link = document.createElement('a');
-          link.href = URL.createObjectURL(blob);
-          link.setAttribute('download', '导出文件.xlsx');
+          let url = URL.createObjectURL(blob)
+          link.href = url
+          link.download = '导出文件.zip' // 重命名文件
           link.click();
           link = null;
-          this.$message.success('导出成功');
+          URL.revokeObjectURL(url) // 释放内存
+          // this.$message.success('导出成功');
         } else {
           // 返回json
-          this.$message.warning(res.data.msg);
+          console.log('error111')
+          // this.$message.warning(res.data.msg);
         }
       })
-      .catch(err => {
-        console.log(err)
+      .catch(() => {
+        console.log('error222')
         this.btnLoading = false;
-        this.$message.error("下载失败");
+        // this.$message.error("下载失败");
       });
   }
 

@@ -43,10 +43,15 @@ export default {
             crossStyle: {
               color: '#999'
             }
+          },
+          formatter: (p) => {
+            console.log('p', p)
           }
         },
         legend: {
           show: true,
+          // orient: 'vertical',
+          itemWidth: 5,
           textStyle: {
             color: '#fff'
           },
@@ -124,9 +129,10 @@ export default {
 
         return {
           name: item.name,
-          type: r ? 'bar' : 'line',
+          type: r ? 'line' : 'bar',
           yAxisIndex: r ? 1 : 0,
           datasetIndex: r ? 1 : 0,
+
         }
 
       })
