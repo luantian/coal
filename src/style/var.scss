@@ -250,5 +250,9 @@ el-table th,
 /deep/ .el-range-input{
   background-color: transparent !important;
 }
-
+::v-deep .el-textarea__inner {
+  background-color: transparent;
+  border: 1px solid #2D35B7;
+  color: #fff;
+}
 // dialog 结束
