@@ -8,7 +8,7 @@
         </el-radio-group>
       </div>
       <div class="__line-wrap">
-        <custom-line :dataset="workTimeDataset" x-unit=" " y-unit="小时"></custom-line>
+        <custom-line :dataset="workTimeDataset" :x-unit="outputUnit" y-unit="小时"></custom-line>
       </div>
     </div>
 
@@ -36,6 +36,11 @@
 
     <div class="row3">
       <sub-title>AACM电能消耗</sub-title>
+<!--      <div class="radio-group">-->
+<!--        <el-checkbox-group v-model="checkboxList">-->
+<!--          <el-checkbox-button v-for="item in motorTemperatures" :label="item.name" :key="item.name">{{ item.name }}</el-checkbox-button>-->
+<!--        </el-checkbox-group>-->
+<!--      </div>-->
       <div class="__bar_line-wrap">
         <custom-bar-line :dataset="barLineDataset" x-unit="千瓦" y-unit="时"></custom-bar-line>
       </div>
@@ -71,12 +76,21 @@
     { name: '年度', value: 1 }
   ]
 
+  const unit = {
+    1: '月',
+    2: '日',
+    3: '时'
+  }
+
+  const keysss = ['belt_111', 'belt_112', 'belt_113', 'belt_121', 'belt_122']
+
+
   const motorTemperatures = [
-    { name: '111皮带', value: 0 },
-    { name: '112皮带', value: 1 },
-    { name: '113皮带', value: 2 },
-    { name: '121皮带', value: 3 },
-    { name: '122皮带', value: 4 }
+    { name: '111皮带', value: 0, key: 'belt_111#motortem_1a' },
+    { name: '112皮带', value: 1, key: 'belt_112#motortem_1a' },
+    { name: '113皮带', value: 2, key: 'belt_113#motortem_a' },
+    { name: '121皮带', value: 3, key: 'belt_121#motortem_a' },
+    { name: '122皮带', value: 4, key: 'belt_122#motortem_a' }
   ]
 
   export default {
@@ -84,26 +98,39 @@
     components: { SubTitle, CustomLine, CustomBarLine },
     data() {
       return {
+        unit,
+        outputUnit: '时',
         workTimes,
         workTimeValue: 3,
         motorTemperatures,
         motorTemperatureValue: 0,
         workTimeDataset: { source: [] },
         duty: {},
-        barLineDataset: { source: [] }
+        checkboxList: [],
+        lineDataset: {},
+        barLineDataset: []
       }
     },
     mounted() {
-      this.barLineDataset = {
-        source: [
-          ['0', 100, 200, 300, 400, 43, 334, 763],
-          ['1', 150, 250, 350, 400, 500, 600, 876],
-          ['3', 100, 200, 300, 34, 34, 600, 654],
-          ['4', 150, 250, 300, 345, 123, 600, 234],
-          ['5', 100, 200, 300, 234, 768, 344, 700],
-          ['6', 150, 250, 300, 400, 587, 234, 564],
-        ]
-      }
+      // this.barLineDataset = [
+      //   {
+      //     source: [
+      //       ['00', 10, 100, 101, 102, 103, 104, 105, 111],
+      //       ['01', 20, 200, 201, 202, 203, 204, 205, 222],
+      //       ['02', 30, 300, 301, 302, 303, 304, 305, 333],
+      //       ['03', 40, 400, 401, 402, 403, 404, 405, 444]
+      //     ]
+      //   },
+      //   {
+      //     source: [
+      //       ['00', 70, 100, 101, 102, 103, 104, 105, 111],
+      //       ['01', 80, 200, 201, 202, 203, 204, 205, 222],
+      //       ['02', 90, 300, 301, 302, 303, 304, 305, 333],
+      //       ['03', 50, 400, 401, 402, 403, 404, 405, 444]
+      //     ]
+      //   }
+      // ]
+
       this.queryWorkTime(this.workTimeValue)
       this.queryScreen()
       this.queryAACM(3)
@@ -111,10 +138,15 @@
     },
     methods: {
       onWorkTimeChange(v) {
+        this.outputUnit = this.unit[v]
         this.queryWorkTime(v)
       },
       onMotorTemperaturesChange(v) {
-        console.log('v', v)
+        const key = motorTemperatures[v].key
+        this.lineDataset = {
+          source: this.barLineData[key].statisticsData
+        }
+        console.log('this.lineDataset', this.lineDataset)
       },
       async queryWorkTime(v) {
         const params = {
@@ -137,15 +169,24 @@
         }
         const { data } = await OutputInfoModel.queryAACM(params)
         console.log('查询AACM data', data)
-        this.barLineDataset = { source: data }
+        //
+        this.barLineDataset = keysss.map((key) => {
+          return {
+            source: data[key]
+          }
+        })
+        console.log('this.barLineDataset', this.barLineDataset)
       },
 
       async queryMotorTemperature(v) {
         const params = {
           selectType: v
         }
-        const data = await OutputInfoModel.queryMotorTemperature(params)
-        console.log('_____________queryMotorTemperature_____________', data)
+        const { data } = await OutputInfoModel.queryMotorTemperature(params)
+        // console.log('_____________queryMotorTemperature_____________', data)
+        this.barLineData = data
+        this.onMotorTemperaturesChange(this.motorTemperatureValue)
+
       },
 
     }
@@ -164,7 +205,7 @@
     text-align: center;
     position: relative;
     top: -20px;
-    z-index: 2;
+    z-index: 21;
   }
 
   .row1, .row2, .row3, .row4 {
@@ -187,7 +228,7 @@
     height: 230px;
   }
 
-  .__line-wrap, .__bar_line-wrap {
+  .__line-wrap, .__bar_line-wrap, .row4_line-wrap {
     position: absolute;
     left: 0;
     right: 0;
@@ -205,6 +246,15 @@
     right: 10px;
     bottom: -20px;
   }
+
+  .row4_line-wrap {
+    top: 40px;
+    left: 10px;
+    right: 10px;
+    bottom: -20px;
+  }
+
+
 
   .__content {
     font-size: 16px;

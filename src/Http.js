@@ -137,7 +137,7 @@ class Http {
               path: '/login'
             })
           }
-          if (data.code !== 200) {
+          if (data.code !== 200 && data.code !== 401) {
             Message.error(data.msg)
           }
         })

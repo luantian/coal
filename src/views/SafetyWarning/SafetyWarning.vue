@@ -63,7 +63,7 @@
 <style lang="scss" scoped>
   .safety-warning {
     height: 100%;
-    background: url("~@/assets/img/index_bg.png") no-repeat;
+    background: url("~@/assets/img/index_bg.jpg") no-repeat;
     background-size: 100% 100%;
   }
 
