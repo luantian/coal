@@ -54,7 +54,7 @@
         </el-radio-group>
       </div>
       <div class="row4_line-wrap">
-        <custom-line :dataset="lineDataset" x-unit=" " y-unit=" "></custom-line>
+        <custom-line :dataset="lineDataset" x-unit="时" y-unit="℃"></custom-line>
       </div>
     </div>
   </div>
@@ -82,7 +82,7 @@
     3: '时'
   }
 
-  const keysss = ['belt_111', 'belt_112', 'belt_113', 'belt_121', 'belt_122']
+  // const keysss = ['belt_111', 'belt_112', 'belt_113', 'belt_121', 'belt_122']
 
 
   const motorTemperatures = [
@@ -112,24 +112,27 @@
       }
     },
     mounted() {
-      // this.barLineDataset = [
-      //   {
-      //     source: [
-      //       ['00', 10, 100, 101, 102, 103, 104, 105, 111],
-      //       ['01', 20, 200, 201, 202, 203, 204, 205, 222],
-      //       ['02', 30, 300, 301, 302, 303, 304, 305, 333],
-      //       ['03', 40, 400, 401, 402, 403, 404, 405, 444]
-      //     ]
-      //   },
-      //   {
-      //     source: [
-      //       ['00', 70, 100, 101, 102, 103, 104, 105, 111],
-      //       ['01', 80, 200, 201, 202, 203, 204, 205, 222],
-      //       ['02', 90, 300, 301, 302, 303, 304, 305, 333],
-      //       ['03', 50, 400, 401, 402, 403, 404, 405, 444]
-      //     ]
-      //   }
-      // ]
+      this.barLineDataset =
+        [
+          {
+            source: [
+              //     设备1功率，设备2功率...  设备7功率
+              ['00', 10, 100, 101, 102, 103, 104, 105, 111],
+              ['01', 20, 200, 201, 202, 203, 204, 205, 222],
+              ['02', 30, 300, 301, 302, 303, 304, 305, 333],
+              ['03', 40, 400, 401, 402, 403, 404, 405, 444]
+            ]
+          },
+          {
+            source: [
+              //     设备1能耗，设备2能耗...  设备7能耗
+              ['00', 70, 700, 701, 702, 703, 704, 705, 711],
+              ['01', 80, 800, 801, 802, 803, 804, 805, 822],
+              ['02', 90, 900, 901, 902, 999, 904, 905, 933],
+              ['03', 50, 500, 501, 502, 503, 504, 505, 544]
+            ]
+          }
+        ]
 
       this.queryWorkTime(this.workTimeValue)
       this.queryScreen()
@@ -169,13 +172,17 @@
         }
         const { data } = await OutputInfoModel.queryAACM(params)
         console.log('查询AACM data', data)
+
+        // //
+        // this.barLineDataset = keysss.map((key) => {
         //
-        this.barLineDataset = keysss.map((key) => {
-          return {
-            source: data[key]
-          }
-        })
-        console.log('this.barLineDataset', this.barLineDataset)
+        //   // power_sourceData.push()
+        //
+        //   // return {
+        //   //   source: data[key]
+        //   // }
+        // })
+        // // console.log('this.barLineDataset', this.barLineDataset)
       },
 
       async queryMotorTemperature(v) {
