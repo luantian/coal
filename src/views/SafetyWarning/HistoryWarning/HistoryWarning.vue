@@ -74,7 +74,7 @@ export default {
       queryParams: {},
       editRowData: {},
       alarmDevice: '',
-      alarmStatus: 2,
+      alarmStatus: 1,
       alarmStartTime: '',
       alarmEndTime: '',
       searchDate: ''
@@ -108,10 +108,11 @@ export default {
       await this.toQuery()
     },
     statusFormatter(data) {
-      if (null === data) {
-        return data
+      console.log(data)
+      if (null === data.alarmStatus) {
+        return data.alarmStatus
       }
-      if (data === 1) {
+      if (data.alarmStatus === '1') {
         return '已处理'
       }
       return '未处理'

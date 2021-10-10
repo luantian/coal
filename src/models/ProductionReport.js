@@ -1,5 +1,7 @@
 import Base from "@/models/Base";
-
+import axios from 'axios'
+import LocalStorage from '@/cache/LocalStorage'
+const token = LocalStorage.getItem('token')
 class ArchiveReport extends Base {
   constructor() {
     super()
@@ -98,6 +100,42 @@ class ArchiveReport extends Base {
       url: '/reportcomplete/complete' + id
     })
   }
+
+  static async exportFile() {
+    this.btnLoading = true;
+    axios({
+      method: 'get',
+      url: 'http://localhost:8080/api/report/export/productionPlan',
+      headers: {
+        Authorization: 'Bearer ' + token
+      },
+      responseType: "arraybuffer"
+    })
+      .then(res => {
+        this.btnLoading = false;
+        if (res.data.type) {
+          // 文件下载
+          const blob = new Blob([res.data], {
+            type: "application/vnd.ms-excel"
+          });
+          let link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.setAttribute('download', '导出文件.xlsx');
+          link.click();
+          link = null;
+          this.$message.success('导出成功');
+        } else {
+          // 返回json
+          this.$message.warning(res.data.msg);
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        this.btnLoading = false;
+        this.$message.error("下载失败");
+      });
+  }
+
 
 }
 

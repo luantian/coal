@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm" >
     <el-form-item label="故障部位" prop="faultLocation">
       <el-input type="text" v-model="ruleForm.faultLocation" autocomplete="off" placeholder="请输入故障部位"></el-input>
     </el-form-item>

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm" >
     <el-form-item label="设备型号" prop="deviceType">
       <el-input type="text" v-model="ruleForm.deviceType" autocomplete="off" placeholder="请输入设备型号"></el-input>
     </el-form-item>

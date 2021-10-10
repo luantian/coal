@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm" >
     <el-form-item label="部门" prop="deptName">
       <el-input type="text" v-model="rowData.deptName" autocomplete="off"></el-input>
     </el-form-item>

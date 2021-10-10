@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm" >
     <el-form-item label="设备类别" prop="deviceType">
       <el-input type="text" v-model="ruleForm.deviceType" autocomplete="off" placeholder="请输入设备类别"></el-input>
     </el-form-item>
@@ -9,13 +9,13 @@
     </el-form-item>
     <el-form-item label="故障开始时间" prop="alarmStartTime">
       <el-col :span="11">
-        <el-date-picker type="date" placeholder="请选择故障开始时间" v-model="ruleForm.alarmStartTime" style="width: 100%;" value-format="yyyy-MM-dd" editable="false"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="请选择故障开始时间" v-model="ruleForm.alarmStartTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss" editable="false"></el-date-picker>
       </el-col>
 <!--      <el-date-picker v-model="ruleForm.alarmStartTime" placeholder="请选择故障开始时间"></el-date-picker>-->
     </el-form-item>
     <el-form-item label="故障结束时间" prop="alarmEndTime">
       <el-col :span="11">
-        <el-date-picker type="date" placeholder="请选择故障结束时间" v-model="ruleForm.alarmEndTime" style="width: 100%;" value-format="yyyy-MM-dd" editable="false"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="请选择故障结束时间" v-model="ruleForm.alarmEndTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss" editable="false"></el-date-picker>
       </el-col>
 <!--      <el-input v-model="ruleForm.alarmEndTime" placeholder="请输入故障结束时间"></el-input>-->
     </el-form-item>
