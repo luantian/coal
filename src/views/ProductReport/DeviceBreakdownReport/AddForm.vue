@@ -25,9 +25,9 @@
     <el-form-item label="耗时" prop="deviceLimenValue">
       <el-input v-model="ruleForm.deviceLimenValue" placeholder="请输入耗时"></el-input>
     </el-form-item>
-    <el-form-item label="故障记录员" prop="createUser">
-      <el-input v-model="ruleForm.createUser" placeholder="请输入故障记录员"></el-input>
-    </el-form-item>
+<!--    <el-form-item label="故障记录员" prop="createUser">-->
+<!--      <el-input v-model="ruleForm.createUser" placeholder="请输入故障记录员"></el-input>-->
+<!--    </el-form-item>-->
     <el-form-item>
       <el-button @click="addCancel">取消</el-button>
       <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -49,7 +49,7 @@ import ProductionReportModel from "@/models/ProductionReport";
             alarmEndTime: '',
             alarmLocation: '',
             deviceLimenValue: '',
-            createUser: ''
+            // createUser: ''
           },
           rules: {
             deviceType: [
@@ -70,9 +70,9 @@ import ProductionReportModel from "@/models/ProductionReport";
             deviceLimenValue: [
               { required: true, message: '耗时不能为空', trigger: 'blur' }
             ],
-            createUser: [
-              { required: true, message: '故障记录员不能为空', trigger: 'blur' }
-            ]
+            // createUser: [
+            //   { required: true, message: '故障记录员不能为空', trigger: 'blur' }
+            // ]
           }
         };
       },

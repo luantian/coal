@@ -45,14 +45,14 @@
           <el-table-column prop="waterwheelJobPeopleNumber" label="水车作业人数" align="center"></el-table-column>
           <el-table-column prop="waterwheelNumber" label="水车台数" align="center"></el-table-column>
           <el-table-column prop="workPlan" label="工作计划" align="center"></el-table-column>
-<!--          <el-table-column label="操作">-->
-<!--            <template slot-scope="scope">-->
-<!--              <div>-->
-<!--                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>-->
-<!--                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>-->
-<!--              </div>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <div>
+                <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>
+                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>
+              </div>
+            </template>
+          </el-table-column>
         </el-table>
         <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
           <el-pagination
@@ -67,7 +67,7 @@
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
-                   :destroy-on-close="true">
+                   :destroy-on-close="true" width="1500px">
           <add-form @addDialogClose="addDialogVisible = false"
                     @queryList="toQuery"></add-form>
         </el-dialog>
@@ -84,12 +84,12 @@
 <script>
   import ProductionReportModel from "@/models/ProductionReport";
   import addForm from "@/views/ProductReport/ProductionDailyReport/AddForm";
-  import editForm from "@/views/ProductReport/ProductionDailyReport/EditForm";
+  // import editForm from "@/views/ProductReport/ProductionDailyReport/EditForm";
   import { cloneDeep } from 'lodash-es'
   // import Export from "@/models/Export";
   export default {
     name: 'SitePersonnelFiles',
-    components: {addForm, editForm},
+    components: {addForm},
     data() {
       return {
         tableData: [],
