@@ -1,8 +1,4 @@
-
-
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-
-// const IS_IE_DEV = Boolean(process.env.IE_DEV);
 
 module.exports = {
   productionSourceMap: false,
@@ -16,7 +12,10 @@ module.exports = {
     if (IS_PRODUCTION) {
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
     }
- },
+    return {
+      title: title,
+    }
+  },
 
   css: {
     sourceMap: !IS_PRODUCTION,
