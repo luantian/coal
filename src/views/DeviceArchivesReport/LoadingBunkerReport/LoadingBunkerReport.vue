@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="main_table">
-        <el-table :data="tableData" stripe style="width: 100%;">
+        <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="deviceType" label="设备型号" align="center"></el-table-column>
           <el-table-column prop="warehouseLength" label="仓体长度(m)" align="center"></el-table-column>

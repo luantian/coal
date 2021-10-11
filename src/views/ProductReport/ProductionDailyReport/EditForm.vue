@@ -1,11 +1,11 @@
 <template>
 <div>
 
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="130px">
+  <el-form :model="rowData" status-icon :rules="rules" ref="ruleForm" label-width="130px">
     <div>
       <el-form-item label="日报日期" prop="planDate">
         <el-col :span="5">
-          <el-date-picker type="date" placeholder="请选择日报日期" v-model="rowData.planDate" style="width: 100%;" value-format="yyyy-MM-dd" editable="false"></el-date-picker>
+          <el-date-picker type="date" placeholder="请选择日报日期" v-model="rowData.planDate" style="width: 100%;" value-format="yyyy-MM-dd"></el-date-picker>
         </el-col>
       </el-form-item>
     </div>
@@ -244,7 +244,7 @@
       </el-form-item>
     </div>
     <el-form-item>
-      <el-button @click="addCancel">取消</el-button>
+      <el-button @click="editCancel">取消</el-button>
       <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
     </el-form-item>
   </el-form>

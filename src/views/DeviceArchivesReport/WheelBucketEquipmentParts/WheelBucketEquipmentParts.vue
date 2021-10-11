@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="main_table">
-        <el-table :data="tableData" stripe style="width: 100%;">
+        <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="partsName" label="部件名称" align="center"></el-table-column>
           <el-table-column prop="elementName" label="零件名称" align="center"></el-table-column>

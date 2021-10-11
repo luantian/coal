@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="main_table">
-        <el-table :data="tableData" stripe style="width: 100%;">
+        <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="bucketJobPeopleNumber" label="轮斗组作业人数" align="center"></el-table-column>
           <el-table-column prop="bucketNameDay" label="轮斗组姓名-白班" align="center"></el-table-column>
@@ -45,11 +45,12 @@
           <el-table-column prop="waterwheelJobPeopleNumber" label="水车作业人数" align="center"></el-table-column>
           <el-table-column prop="waterwheelNumber" label="水车台数" align="center"></el-table-column>
           <el-table-column prop="workPlan" label="工作计划" align="center"></el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" fixed="right" :width="120">
             <template slot-scope="scope">
-              <div>
+              <div style="width: 150px">
+                <span class="opear-text" @click="detail(scope.$index, scope.row)">查看</span>
                 <span class="opear-text" @click="editData(scope.$index, scope.row)">编辑</span>
-                <span class="opear-text" @click="deleteData(scope.$index, scope.row)">删除</span>
+                <span class="opear-text" @click="deleteData(scope.$index, scope.row)" style="width: 150px">删除</span>
               </div>
             </template>
           </el-table-column>
@@ -71,9 +72,13 @@
           <add-form @addDialogClose="addDialogVisible = false"
                     @queryList="toQuery"></add-form>
         </el-dialog>
-        <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center">
+        <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center" :destroy-on-close="true" width="1500px">
           <edit-form @editDialogClose="editDialogVisible = false"
                      @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-form>
+        </el-dialog>
+        <el-dialog :visible.sync="detailDialogVisible" @close="detailDialogVisible = false" align="center" :destroy-on-close="true" width="1500px">
+          <detail @editDialogClose="detailDialogVisible = false"
+                      :rowData="rowData" :destroy-on-close="true"></detail>
         </el-dialog>
       </div>
     </div>
@@ -84,12 +89,13 @@
 <script>
   import ProductionReportModel from "@/models/ProductionReport";
   import addForm from "@/views/ProductReport/ProductionDailyReport/AddForm";
-  // import editForm from "@/views/ProductReport/ProductionDailyReport/EditForm";
+  import editForm from "@/views/ProductReport/ProductionDailyReport/EditForm";
+  import detail from "@/views/ProductReport/ProductionDailyReport/Detail";
   import { cloneDeep } from 'lodash-es'
   // import Export from "@/models/Export";
   export default {
     name: 'SitePersonnelFiles',
-    components: {addForm},
+    components: {addForm, editForm, detail},
     data() {
       return {
         tableData: [],
@@ -97,6 +103,7 @@
         personName: '',
         addDialogVisible: false,
         editDialogVisible: false,
+        detailDialogVisible: false,
         rowData: {},
         totalRecords: 0,
         pageSizes: [10, 20, 50, 100],
@@ -121,6 +128,10 @@
       async editData(index, row) {
         this.rowData = cloneDeep(row)
         this.editDialogVisible = true
+      },
+      async detail(index, row) {
+        this.rowData = cloneDeep(row)
+        this.detailDialogVisible = true
       },
       async deleteData(index, row) {
         this.$confirm('是否确认删除该数据?', '提示', {
