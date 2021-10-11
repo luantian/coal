@@ -4,7 +4,7 @@
       <div>
         <el-form-item label="日报日期:" prop="planDate">
           <el-col :span="5">
-            <el-date-picker type="date" placeholder="请选择日报日期" v-model="ruleForm.planDate" style="width: 100%;" value-format="yyyy-MM-dd" editable="false"></el-date-picker>
+            <el-date-picker type="date" placeholder="请选择日报日期" v-model="ruleForm.planDate" style="width: 100%;" value-format="yyyy-MM-dd" ></el-date-picker>
           </el-col>
         </el-form-item>
       </div>

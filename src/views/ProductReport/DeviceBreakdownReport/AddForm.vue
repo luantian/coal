@@ -9,13 +9,13 @@
     </el-form-item>
     <el-form-item label="故障开始时间" prop="alarmStartTime">
       <el-col :span="11">
-        <el-date-picker type="datetime" placeholder="请选择故障开始时间" v-model="ruleForm.alarmStartTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss" editable="false"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="请选择故障开始时间" v-model="ruleForm.alarmStartTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss" ></el-date-picker>
       </el-col>
 <!--      <el-date-picker v-model="ruleForm.alarmStartTime" placeholder="请选择故障开始时间"></el-date-picker>-->
     </el-form-item>
     <el-form-item label="故障结束时间" prop="alarmEndTime">
       <el-col :span="11">
-        <el-date-picker type="datetime" placeholder="请选择故障结束时间" v-model="ruleForm.alarmEndTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss" editable="false"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="请选择故障结束时间" v-model="ruleForm.alarmEndTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss" ></el-date-picker>
       </el-col>
 <!--      <el-input v-model="ruleForm.alarmEndTime" placeholder="请输入故障结束时间"></el-input>-->
     </el-form-item>
