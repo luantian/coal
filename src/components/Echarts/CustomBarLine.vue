@@ -43,9 +43,6 @@ export default {
             crossStyle: {
               color: '#999'
             }
-          },
-          formatter: (p) => {
-            console.log('p', p)
           }
         },
         legend: {
