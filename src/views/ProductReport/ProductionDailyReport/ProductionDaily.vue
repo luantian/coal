@@ -55,16 +55,26 @@
             </template>
           </el-table-column>
         </el-table>
-        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">
-          <el-pagination
-            background
-            layout="prev, pager, next, sizes"
-            :total="totalRecords"
-            @size-change="pageSizeChange"
-            @current-change="currentPageChange"
-            :page-sizes="pageSizes">
-          </el-pagination>
-        </div>
+<!--        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">-->
+<!--          <el-pagination-->
+<!--            background-->
+<!--            layout="prev, pager, next, sizes"-->
+<!--            :total="totalRecords"-->
+<!--            @size-change="pageSizeChange"-->
+<!--            @current-change="currentPageChange"-->
+<!--            :page-sizes="pageSizes">-->
+<!--          </el-pagination>-->
+<!--        </div>-->
+      </div>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next, sizes"
+          :total="totalRecords"
+          @size-change="pageSizeChange"
+          @current-change="currentPageChange"
+          :page-sizes="pageSizes">
+        </el-pagination>
       </div>
       <div>
         <el-dialog :visible.sync="addDialogVisible" @close="addDialogVisible = false" align="center"
