@@ -2,7 +2,7 @@
   <div class="sub-title">
     <div class="main">
       <slot></slot>
-<!--      <div class="el-icon-full-screen"></div>-->
+<!--      <div @click="onFullScreen" class="el-icon-full-screen"></div>-->
     </div>
   </div>
 </template>
@@ -21,6 +21,11 @@
       }
     },
     methods: {
+      onFullScreen() {
+        const element = document.querySelector(this.className)
+        console.log('this.className', this.className)
+        console.log('element', element)
+      },
       fullscreen() {
         const element = document.querySelector('.' + this.className)
         console.log('this.className', this.className)
@@ -58,6 +63,7 @@
       position: absolute;
       right: 0;
       top: 0;
+      cursor: pointer;
     }
   }
 </style>

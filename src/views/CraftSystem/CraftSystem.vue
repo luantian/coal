@@ -6,6 +6,9 @@
       <column2></column2>
       <column3></column3>
     </div>
+    <div class="full-screen">
+      <div class="full-screen-main"></div>
+    </div>
   </div>
 </template>
 
@@ -46,6 +49,23 @@
     display: flex;
     .column3 {
       width: 450px;
+    }
+  }
+
+  .full-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 1);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000000;
+    .full-screen-main {
+      width: 800px;
+      height: 600px;
     }
   }
 
