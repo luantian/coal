@@ -9,6 +9,7 @@
         </div>
         <div style="padding-right: 35px">
           <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
+          <el-button @click="exportDeviceBreakdownReport" type="primary">导出</el-button>
         </div>
       </div>
       <div class="main_table">
@@ -77,7 +78,8 @@ export default {
       pageNum: 1,
       pageSize: 10,
       queryParams: {},
-      editRowData: {}
+      editRowData: {},
+      url: '/api/report/export/devicrFault'
     }
   },
   methods: {
@@ -126,6 +128,9 @@ export default {
     async currentPageChange(val) {
       this.pageNum = val
       await this.toQuery()
+    },
+    async exportDeviceBreakdownReport() {
+      await ProductionReportModel.exportFile(this.url)
     }
   },
   created() {
