@@ -1,7 +1,7 @@
 <template>
   <div class="common-header">
     <div class="logo">
-      <router-link to="/" tag="div" class="to-index">返回首页</router-link>
+      <router-link v-if="$route.fullPath !== '/'" to="/" tag="div" class="to-index">返回首页</router-link>
     </div>
     <div class="title">
 

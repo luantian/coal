@@ -38,7 +38,7 @@ export default {
         },
         series: [
           {
-            name: 'Access From',
+            // name: 'Access From',
             type: 'pie',
             radius: ['30%', '50%'],
             label: {
