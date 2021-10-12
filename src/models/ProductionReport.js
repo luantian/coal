@@ -144,11 +144,11 @@ class ArchiveReport extends Base {
     })
   }
 
-  static async exportFile() {
+  static async exportFile(url) {
     this.btnLoading = true;
     axios({
       method: 'get',
-      url: '/api/report/export/productionPlan',
+      url: url,
       headers: {
         Authorization: 'Bearer ' + token
       },

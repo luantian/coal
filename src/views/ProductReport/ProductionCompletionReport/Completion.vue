@@ -9,6 +9,7 @@
         </div>
         <div style="padding-right: 35px">
           <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
+          <el-button @click="exportProductionCompletionReport" type="primary">导出</el-button>
         </div>
       </div>
       <div class="main_table">
@@ -84,7 +85,8 @@
         pageNum: 1,
         pageSize: 10,
         queryParams: {},
-        editRowData: {}
+        editRowData: {},
+        url: '/api/report/export/productionComplete'
       }
     },
     methods: {
@@ -133,6 +135,9 @@
       async currentPageChange(val) {
         this.pageNum = val
         await this.toQuery()
+      },
+      async exportProductionCompletionReport() {
+        await ProductionReportModel.exportFile(this.url)
       }
     },
     created() {

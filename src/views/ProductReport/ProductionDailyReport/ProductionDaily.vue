@@ -110,7 +110,8 @@
         pageNum: 1,
         pageSize: 10,
         queryParams: {},
-        editRowData: {}
+        editRowData: {},
+        url: '/api/report/export/productionPlan'
       }
     },
     methods: {
@@ -165,7 +166,7 @@
         await this.toQuery()
       },
       async exportProductionPlanReport() {
-        await ProductionReportModel.exportFile()
+        await ProductionReportModel.exportFile(this.url)
       }
     },
     created() {
