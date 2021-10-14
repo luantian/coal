@@ -197,5 +197,12 @@ import ProductionReportModel from "@/models/ProductionReport";
 </script>
 
 <style scoped>
-
+  .span_div{
+    text-align: left;
+    padding-top: 18px;
+  }
+  ._span {
+    font-size: 14px;
+    color: white
+  }
 </style>
