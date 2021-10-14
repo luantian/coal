@@ -121,7 +121,8 @@
         pageSize: 10,
         queryParams: {},
         editRowData: {},
-        url: '/api/report/export/productionPlan'
+        url: '/api/report/export/productionPlan',
+        filename: '生产日报-生产计划'
       }
     },
     methods: {
@@ -176,7 +177,7 @@
         await this.toQuery()
       },
       async exportProductionPlanReport() {
-        await ProductionReportModel.exportFile(this.url)
+        await ProductionReportModel.exportFile(this.url, this.filename)
       }
     },
     created() {

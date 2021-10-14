@@ -144,7 +144,7 @@ class ArchiveReport extends Base {
     })
   }
 
-  static async exportFile(url) {
+  static async exportFile(url, filename) {
     this.btnLoading = true;
     axios({
       method: 'get',
@@ -167,7 +167,7 @@ class ArchiveReport extends Base {
           let link = document.createElement('a');
           let url = URL.createObjectURL(blob)
           link.href = url
-          link.download = '导出文件.zip' // 重命名文件
+          link.download = filename + '.zip' // 重命名文件
           link.click();
           link = null;
           URL.revokeObjectURL(url) // 释放内存

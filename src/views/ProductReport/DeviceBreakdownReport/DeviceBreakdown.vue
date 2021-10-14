@@ -79,7 +79,8 @@ export default {
       pageSize: 10,
       queryParams: {},
       editRowData: {},
-      url: '/api/report/export/devicrFault'
+      url: '/api/report/export/devicrFault',
+      filename: '设备故障表'
     }
   },
   methods: {
@@ -130,7 +131,7 @@ export default {
       await this.toQuery()
     },
     async exportDeviceBreakdownReport() {
-      await ProductionReportModel.exportFile(this.url)
+      await ProductionReportModel.exportFile(this.url, this.filename)
     }
   },
   created() {
