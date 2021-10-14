@@ -71,6 +71,14 @@ class OutputInfo extends Base {
     })
   }
 
+  // 查询设备温度 新
+  static async queryMotorTemperatureNew(data) {
+    return await this.get({
+      url: '/bigbelt/belt/beltMotortemTemperatureHistogramNew',
+      data
+    })
+  }
+
 }
 
 export default OutputInfo
