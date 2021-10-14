@@ -2,6 +2,7 @@
   <div class="sub-title">
     <div class="main">
       <slot></slot>
+<!--      <div @click="onFullScreen" class="el-icon-full-screen"></div>-->
     </div>
   </div>
 </template>
@@ -9,9 +10,39 @@
 <script>
   export default {
     name: 'SubTitle',
+    props: {
+      className: {
+        type: String,
+      }
+    },
     data() {
       return {
 
+      }
+    },
+    methods: {
+      onFullScreen() {
+        const element = document.querySelector(this.className)
+        console.log('this.className', this.className)
+        console.log('element', element)
+      },
+      fullscreen() {
+        const element = document.querySelector('.' + this.className)
+        console.log('this.className', this.className)
+        console.log('element', element)
+        if (!element) return
+        if(element.requestFullscreen){
+          element.requestFullscreen();
+        }
+        else if(element.mozRequestFullScreen) {
+          element.mozRequestFullScreen();
+        }
+        else if(element.webkitRequestFullscreen) {
+          element.webkitRequestFullscreen();
+        }
+        else if(element.msRequestFullscreen) {
+          element.msRequestFullscreen();
+        }
       }
     }
   }
@@ -27,5 +58,12 @@
   .main {
     text-align: center;
     font-size: 18px;
+    position: relative;
+    .el-icon-full-screen {
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+    }
   }
 </style>

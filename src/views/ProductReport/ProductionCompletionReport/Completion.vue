@@ -9,10 +9,11 @@
         </div>
         <div style="padding-right: 35px">
           <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
+          <el-button @click="exportProductionCompletionReport" type="primary">导出</el-button>
         </div>
       </div>
       <div class="main_table">
-        <el-table :data="tableData" stripe style="width: 100%;">
+        <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="dailyEntruckNumber" label="日装车数" align="center"></el-table-column>
           <el-table-column prop="dayCoalNumber" label="日累计煤量(吨)" align="center"></el-table-column>
@@ -84,7 +85,9 @@
         pageNum: 1,
         pageSize: 10,
         queryParams: {},
-        editRowData: {}
+        editRowData: {},
+        url: '/report/export/productionComplete',
+        filename: '生产日报-完成情况'
       }
     },
     methods: {
@@ -133,6 +136,9 @@
       async currentPageChange(val) {
         this.pageNum = val
         await this.toQuery()
+      },
+      async exportProductionCompletionReport() {
+        await ProductionReportModel.exportFile(this.url, this.filename)
       }
     },
     created() {

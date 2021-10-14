@@ -1,6 +1,7 @@
 import Base from "@/models/Base";
 import axios from 'axios'
 import LocalStorage from '@/cache/LocalStorage'
+import { saveAs } from 'file-saver';
 
 // import { saveAs } from 'file-saver';
 
@@ -144,11 +145,11 @@ class ArchiveReport extends Base {
     })
   }
 
-  static async exportFile() {
+  static async exportFile(url, filename) {
     this.btnLoading = true;
     axios({
       method: 'get',
-      url: '/api/report/export/productionPlan',
+      url: '/coal' + url,
       headers: {
         Authorization: 'Bearer ' + token
       },
@@ -163,14 +164,14 @@ class ArchiveReport extends Base {
             // type: "application/vnd.ms-excel"
             type: "application/zip"
           });
-          // saveAs(res.data, 'a.zip')
-          let link = document.createElement('a');
-          let url = URL.createObjectURL(blob)
-          link.href = url
-          link.download = '导出文件.zip' // 重命名文件
-          link.click();
-          link = null;
-          URL.revokeObjectURL(url) // 释放内存
+          saveAs(blob, filename)
+          // let link = document.createElement('a');
+          // let url = URL.createObjectURL(blob)
+          // link.href = url
+          // link.download = filename + '.zip' // 重命名文件
+          // link.click();
+          // link = null;
+          // URL.revokeObjectURL(url) // 释放内存
           // this.$message.success('导出成功');
         } else {
           // 返回json

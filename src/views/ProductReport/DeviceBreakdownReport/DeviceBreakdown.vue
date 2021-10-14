@@ -9,10 +9,11 @@
         </div>
         <div style="padding-right: 35px">
           <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
+          <el-button @click="exportDeviceBreakdownReport" type="primary">导出</el-button>
         </div>
       </div>
       <div class="main_table">
-        <el-table :data="tableData" stripe style="width: 100%;">
+        <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)" >
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="deviceType" label="设备类别" align="center"></el-table-column>
           <el-table-column prop="deviceName" label="设备名称" align="center"></el-table-column>
@@ -77,7 +78,9 @@ export default {
       pageNum: 1,
       pageSize: 10,
       queryParams: {},
-      editRowData: {}
+      editRowData: {},
+      url: '/report/export/devicrFault',
+      filename: '设备故障表'
     }
   },
   methods: {
@@ -126,6 +129,9 @@ export default {
     async currentPageChange(val) {
       this.pageNum = val
       await this.toQuery()
+    },
+    async exportDeviceBreakdownReport() {
+      await ProductionReportModel.exportFile(this.url, this.filename)
     }
   },
   created() {

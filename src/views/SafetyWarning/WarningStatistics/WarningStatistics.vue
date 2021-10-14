@@ -29,16 +29,16 @@
           <div class="bar1">报警时长</div>
         </div>
         <div class="echarts_warning_duration">
-          <custom-bar2 :dataset="barDataset" unit-x=" " unit-y="min"></custom-bar2>
+          <custom-bar2 :dataset="barDataset" x-unit=" " y-unit="报警时长(min)"></custom-bar2>
         </div>
       </div>
 
       <div class="percent_chart_div">
         <div class="pie1">
-          <custom-pie :dataset="pie1Dataset"></custom-pie>
+          <custom-pie :dataset="pie1Dataset" unit="个"></custom-pie>
         </div>
         <div class="pie2">
-          <custom-pie :dataset="pie2Dataset"></custom-pie>
+          <custom-pie :dataset="pie2Dataset" unit="分钟"></custom-pie>
         </div>
       </div>
 
@@ -78,9 +78,13 @@ export default {
   methods: {
 
     async toQuery() {
+      console.log('this.searchDate', this.searchDate)
       if (this.searchDate) {
         this.alarmStartTime = this.searchDate[0]
         this.alarmEndTime = this.searchDate[1]
+      } else {
+        this.alarmStartTime = ''
+        this.alarmEndTime = ''
       }
       this.queryParams = {
         'selectCode': this.searchValueDuration,

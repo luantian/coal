@@ -1,7 +1,7 @@
 <template>
   <div class="column1">
     <div class="output">
-      <div class="row1">
+      <div class="row1 __left">
         <sub-title>产量统计</sub-title>
 <!--        <div @click="onModalShow" class="full-screen-button"><i class="el-icon-full-screen"></i></div>-->
         <div class="radio-group">
@@ -14,21 +14,21 @@
         </div>
       </div>
 
-      <div class="row2">
+      <div class="row2 __left">
         <sub-title>轮斗利用率</sub-title>
         <div class="__pies-wrap">
           <custom-pies :dataset="piesDataset"></custom-pies>
         </div>
       </div>
 
-      <div class="row3">
+      <div class="row3 __left">
         <sub-title>储量数据</sub-title>
         <div class="__bar-wrap">
           <custom-bar :dataset="barDataset" unit-x=" " unit-y=" "></custom-bar>
         </div>
       </div>
 
-      <div class="row4">
+      <div class="row4 __left">
         <sub-title>储量温度数据</sub-title>
         <div class="radio-group">
           <el-radio-group v-model="temperatureValue" @change="onTemperatureChange">
@@ -185,6 +185,9 @@
 
   .row1, .row2, .row3, .row4 {
     position: relative;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
   }
 
   .row1 {
@@ -206,6 +209,7 @@
   .radio-group {
     text-align: center;
     position: relative;
+    margin: 0 40px;
     top: -20px;
     z-index: 2;
   }

@@ -12,11 +12,11 @@ export default {
       type: Object,
       required: true
     },
-    unitX: {
+    xUnit: {
       type: String,
       required: true
     },
-    unitY: {
+    yUnit: {
       type: String,
       required: true
     },
@@ -33,8 +33,12 @@ export default {
     init() {
       this.myChart = this.$echarts.init(this.$refs.__bar)
       this.option = {
+        toolTip: {
+          show: true
+        },
         xAxis: {
           type: 'category',
+          name: this.xUnit,
           textStyle: {
             color: '#fff',
           },
@@ -46,6 +50,7 @@ export default {
         },
         yAxis: {
           type: 'value',
+          name: this.yUnit,
           splitLine: {
             show: false
           },

@@ -24,25 +24,25 @@
         </div>
       </div>
       <div class="main_table">
-        <el-table :data="tableData" stripe style="width: 100%;">
+        <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="alarmStartTime" label="报警起始时间" align="center"></el-table-column>
-          <el-table-column prop="alarmEndTime" label="报警终止时间" align="center"></el-table-column>
+<!--          <el-table-column prop="alarmEndTime" label="报警终止时间" align="center"></el-table-column>-->
           <el-table-column prop="alarmInfo" label="报警信息" align="center"></el-table-column>
           <el-table-column prop="alarmDevice" label="报警设备" align="center"></el-table-column>
           <el-table-column prop="alarmLocation" label="报警部位" align="center"></el-table-column>
           <el-table-column prop="alarmParamValue" label="报警参数值" align="center"></el-table-column>
           <el-table-column prop="deviceLimenValue" label="设备阀值" align="center"></el-table-column>
-          <el-table-column prop="alarmExcludeMeasures" label="预警排除措施" align="center"></el-table-column>
-          <el-table-column prop="alarmStatus" label="状态" align="center" :formatter="statusFormatter"></el-table-column>
-          <el-table-column label="操作">
-            <template slot-scope="scope">
-              <div style="display: flex">
-                <label style="cursor: pointer;text-decoration: underline;color: #8CF5FF"
-                       @click="editData(scope.$index, scope.row)">处理</label>
-              </div>
-            </template>
-          </el-table-column>
+<!--          <el-table-column prop="alarmExcludeMeasures" label="预警排除措施" align="center"></el-table-column>-->
+<!--          <el-table-column prop="alarmStatus" label="状态" align="center" :formatter="statusFormatter"></el-table-column>-->
+<!--          <el-table-column label="操作">-->
+<!--            <template slot-scope="scope">-->
+<!--              <div style="display: flex">-->
+<!--                <label style="cursor: pointer;text-decoration: underline;color: #8CF5FF"-->
+<!--                       @click="editData(scope.$index, scope.row)">处理</label>-->
+<!--              </div>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
         </el-table>
       </div>
       <div class="pagination">

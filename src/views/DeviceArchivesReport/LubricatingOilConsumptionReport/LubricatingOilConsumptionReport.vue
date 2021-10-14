@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="main_table">
-        <el-table :data="tableData" stripe style="width: 100%;">
+        <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
           <el-table-column prop="belongSystem" label="所属系统" align="center"></el-table-column>
           <el-table-column prop="deviceName" label="设备名称" align="center"></el-table-column>

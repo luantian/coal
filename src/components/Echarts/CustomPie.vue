@@ -11,6 +11,9 @@ export default {
     dataset: {
       type: Object,
       required: true
+    },
+    unit: {
+      type: Object
     }
   },
   data() {
@@ -27,7 +30,16 @@ export default {
       this.myChart = this.$echarts.init(this.$refs.__pie)
       this.option = {
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          formatter: (p) => {
+            let result = ''
+            if (this.unit) {
+              result = p.value[1] + this.unit
+            } else {
+              result = p.value[1]
+            }
+            return result
+          }
         },
         legend: {
           top: '5%',
