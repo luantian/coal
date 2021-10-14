@@ -13,7 +13,7 @@ export default {
       required: true
     },
     unit: {
-      type: Object
+      type: String
     }
   },
   data() {
@@ -41,13 +41,13 @@ export default {
             return result
           }
         },
-        legend: {
-          top: '5%',
-          left: 'center',
-          textStyle: {
-            color: '#fff'
-          }
-        },
+        // legend: {
+        //   top: '5%',
+        //   left: 'center',
+        //   textStyle: {
+        //     color: '#fff'
+        //   }
+        // },
         series: [
           {
             // name: 'Access From',
