@@ -79,7 +79,7 @@ export default {
       pageSize: 10,
       queryParams: {},
       editRowData: {},
-      url: '/api/report/export/devicrFault',
+      url: '/report/export/devicrFault',
       filename: '设备故障表'
     }
   },

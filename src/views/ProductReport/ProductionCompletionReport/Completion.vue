@@ -86,7 +86,7 @@
         pageSize: 10,
         queryParams: {},
         editRowData: {},
-        url: '/api/report/export/productionComplete',
+        url: '/report/export/productionComplete',
         filename: '生产日报-完成情况'
       }
     },

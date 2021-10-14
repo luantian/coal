@@ -149,7 +149,7 @@ class ArchiveReport extends Base {
     this.btnLoading = true;
     axios({
       method: 'get',
-      url: url,
+      url: '/coal' + url,
       headers: {
         Authorization: 'Bearer ' + token
       },
@@ -164,7 +164,7 @@ class ArchiveReport extends Base {
             // type: "application/vnd.ms-excel"
             type: "application/zip"
           });
-          saveAs(blob, filename + '.zip')
+          saveAs(blob, filename)
           // let link = document.createElement('a');
           // let url = URL.createObjectURL(blob)
           // link.href = url

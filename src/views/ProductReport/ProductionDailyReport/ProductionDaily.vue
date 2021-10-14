@@ -121,7 +121,7 @@
         pageSize: 10,
         queryParams: {},
         editRowData: {},
-        url: '/api/report/export/productionPlan',
+        url: '/report/export/productionPlan',
         filename: '生产日报-生产计划'
       }
     },
