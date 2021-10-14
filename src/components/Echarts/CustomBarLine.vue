@@ -43,7 +43,11 @@ export default {
             crossStyle: {
               color: '#999'
             }
-          }
+          },
+          // formatter: '{a}: {b}'
+        },
+        grid: {
+          containLabel: true
         },
         legend: {
           show: true,

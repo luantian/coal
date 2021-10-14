@@ -30,6 +30,7 @@
     methods: {
       init() {
         if (!this.myChart) {
+          console.log('this.$refs.__line', this.$refs.__line)
           this.myChart = this.$echarts.init(this.$refs.__line)
         }
         const color = '#fff'
