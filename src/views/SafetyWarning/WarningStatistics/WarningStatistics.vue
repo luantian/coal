@@ -35,9 +35,17 @@
 
       <div class="percent_chart_div">
         <div class="pie1">
+          <div style="display: flex; padding: 28px 36px;">
+            <div style="width: 6px; height: 18px; background: #399CFF; border-radius: 2px;"></div>
+            <div class="bar1">报警时长</div>
+          </div>
           <custom-pie :dataset="pie1Dataset" unit="个"></custom-pie>
         </div>
         <div class="pie2">
+          <div style="display: flex; padding: 28px 36px;">
+            <div style="width: 6px; height: 18px; background: #399CFF; border-radius: 2px;"></div>
+            <div class="bar1">报警时长</div>
+          </div>
           <custom-pie :dataset="pie2Dataset" unit="分钟"></custom-pie>
         </div>
       </div>
