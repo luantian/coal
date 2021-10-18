@@ -269,9 +269,9 @@
         display: flex;
       }
 
-      > div:last-of-type {
-        flex: 2 !important;
-      }
+      //> div:last-of-type {
+      //  flex: 2 !important;
+      //}
     }
 
     .__body {
@@ -283,9 +283,9 @@
         display: flex;
       }
 
-      > div:last-of-type {
-        flex: 2 !important;
-      }
+      //> div:last-of-type {
+      //  flex: 1 !important;
+      //}
 
       .__btn {
         width: 72px;

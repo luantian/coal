@@ -10,7 +10,7 @@
           </el-radio-group>
         </div>
         <div class="__line-wrap">
-          <custom-line :dataset="lineDataset" :x-unit="outputUnit" :y-unit="'万吨'"></custom-line>
+          <custom-line :dataset="lineDataset" :x-unit="outputUnit" :y-unit="'吨'"></custom-line>
         </div>
       </div>
 

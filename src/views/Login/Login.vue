@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <img style="position: fixed; top: 20px; left: 20px; width: 468px; height: 44px;" :src="require('@/assets/img/bottom-left.png')" alt="">
     <div class="main">
       <div class="left">
         <img :src="require('@/assets/img/main-left.png')" alt="">
@@ -26,7 +27,6 @@
       </div>
     </div>
     <div class="bottom">
-      <img style="width: 468px; height: 44px;" :src="require('@/assets/img/bottom-left.png')" alt="">
       <div class="bottom-right">
         <img :src="require('@/assets/img/record.png')" alt="">
         <span>辽ICP备178743983号</span>
@@ -126,7 +126,7 @@ export default {
     right: 0;
     bottom: 0;
     height: 60px;
-    justify-content: space-around;
+    justify-content: center;
     .bottom-right {
       display: flex;
       align-items: center;

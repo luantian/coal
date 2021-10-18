@@ -5,7 +5,7 @@
       <span class="cumulative">
         <span class="item" v-for="(item, index) in String(cumulative.totalYieldNumber)" :style="{ backgroundImage: item === '.' && 'none' }" :key="index">{{ item }}</span>
       </span>
-      <span>万吨</span>
+      <span>吨</span>
     </div>
     <div class="info-list">
       <div class="info-item" v-for="(item, index) in cumulativeList" :key="index">
@@ -43,8 +43,8 @@
   const cumulativeList = [
     { keyIndex: 'hourYieldNumber', title: '小时量', count: 0, unit: '吨', icon: require('@/assets/img/hour.png') },
     { keyIndex: 'dayYieldNumber', title: '日产量', count: 0, unit: '吨', icon: require('@/assets/img/day.png') },
-    { keyIndex: 'monYieldNumber', title: '月产量', count: 0, unit: '万吨', icon: require('@/assets/img/month.png') },
-    { keyIndex: 'yearYieldNumber', title: '年产量', count: 0, unit: '万吨', icon: require('@/assets/img/year.png') },
+    { keyIndex: 'monYieldNumber', title: '月产量', count: 0, unit: '吨', icon: require('@/assets/img/month.png') },
+    { keyIndex: 'yearYieldNumber', title: '年产量', count: 0, unit: '吨', icon: require('@/assets/img/year.png') },
   ]
 
   const models = [
