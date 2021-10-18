@@ -43,13 +43,13 @@
 
     <div class="row4">
       <sub-title>皮带电机温度</sub-title>
-      <div class="radio-group">
-        <el-radio-group v-model="motorTemperatureValue" @change="onMotorTemperaturesChange">
-          <el-radio-button v-for="item in motorTemperatures" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>
-        </el-radio-group>
-      </div>
+<!--      <div class="radio-group">-->
+<!--        <el-radio-group v-model="motorTemperatureValue" @change="onMotorTemperaturesChange">-->
+<!--          <el-radio-button v-for="item in motorTemperatures" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>-->
+<!--        </el-radio-group>-->
+<!--      </div>-->
       <div class="row4_line-wrap">
-        <custom-line :dataset="lineDataset" x-unit="时" y-unit="℃"></custom-line>
+        <custom-line2 :dataset="lineDataset" x-unit="时" y-unit="℃"></custom-line2>
       </div>
     </div>
   </div>
@@ -60,6 +60,7 @@
   import SubTitle from "../SubTitle";
 
   import CustomLine from '@/components/Echarts/CustomLine'
+  import CustomLine2 from '@/components/Echarts/CustomLine2'
   import CustomBarLine from '@/components/Echarts/CustomBarLine'
 
   import OutputInfoModel from "@/models/OutputInfo";
@@ -87,7 +88,7 @@
 
   export default {
     name: 'Column3',
-    components: { SubTitle, CustomLine, CustomBarLine },
+    components: { SubTitle, CustomLine, CustomLine2, CustomBarLine },
     data() {
       return {
         unit,
@@ -130,19 +131,20 @@
       this.queryScreen()
       this.queryAACM(3)
       this.queryMotorTemperature(3)
+
     },
     methods: {
       onWorkTimeChange(v) {
         this.outputUnit = this.unit[v]
         this.queryWorkTime(v)
       },
-      onMotorTemperaturesChange(v) {
-        const key = motorTemperatures[v].key
-        this.lineDataset = {
-          source: this.barLineData[key].statisticsData
-        }
-        console.log('this.lineDataset', this.lineDataset)
-      },
+      // onMotorTemperaturesChange(v) {
+      //   const key = motorTemperatures[v].key
+      //   this.lineDataset = {
+      //     source: this.barLineData[key].statisticsData
+      //   }
+      //   console.log('this.lineDataset', this.lineDataset)
+      // },
       async queryWorkTime(v) {
         const params = {
           selectType: v
@@ -179,10 +181,13 @@
         const params = {
           selectType: v
         }
-        const { data } = await OutputInfoModel.queryMotorTemperature(params)
+        // const { data } = await OutputInfoModel.queryMotorTemperature(params)
+        const { data } = await OutputInfoModel.queryMotorTemperatureNew(params)
         // console.log('_____________queryMotorTemperature_____________', data)
-        this.barLineData = data
-        this.onMotorTemperaturesChange(this.motorTemperatureValue)
+        this.lineDataset = {
+          source: data
+        }
+        // this.onMotorTemperaturesChange(this.motorTemperatureValue)
 
       },
 

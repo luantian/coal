@@ -3,6 +3,7 @@
     <div class="output">
       <div class="row1 __left">
         <sub-title>产量统计</sub-title>
+<!--        <div @click="onModalShow" class="full-screen-button"><i class="el-icon-full-screen"></i></div>-->
         <div class="radio-group">
           <el-radio-group v-model="outputValue" @change="onOutputChange">
             <el-radio-button v-for="item in outputRadios" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>
@@ -40,6 +41,15 @@
       </div>
 
     </div>
+    <div class="echart-modal" :style="{ right: echartModelVisible ? 0 : '10000px' }">
+      <div class="echart-modal-container">
+        <el-button @click="onModalHidden" type="primary">返回</el-button>
+      </div>
+      <div class="echart-modal-container">
+<!--        <component :is="'RowEcharts1'" :dataset="lineDataset" :x-unit="outputUnit" :y-unit="'万吨'"></component>-->
+        <row-echarts1 :dataset="lineDataset" :x-unit="outputUnit" :y-unit="'万吨'"></row-echarts1>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -50,6 +60,8 @@
   import CustomLine from '@/components/Echarts/CustomLine'
   import CustomPies from "@/components/Echarts/CustomPies";
   import CustomBar from "@/components/Echarts/CustomBar";
+
+  import RowEcharts1 from "./RowEcharts1";
 
   const outputRadios = [
     { name: '当天', value: 3 },
@@ -71,7 +83,7 @@
 
   export default {
     name: 'Column1',
-    components: { SubTitle, CustomLine, CustomPies, CustomBar },
+    components: { SubTitle, CustomLine, CustomPies, CustomBar, RowEcharts1 },
     data() {
       return {
         outputRadios,
@@ -84,11 +96,14 @@
         piesDataset: { source: [] },
         barDataset: { source: [] },
         temperatureData: {},
-        temperatureDataset: { source: [] }
+        temperatureDataset: { source: [] },
+        echartModelVisible: false
       }
     },
     mounted() {
-      this.queryTotal(this.outputValue)
+      this.queryTotal({
+        selectType: this.outputValue
+      })
       this.queryBucketreality()
       this.queryReserves()
       this.queryTemperature(3)
@@ -98,7 +113,9 @@
         this.outputUnit = this.unit[v]
 
         console.log('this.outputUnit', this.outputUnit)
-        this.queryTotal(v)
+        this.queryTotal({
+          selectType: v
+        })
       },
       onTemperatureChange(v) {
         // this.queryTemperature(v)
@@ -109,13 +126,9 @@
 
         console.log('v', this.temperatureDataset)
       },
-      async queryTotal(v) {
-        const params = {
-          selectType: v
-        }
+      async queryTotal(params) {
         const { data } = await OutputInfoModel.queryHistogramStatistics(params)
         this.lineDataset = { source: data }
-
       },
       async queryBucketreality() {
         const { data } = await OutputInfoModel.queryBucketreality()
@@ -153,8 +166,11 @@
         }
 
       },
-      onFullScreen() {
-
+      onModalShow() {
+        this.echartModelVisible = true
+      },
+      onModalHidden() {
+        this.echartModelVisible = false
       }
     }
   }
@@ -223,6 +239,29 @@
   .__row4_line-wrap {
     top: 30px;
     bottom: -20px;
+  }
+
+  .echart-modal {
+    position: fixed;
+    top: 93px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #0A1266;
+    z-index: 100;
+    overflow: hidden;
+    .echart-modal-container {
+      width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+  }
+
+  .full-screen-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
   }
 
 

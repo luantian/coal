@@ -21,7 +21,7 @@ class ArchiveReport extends Base {
     })
   }
 
-  // 查询设备历史报警统计--报警市场
+  // 查询设备历史报警统计--报警时长
   static async selectWarningDurationEchartsData(data) {
     return await this.get({
       url: '/devicealarm/devicealarmInfo/deviceAlarmStatistics',
