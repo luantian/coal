@@ -3,15 +3,22 @@
 
 
     <div class="table_div" style="position: relative">
-      <div style="display: flex;">
-        <div style="flex: 1">
-
+      <el-form>
+        <div style="display: flex;">
+          <div style="flex: 1">
+            <el-form-item label="导出日报日期" prop="exportDate">
+              <el-col :span="3">
+                <el-date-picker type="date" placeholder="请选择导出日报日期" v-model="exportDate" style="width: 100%;"
+                                value-format="yyyy-MM-dd"></el-date-picker>
+              </el-col>
+            </el-form-item>
+          </div>
+          <div style="padding-right: 35px">
+            <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
+            <el-button @click="exportProductionPlanReport" type="primary" v-loading="loading">导出</el-button>
+          </div>
         </div>
-        <div style="padding-right: 35px">
-          <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
-          <el-button @click="exportProductionPlanReport" type="primary">导出</el-button>
-        </div>
-      </div>
+      </el-form>
       <div class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
@@ -55,16 +62,16 @@
             </template>
           </el-table-column>
         </el-table>
-<!--        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">-->
-<!--          <el-pagination-->
-<!--            background-->
-<!--            layout="prev, pager, next, sizes"-->
-<!--            :total="totalRecords"-->
-<!--            @size-change="pageSizeChange"-->
-<!--            @current-change="currentPageChange"-->
-<!--            :page-sizes="pageSizes">-->
-<!--          </el-pagination>-->
-<!--        </div>-->
+        <!--        <div class="bolck" style="margin-top: 40px;text-align: right;padding-right: 0px">-->
+        <!--          <el-pagination-->
+        <!--            background-->
+        <!--            layout="prev, pager, next, sizes"-->
+        <!--            :total="totalRecords"-->
+        <!--            @size-change="pageSizeChange"-->
+        <!--            @current-change="currentPageChange"-->
+        <!--            :page-sizes="pageSizes">-->
+        <!--          </el-pagination>-->
+        <!--        </div>-->
       </div>
       <div class="pagination">
         <el-pagination
@@ -82,13 +89,15 @@
           <add-form @addDialogClose="addDialogVisible = false"
                     @queryList="toQuery"></add-form>
         </el-dialog>
-        <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center" :destroy-on-close="true" width="1500px">
+        <el-dialog :visible.sync="editDialogVisible" @close="editDialogVisible = false" align="center"
+                   :destroy-on-close="true" width="1500px">
           <edit-form @editDialogClose="editDialogVisible = false"
                      @queryList="toQuery" :rowData="rowData" :destroy-on-close="true"></edit-form>
         </el-dialog>
-        <el-dialog :visible.sync="detailDialogVisible" @close="detailDialogVisible = false" align="center" :destroy-on-close="true" width="1500px">
+        <el-dialog :visible.sync="detailDialogVisible" @close="detailDialogVisible = false" align="center"
+                   :destroy-on-close="true" width="1500px">
           <detail @editDialogClose="detailDialogVisible = false"
-                      :rowData="rowData" :destroy-on-close="true"></detail>
+                  :rowData="rowData" :destroy-on-close="true"></detail>
         </el-dialog>
       </div>
     </div>
@@ -101,7 +110,7 @@
   import addForm from "@/views/ProductReport/ProductionDailyReport/AddForm";
   import editForm from "@/views/ProductReport/ProductionDailyReport/EditForm";
   import detail from "@/views/ProductReport/ProductionDailyReport/Detail";
-  import { cloneDeep } from 'lodash-es'
+  import {cloneDeep} from 'lodash-es'
   // import Export from "@/models/Export";
   export default {
     name: 'SitePersonnelFiles',
@@ -122,7 +131,9 @@
         queryParams: {},
         editRowData: {},
         url: '/report/export/productionPlan',
-        filename: '生产日报-生产计划'
+        filename: '生产日报-生产计划',
+        exportDate: '',
+        loading: false
       }
     },
     methods: {
@@ -177,7 +188,17 @@
         await this.toQuery()
       },
       async exportProductionPlanReport() {
-        await ProductionReportModel.exportFile(this.url, this.filename)
+        if (!this.exportDate) {
+          this.$message({
+            type: 'error',
+            message: '请选择日报导出日期'
+          })
+          return
+        }
+        this.loading = true
+        const exportUrl = this.url + '?' + 'planDate=' + this.exportDate
+        await ProductionReportModel.exportFile(exportUrl, this.filename)
+        this.loading = false
       }
     },
     created() {

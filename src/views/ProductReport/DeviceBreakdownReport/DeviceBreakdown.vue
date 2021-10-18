@@ -9,7 +9,7 @@
         </div>
         <div style="padding-right: 35px">
           <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
-          <el-button @click="exportDeviceBreakdownReport" type="primary">导出</el-button>
+          <el-button @click="exportDeviceBreakdownReport" type="primary" v-loading="loading">导出</el-button>
         </div>
       </div>
       <div class="main_table">
@@ -80,7 +80,8 @@ export default {
       queryParams: {},
       editRowData: {},
       url: '/report/export/devicrFault',
-      filename: '设备故障表'
+      filename: '设备故障表',
+      loading: false
     }
   },
   methods: {
@@ -131,7 +132,9 @@ export default {
       await this.toQuery()
     },
     async exportDeviceBreakdownReport() {
+      this.loading = true
       await ProductionReportModel.exportFile(this.url, this.filename)
+      this.loading = false
     }
   },
   created() {

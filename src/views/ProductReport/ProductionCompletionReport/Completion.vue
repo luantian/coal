@@ -3,15 +3,22 @@
 
 
     <div class="table_div" style="position: relative">
-      <div style="display: flex;">
-        <div style="flex: 1">
-
+      <el-form>
+        <div style="display: flex;">
+          <div style="flex: 1">
+            <el-form-item label="导出日报日期" prop="exportDate">
+              <el-col :span="3">
+                <el-date-picker type="date" placeholder="请选择导出日报日期" v-model="exportDate" style="width: 100%;"
+                                value-format="yyyy-MM-dd"></el-date-picker>
+              </el-col>
+            </el-form-item>
+          </div>
+          <div style="padding-right: 35px">
+            <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
+            <el-button @click="exportProductionCompletionReport" type="primary" v-loading="loading">导出</el-button>
+          </div>
         </div>
-        <div style="padding-right: 35px">
-          <el-button @click="addDialogVisible=true" type="primary">新增参数</el-button>
-          <el-button @click="exportProductionCompletionReport" type="primary">导出</el-button>
-        </div>
-      </div>
+      </el-form>
       <div class="main_table">
         <el-table :data="tableData" stripe style="width: 100%;" height="calc(100vh - 400px)">
           <el-table-column label="序号" type="index" align="center"></el-table-column>
@@ -68,7 +75,8 @@
   import ProductionReportModel from "@/models/ProductionReport";
   import addForm from "@/views/ProductReport/ProductionCompletionReport/AddForm";
   import editForm from "@/views/ProductReport/ProductionCompletionReport/EditForm";
-  import { cloneDeep } from 'lodash-es'
+  import {cloneDeep} from 'lodash-es'
+
   export default {
     name: 'Completion',
     components: {addForm, editForm},
@@ -87,7 +95,9 @@
         queryParams: {},
         editRowData: {},
         url: '/report/export/productionComplete',
-        filename: '生产日报-完成情况'
+        filename: '生产日报-完成情况',
+        exportDate: '',
+        loading: false
       }
     },
     methods: {
@@ -138,7 +148,17 @@
         await this.toQuery()
       },
       async exportProductionCompletionReport() {
-        await ProductionReportModel.exportFile(this.url, this.filename)
+        if (!this.exportDate) {
+          this.$message({
+            type: 'error',
+            message: '请选择日报导出日期'
+          })
+          return
+        }
+        this.loading = true
+        const exportUrl = this.url + '?' + 'productionDate=' + this.exportDate
+        await ProductionReportModel.exportFile(exportUrl, this.filename)
+        this.loading = false
       }
     },
     created() {
