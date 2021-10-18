@@ -146,7 +146,6 @@ class ArchiveReport extends Base {
   }
 
   static async exportFile(url, filename) {
-    this.btnLoading = true;
     axios({
       method: 'get',
       url: '/coal' + url,
@@ -161,8 +160,8 @@ class ArchiveReport extends Base {
         if (res.data) {
           // 文件下载
           const blob = new Blob([res.data], {
-            // type: "application/vnd.ms-excel"
-            type: "application/zip"
+            type: "application/vnd.ms-excel"
+            // type: "application/zip"
           });
           saveAs(blob, filename)
           // let link = document.createElement('a');
