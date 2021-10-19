@@ -4,7 +4,7 @@ import LocalStorage from '@/cache/LocalStorage'
 import { saveAs } from 'file-saver';
 
 // import { saveAs } from 'file-saver';
-
+const baseUrl = process.env.VUE_APP_BASE_URL
 
 const token = LocalStorage.getItem('token')
 
@@ -137,7 +137,7 @@ class ArchiveReport extends Base {
   static async downFileZip() {
     axios({
       method: 'get',
-      url: '/api/report/export/productionPlan',
+      url: `${baseUrl}/api/report/export/productionPlan`,
       responseType: 'blob',
       headers: { 'Authorization': 'Bearer ' + token }
     }).then(res => {
@@ -148,7 +148,7 @@ class ArchiveReport extends Base {
   static async exportFile(url, filename) {
     axios({
       method: 'get',
-      url: '/coal' + url,
+      url: baseUrl + url,
       headers: {
         Authorization: 'Bearer ' + token
       },
@@ -160,10 +160,11 @@ class ArchiveReport extends Base {
         if (res.data) {
           // 文件下载
           const blob = new Blob([res.data], {
-            type: "application/vnd.ms-excel"
+            // type: "application/vnd.ms-excel"
+            type: "application/octet-stream"
             // type: "application/zip"
           });
-          saveAs(blob, filename)
+          saveAs(blob, filename + '.xlsx')
           // let link = document.createElement('a');
           // let url = URL.createObjectURL(blob)
           // link.href = url
