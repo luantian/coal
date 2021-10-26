@@ -22,14 +22,14 @@
       </div>
 
       <div class="row3 __left">
-        <sub-title>储量数据</sub-title>
+        <sub-title>仓储数据</sub-title>
         <div class="__bar-wrap">
           <custom-bar :dataset="barDataset" unit-x=" " unit-y=" "></custom-bar>
         </div>
       </div>
 
       <div class="row4 __left">
-        <sub-title>储量温度数据</sub-title>
+        <sub-title>装车仓温度数据</sub-title>
         <div class="radio-group">
           <el-radio-group v-model="temperatureValue" @change="onTemperatureChange">
             <el-radio-button v-for="item in temperatures" :label="item.value" :key="item.name">{{ item.name }}</el-radio-button>

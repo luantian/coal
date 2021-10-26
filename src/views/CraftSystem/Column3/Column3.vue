@@ -35,7 +35,7 @@
     </div>
 
     <div class="row3">
-      <sub-title>AACM电能消耗</sub-title>
+      <sub-title>皮带机电能消耗</sub-title>
       <div class="__bar_line-wrap">
         <custom-bar-line :dataset="barLineDataset" x-unit="千瓦" y-unit="时"></custom-bar-line>
       </div>

@@ -14,7 +14,7 @@
         </div>
         <div class="info-content">
           <div class="info-title">{{ item.title }}</div>
-          <div class="info-count">{{ item.count }} <span class="info-unit">{{ item.unit }}</span></div>
+          <div class="info-count">{{ item.count > 1000000 ? item.count / 10000 : item.count }} <span class="info-unit">{{ item.count > 1000000 ? '万吨' : item.unit }}</span></div>
         </div>
       </div>
     </div>
@@ -49,11 +49,11 @@
 
   const models = [
     { name: '轮斗挖掘机' },
-    { name: '传送带' },
-    { name: '悬臂受料车' },
-    { name: '整体工艺' },
     { name: '转载机' },
+    { name: '悬臂式受料车' },
+    { name: '带式输送机' },
     { name: '装车仓' },
+    { name: '整体工艺' },
   ]
 
   export default {
