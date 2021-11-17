@@ -8,56 +8,58 @@
 <!--      <router-link to="/productReport/productionDailyReport" tag="div" class="four"></router-link>-->
 <!--      <router-link to="/deviceArchiveReport/sitePersonnelFiles" tag="div" class="five"></router-link>-->
 <!--    </div>-->
-    <div class="content">
-      <span class="lightLeftTop"></span>
-      <span class="lightRightTop"></span>
-      <span class="lightLeftBottom"></span>
-      <span class="lightRightBottom"></span>
-      <span class="lightLeft"></span>
-      <span class="lightTop"></span>
-      <span class="lightRight"></span>
-      <span class="lightBottom"></span>
+    <div style=" height: calc(100vh - 97px); display: flex;  align-items: center">
+      <div class="content">
+        <span class="lightLeftTop"></span>
+        <span class="lightRightTop"></span>
+        <span class="lightLeftBottom"></span>
+        <span class="lightRightBottom"></span>
+        <span class="lightLeft"></span>
+        <span class="lightTop"></span>
+        <span class="lightRight"></span>
+        <span class="lightBottom"></span>
 
-      <router-link to="/craftSystem" tag="div" class="menuCraftSysBox">
-        <div class="title">工艺系统</div>
-        <div class="circleBg"></div>
-        <div class="circleRun"><div><div></div><div></div><div></div></div></div>
-        <div class="icon"><div class="iconLight"></div></div>
-        <div class="pointBox"><div></div><div></div></div>
-        <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleYellow.png')"><img :src="require('@/assets/images/circleYellow.png')"><img :src="require('@/assets/images/circleYellow.png')"></div>
-      </router-link>
-      <router-link to="/safetyWarning" tag="div" class="menuSafeBox">
-        <div class="title">安全预警</div>
-        <div class="circleBg"></div>
-        <div class="circleRun"><div><div></div><div></div><div></div></div></div>
-        <div class="icon"><div class="iconLight"></div></div>
-        <div class="pointBox"><div></div><div></div></div>
-        <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleRed.png')"><img :src="require('@/assets/images/circleRed.png')"><img :src="require('@/assets/images/circleRed.png')"></div>
-      </router-link>
-      <router-link to="/productReport/productionPlan" tag="div" class="menuProduceForm">
-        <div class="title">生产报表</div>
-        <div class="circleBg"></div>
-        <div class="circleRun"><div><div></div><div></div><div></div></div></div>
-        <div class="pointBox"><div></div><div></div></div>
-        <div class="icon"><div class="iconLight"></div></div>
-        <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleGreen.png')"><img :src="require('@/assets/images/circleGreen.png')"><img :src="require('@/assets/images/circleGreen.png')"></div>
-      </router-link>
-      <router-link to="/videoMonitor" tag="div" class="menuVideoBox">
-        <div class="title">视频监控</div>
-        <div class="circleBg"></div>
-        <div class="circleRun"><div><div></div><div></div><div></div></div></div>
-        <div class="icon"></div>
-        <div class="pointBox"><div></div><div></div></div>
-        <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circlePurple.png')"><img :src="require('@/assets/images/circlePurple.png')"><img :src="require('@/assets/images/circlePurple.png')"></div>
-      </router-link>
-      <router-link to="/deviceArchiveReport/sitePersonnelFiles" tag="div" class="menuDevicefilesBox">
-        <div class="title">设备档案</div>
-        <div class="circleBg"></div>
-        <div class="circleRun"><div><div></div><div></div><div></div></div></div>
-        <div class="icon"></div>
-        <div class="pointBox"><div></div><div></div></div>
-        <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleOrange.png')"><img :src="require('@/assets/images/circleOrange.png')"><img :src="require('@/assets/images/circleOrange.png')"></div>
-      </router-link>
+        <router-link to="/craftSystem" tag="div" class="menuCraftSysBox">
+          <div class="title">工艺系统</div>
+          <div class="circleBg"></div>
+          <div class="circleRun"><div><div></div><div></div><div></div></div></div>
+          <div class="icon"><div class="iconLight"></div></div>
+          <div class="pointBox"><div></div><div></div></div>
+          <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleYellow.png')"><img :src="require('@/assets/images/circleYellow.png')"><img :src="require('@/assets/images/circleYellow.png')"></div>
+        </router-link>
+        <router-link to="/safetyWarning" tag="div" class="menuSafeBox">
+          <div class="title">安全预警</div>
+          <div class="circleBg"></div>
+          <div class="circleRun"><div><div></div><div></div><div></div></div></div>
+          <div class="icon"><div class="iconLight"></div></div>
+          <div class="pointBox"><div></div><div></div></div>
+          <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleRed.png')"><img :src="require('@/assets/images/circleRed.png')"><img :src="require('@/assets/images/circleRed.png')"></div>
+        </router-link>
+        <router-link to="/productReport/productionPlan" tag="div" class="menuProduceForm">
+          <div class="title">生产报表</div>
+          <div class="circleBg"></div>
+          <div class="circleRun"><div><div></div><div></div><div></div></div></div>
+          <div class="pointBox"><div></div><div></div></div>
+          <div class="icon"><div class="iconLight"></div></div>
+          <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleGreen.png')"><img :src="require('@/assets/images/circleGreen.png')"><img :src="require('@/assets/images/circleGreen.png')"></div>
+        </router-link>
+        <router-link to="/videoMonitor" tag="div" class="menuVideoBox">
+          <div class="title">视频监控</div>
+          <div class="circleBg"></div>
+          <div class="circleRun"><div><div></div><div></div><div></div></div></div>
+          <div class="icon"></div>
+          <div class="pointBox"><div></div><div></div></div>
+          <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circlePurple.png')"><img :src="require('@/assets/images/circlePurple.png')"><img :src="require('@/assets/images/circlePurple.png')"></div>
+        </router-link>
+        <router-link to="/deviceArchiveReport/sitePersonnelFiles" tag="div" class="menuDevicefilesBox">
+          <div class="title">设备档案</div>
+          <div class="circleBg"></div>
+          <div class="circleRun"><div><div></div><div></div><div></div></div></div>
+          <div class="icon"></div>
+          <div class="pointBox"><div></div><div></div></div>
+          <div class="pointBox1"><div></div><div></div><img :src="require('@/assets/images/circleOrange.png')"><img :src="require('@/assets/images/circleOrange.png')"><img :src="require('@/assets/images/circleOrange.png')"></div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>

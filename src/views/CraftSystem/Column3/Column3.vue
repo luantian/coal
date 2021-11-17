@@ -201,6 +201,8 @@
     width: 450px;
     padding-right: 40px;
     box-sizing: border-box;
+    height: calc(100vh - 97px);
+    min-height: 900px;
   }
 
   .radio-group {
@@ -215,19 +217,23 @@
   }
 
   .row1 {
-    height: 240px;
+    //height: 240px;
+    height: 25%;
   }
 
   .row2 {
-    height: 180px;
+    //height: 180px;
+    height: 25%;
   }
 
   .row3 {
-    height: 230px;
+    //height: 230px;
+    height: 25%;
   }
 
   .row4 {
-    height: 230px;
+    //height: 230px;
+    height: 25%;
   }
 
   .__line-wrap, .__bar_line-wrap, .row4_line-wrap {

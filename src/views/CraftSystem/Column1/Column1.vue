@@ -181,6 +181,11 @@
     width: 450px;
     padding-left: 40px;
     box-sizing: border-box;
+    height: calc(100vh - 97px);
+    .output {
+      height: 100%;
+      min-height: 900px;
+    }
   }
 
   .row1, .row2, .row3, .row4 {
@@ -191,19 +196,23 @@
   }
 
   .row1 {
-    height: 240px;
+    //height: 240px;
+    height: 25%;
   }
 
   .row2 {
-    height: 180px;
+    //height: 180px;
+    height: 25%;
   }
 
   .row3 {
-    height: 230px;
+    //height: 230px;
+    height: 25%;
   }
 
   .row4 {
-    height: 230px;
+    //height: 230px;
+    height: 25%;
   }
 
   .radio-group {

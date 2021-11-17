@@ -3,9 +3,9 @@
     <div class="title-wrap">
       <span>累计产量</span>
       <span class="cumulative">
-        <span class="item" v-for="(item, index) in String(cumulative.totalYieldNumber)" :style="{ backgroundImage: item === '.' && 'none' }" :key="index">{{ item }}</span>
+        <span class="item" v-for="(item, index) in (cumulative.totalYieldNumber/10000).toFixed(4)" :style="{ backgroundImage: item === '.' && 'none' }" :key="index">{{ item }}</span>
       </span>
-      <span>吨</span>
+      <span>万吨</span>
     </div>
     <div class="info-list">
       <div class="info-item" v-for="(item, index) in cumulativeList" :key="index">
@@ -27,11 +27,10 @@
           </div>
         </div>
       </div>
-      <div style="width: 100%; height: 510px; padding: 10px; box-sizing: border-box;">
+      <div style="width: 100%; height: 90%; min-height: 500px; padding: 30px 10px 0 10px; box-sizing: border-box;">
         <iframe style="width: 100%; height: 100%;" :src="`/threeModel/index.html?timer=${new Date().getTime()}#model=./model/${models[activeModelIndex].name}.glb&kiosk=0`" frameborder="0"></iframe>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -157,7 +156,8 @@
   }
 
   .three-model {
-    height: 570px;
+    height: calc(100vh - 320px);
+    min-height: 600px;
     background: url("~@/assets/img/three-model-border.png") no-repeat;
     background-size: 100% 100%;
     .three-model-header {
