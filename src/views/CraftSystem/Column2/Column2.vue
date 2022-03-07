@@ -3,7 +3,7 @@
     <div class="title-wrap">
       <span>累计产量</span>
       <span class="cumulative">
-        <span class="item" v-for="(item, index) in (cumulative.totalYieldNumber/10000).toFixed(4)" :style="{ backgroundImage: item === '.' && 'none' }" :key="index">{{ item }}</span>
+        <span class="item" v-for="(item, index) in ((cumulative.totalYieldNumber/10000).toFixed(4))" :key="index">{{ item }}</span>
       </span>
       <span>万吨</span>
     </div>
@@ -124,6 +124,10 @@
       height: $h;
       line-height: $h;
       background: url("~@/assets/img/count_bg.png") no-repeat;
+    }
+    .item.point {
+      background-image: none;
+
     }
   }
 
